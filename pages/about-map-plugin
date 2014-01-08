@@ -18,7 +18,7 @@
     {
       "type": "paragraph",
       "id": "adca22ad59e9c6ba",
-      "text": "See [https://github.com/WardCunningham/Smallest-Federated-Wiki/tree/master/client/plugins/map GitHub] for plugin source."
+      "text": "See [https://github.com/fedwiki/wiki-plugin-map GitHub] for plugin source."
     }
   ],
   "journal": [
@@ -99,6 +99,16 @@
         "text": "See [https://github.com/WardCunningham/Smallest-Federated-Wiki/tree/master/client/plugins/map GitHub] for plugin source."
       },
       "date": 1345604346260
+    },
+    {
+      "type": "edit",
+      "id": "adca22ad59e9c6ba",
+      "item": {
+        "type": "paragraph",
+        "id": "adca22ad59e9c6ba",
+        "text": "See [https://github.com/fedwiki/wiki-plugin-map GitHub] for plugin source."
+      },
+      "date": 1389178339905
     }
   ]
 }
