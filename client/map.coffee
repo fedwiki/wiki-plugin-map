@@ -13,7 +13,7 @@ window.plugins.map =
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map)
 
-      map.on 'viewreset', (e) ->
+      map.on 'blur', (e) ->
         item.latlng = map.getCenter()
         item.zoom = map.getZoom()
         plugins.map.save(div, item)
