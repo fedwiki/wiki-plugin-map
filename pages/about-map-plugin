@@ -4,16 +4,21 @@
     {
       "type": "paragraph",
       "id": "fc7d3d39695cd19c",
-      "text": "The map plugin displays a map. Scrolling and zooming are actions that are saved in the journal."
+      "text": "The map plugin displays a map. Scrolling and zooming are actions that are saved, when the map looses focus, in the journal."
     },
     {
       "type": "map",
-      "id": "2add4e18c4fa1175"
+      "id": "2add4e18c4fa1175",
+      "latlng": {
+        "lat": 52.20435867519638,
+        "lng": 0.11744320392608643
+      },
+      "zoom": 17
     },
     {
       "type": "paragraph",
       "id": "8c79557ece9937e0",
-      "text": "We use mapquest, because they have a free, public API for loading open-source OpenStreetMap map tiles. They also have a convenient javascript api for adding annotations like points, regions, icons, etc. on top of the maps, comparable to Leaflet."
+      "text": "We use Leaflet with OpenStreetMap map tiles, as it provides a simple API."
     },
     {
       "type": "paragraph",
@@ -109,6 +114,40 @@
         "text": "See [https://github.com/fedwiki/wiki-plugin-map GitHub] for plugin source."
       },
       "date": 1389178339905
+    },
+    {
+      "type": "edit",
+      "id": "8c79557ece9937e0",
+      "item": {
+        "type": "paragraph",
+        "id": "8c79557ece9937e0",
+        "text": "We use Leaflet with OpenStreetMap map tiles, as it provides a simple API."
+      },
+      "date": 1399922095987
+    },
+    {
+      "type": "edit",
+      "id": "fc7d3d39695cd19c",
+      "item": {
+        "type": "paragraph",
+        "id": "fc7d3d39695cd19c",
+        "text": "The map plugin displays a map. Scrolling and zooming are actions that are saved, when the map looses focus, in the journal."
+      },
+      "date": 1399922133610
+    },
+    {
+      "type": "edit",
+      "id": "2add4e18c4fa1175",
+      "item": {
+        "type": "map",
+        "id": "2add4e18c4fa1175",
+        "latlng": {
+          "lat": 52.20435867519638,
+          "lng": 0.11744320392608643
+        },
+        "zoom": 17
+      },
+      "date": 1399922645358
     }
   ]
 }
