@@ -12,3 +12,8 @@ Wiki Plugin - map
   date: 2014-01-07
   changes:
     - Migrated to fedwiki GitHub organization
+    
+0.1.2
+  date: 2014-05-13
+  changes:
+    - Using Leaflet.js, with OpenStreetMap tiles
