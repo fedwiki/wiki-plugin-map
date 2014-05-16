@@ -1,0 +1,11 @@
+.map p {
+  text-align: center;
+  margin-top: 0.4em;
+  padding-bottom: 0.4em;
+  color: gray;
+  font-size: 70%;
+}
+
+.map {
+      background: #eeeeee;
+}
