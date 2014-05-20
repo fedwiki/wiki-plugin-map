@@ -1,4 +1,8 @@
-.map p {
+.map {
+	background: #eee;
+}
+
+.map figcaption {
   text-align: center;
   margin-top: 0.4em;
   padding-bottom: 0.4em;
@@ -6,6 +10,8 @@
   font-size: 70%;
 }
 
-.map {
+.map figure{
       background: #eeeeee;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
 }
