@@ -13,7 +13,55 @@ window.plugins.map =
       $('<link rel="stylesheet" href="/plugins/map/map.css" type="text/css">').appendTo("head")
     wiki.getScript "http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js", ->
       mapId = 'map-' + uniqueId()
-      div.append "<figure id='" + mapId + "' style='height: 300px;'></figure>"
+      figure = $("<figure></figure>")
+        .focusout ->
+          return if !figure.hasClass 'mapEditing'
+          # for some reason we also get here by clicking on the textarea
+          #  - need to add something here to ignore clicks on textarea
+
+          if item.latlng isnt map.getCenter() || item.zoom isnt map.getZoom() || item.text isnt $("textarea").val()
+            # something has been changed, so lets save
+            item.latlng = map.getCenter()
+            item.zoom = map.getZoom()
+            item.text = $("textarea").val()
+
+            # save the new position, and caption, but only if
+            plugins.map.save(div, item)
+
+          figure.find("textarea").replaceWith( "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>" )
+
+          figure.removeClass 'mapEditing'
+
+          null
+
+
+        .dblclick ->
+          # Double clicking on either map or caption will switch into edit mode.
+
+          # ignore dblclick if we are already editing.
+          return if figure.hasClass 'mapEditing'
+          figure.addClass 'mapEditing'
+
+          # replace the caption with a textarea
+          textarea = $("<textarea>#{original = item.text ? ''}</textarea>")
+          figure.find("figcaption").replaceWith( textarea )
+
+          null
+
+        .bind 'keydown', (e) ->
+          if (e.altKey || e.ctlKey || e.metaKey) and e.which == 83 #alt-s
+            figure.focusout()
+            return false
+          if (e.altKey || e.ctlKey || e.metaKey) and e.which == 73 #alt-i
+            # note: only works if clicked in the textarea 
+            e.preventDefault()
+            page = $(e.target).parents('.page') unless e.shiftKey
+            wiki.doInternalLink "about map plugin", page
+            return false
+
+      div.html figure 
+
+      figure.append "<div id='" + mapId + "' style='height: 300px;'></div>"
       
       map = L.map(mapId).setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
 
@@ -24,52 +72,13 @@ window.plugins.map =
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map)
 
-      # this will go, to allow the map to be explored without changing content - unless in edit.
-      #map.on 'blur', (e) ->
-      #  item.latlng = map.getCenter()
-      #  item.zoom = map.getZoom()
-      #  plugins.map.save(div, item)
-
       # any old maps will not define item.text, so set a default value
       if !item.text
         item.text = "Map Caption"
 
-      div.append "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>"
-
-      div.dblclick -> plugins.map.mapEditor map, div, item
-
-  mapEditor: (map, div, item) ->
-    return if div.hasClass 'mapEditing'
-    div.addClass 'mapEditing'
-    textarea = $("<textarea>#{original = item.text ? ''}</textarea>")
-
-    $("figcaption").replaceWith( textarea )
-
-    div.on 'focusout', (e) ->
-      # make sure the map is being edited
-      return if !div.hasClass 'mapEditing'
-
-      item.latlng = map.getCenter()
-      item.zoom = map.getZoom()
-      item.text = $("textarea").val()
-
-      plugins.map.save(div, item)
-
-      $("textarea").replaceWith( "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>" )
-
-      div.removeClass 'mapEditing'
+      figure.append "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>"
 
 
-
-
-
-
-
-
-
-
-
-        
   save: (div, item) ->
     wiki.pageHandler.put div.parents('.page:first'),
       type: 'edit',
