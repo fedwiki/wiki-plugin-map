@@ -1,8 +1,3 @@
-uniqueId = (length=8) ->
-  id = ""
-  id += Math.random().toString(36).substr(2) while id.length < length
-  id.substr 0, length
-
 window.plugins.map =
 
   bind: (div, item) ->
@@ -14,12 +9,17 @@ window.plugins.map =
     wiki.getScript "http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js", ->
       mapId = 'map-' + uniqueId()
       figure = $("<figure></figure>")
-        .focusout ->
-          return if !figure.hasClass 'mapEditing'
-          # for some reason we also get here by clicking on the textarea
-          #  - need to add something here to ignore clicks on textarea
+        .mouseout (e) ->
+          # focusout does not seem fire, so using mouseout...
 
-          if item.latlng isnt map.getCenter() || item.zoom isnt map.getZoom() || item.text isnt $("textarea").val()
+          # ignore if we are not editing
+          return if !figure.hasClass 'mapEditing'
+
+          # ignore if not for the outer container
+          return unless $(e.relatedTarget).hasAnyClass("page", "story")
+
+          # see anything has changed - don't want to save if it has not
+          if !map.getCenter().equals(item.latlng) || item.zoom isnt map.getZoom() || item.text isnt $("textarea").val()
             # something has been changed, so lets save
             item.latlng = map.getCenter()
             item.zoom = map.getZoom()
@@ -50,22 +50,26 @@ window.plugins.map =
 
         .bind 'keydown', (e) ->
           if (e.altKey || e.ctlKey || e.metaKey) and e.which == 83 #alt-s
-            figure.focusout()
+            figure.mouseout()
             return false
           if (e.altKey || e.ctlKey || e.metaKey) and e.which == 73 #alt-i
-            # note: only works if clicked in the textarea 
+            # note: only works if clicked in the textarea
             e.preventDefault()
             page = $(e.target).parents('.page') unless e.shiftKey
             wiki.doInternalLink "about map plugin", page
             return false
 
-      div.html figure 
+#        .bind 'focusout', (e) ->
+#          console.log 'event target: ', e.target
+#          e.stopPropagation if e.target.class == 'leaflet-tile' || 'leaflet-container'
+
+      div.html figure
 
       figure.append "<div id='" + mapId + "' style='height: 300px;'></div>"
-      
+
       map = L.map(mapId).setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
 
-      # disable double click zoom
+      # disable double click zoom - so we can use double click to start edit
       map.doubleClickZoom.disable()
 
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -84,3 +88,17 @@ window.plugins.map =
       type: 'edit',
       id: item.id,
       item: item
+
+
+uniqueId = (length=8) ->
+  id = ""
+  id += Math.random().toString(36).substr(2) while id.length < length
+  id.substr 0, length
+
+$.fn.hasAnyClass = ->
+  i = 0
+
+  while i < arguments.length
+    return true  if @hasClass(arguments[i])
+    i++
+  false
