@@ -3,22 +3,33 @@
   "story": [
     {
       "type": "paragraph",
-      "id": "fc7d3d39695cd19c",
-      "text": "The map plugin displays a map. Scrolling and zooming are actions that are saved, when the map looses focus, in the journal."
+      "id": "75413e06d2ac887d",
+      "text": "The map plug-in displays a map, with a caption. The map can be explored, scrolling and zooming, without creating an updated version. Double clicking on the map enables editing, actions being saved in the journal, when the pointer leaves the map."
+    },
+    {
+      "type": "paragraph",
+      "id": "e82cd8ce01e6bdfa",
+      "text": "When selecting <i>map</i> from the factory menu, you will be presented with a textbox. This value will be used as a caption, if it is blank the map will be removed."
     },
     {
       "type": "map",
-      "id": "2add4e18c4fa1175",
+      "id": "70ab7213605ecdcc",
+      "text": "Trinity College (Cambridge)",
       "latlng": {
-        "lat": 52.20435867519638,
-        "lng": 0.11744320392608643
+        "lat": 52.206982076367645,
+        "lng": 0.11684775352478029
       },
       "zoom": 17
     },
     {
       "type": "paragraph",
-      "id": "8c79557ece9937e0",
-      "text": "We use Leaflet with OpenStreetMap map tiles, as it provides a simple API."
+      "id": "0afb0c6bd45cb7ed",
+      "text": "To move a map, drag it by its caption."
+    },
+    {
+      "type": "paragraph",
+      "id": "01c3cbb7b0e0b41d",
+      "text": "This plugin uses [http://leafletjs.com/ Leaflet], with OpenStreetMap map tiles."
     },
     {
       "type": "paragraph",
@@ -29,125 +40,186 @@
   "journal": [
     {
       "type": "create",
-      "id": "0df5c5968737cc8c",
       "item": {
-        "title": "About Map Plugin"
+        "title": "About Map Plugin",
+        "story": []
       },
-      "date": 1345603804367
+      "date": 1400938220543
     },
     {
       "item": {
         "type": "factory",
-        "id": "fc7d3d39695cd19c"
+        "id": "75413e06d2ac887d"
       },
-      "id": "fc7d3d39695cd19c",
+      "id": "75413e06d2ac887d",
       "type": "add",
-      "date": 1345603847486
+      "date": 1400938226361
     },
     {
       "type": "edit",
-      "id": "fc7d3d39695cd19c",
+      "id": "75413e06d2ac887d",
       "item": {
         "type": "paragraph",
-        "id": "fc7d3d39695cd19c",
-        "text": "The map plugin displays a map. Scrolling and zooming are actions that are saved in the journal."
+        "id": "75413e06d2ac887d",
+        "text": "The map plug-in displays a map, with a caption. The map can be explored, scrolling and zooming, without creating an updated version. Double clicking on the map enables editing, actions being saved in the journal, when the pointer leaves the map."
       },
-      "date": 1345603950139
+      "date": 1400938481574
     },
     {
+      "item": {
+        "type": "factory",
+        "id": "70ab7213605ecdcc"
+      },
+      "id": "70ab7213605ecdcc",
+      "type": "add",
+      "after": "75413e06d2ac887d",
+      "date": 1400939953034
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
       "item": {
         "type": "map",
-        "id": "2add4e18c4fa1175"
+        "id": "70ab7213605ecdcc",
+        "text": "Trinity College (Cambridge)"
       },
-      "id": "2add4e18c4fa1175",
-      "type": "add",
-      "after": "fc7d3d39695cd19c",
-      "date": 1345604018236
+      "date": 1400939989041
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Trinity College (Cambridge)",
+        "latlng": {
+          "lat": 52.207047823780876,
+          "lng": 0.11680483818054199
+        },
+        "zoom": 17
+      },
+      "date": 1400940062384
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Trinity College (Cambridge)",
+        "latlng": {
+          "lat": 52.206982076367645,
+          "lng": 0.11684775352478029
+        },
+        "zoom": 17
+      },
+      "date": 1400940079952
     },
     {
       "item": {
         "type": "factory",
-        "id": "8c79557ece9937e0"
+        "id": "e82cd8ce01e6bdfa"
       },
-      "id": "8c79557ece9937e0",
+      "id": "e82cd8ce01e6bdfa",
       "type": "add",
-      "after": "2add4e18c4fa1175",
-      "date": 1345604208521
+      "after": "70ab7213605ecdcc",
+      "date": 1400940108937
     },
     {
       "type": "edit",
-      "id": "8c79557ece9937e0",
+      "id": "e82cd8ce01e6bdfa",
       "item": {
         "type": "paragraph",
-        "id": "8c79557ece9937e0",
-        "text": "We use mapquest, because they have a free, public API for loading open-source OpenStreetMap map tiles. They also have a convenient javascript api for adding annotations like points, regions, icons, etc. on top of the maps, comparable to Leaflet."
+        "id": "e82cd8ce01e6bdfa",
+        "text": "When selecting <i>map</i> from the factory menu, you will be presented with a textbox. This value will be used as a caption, if it is blank the map will be removed."
       },
-      "date": 1345604249424
+      "date": 1400940293374
     },
     {
       "item": {
         "type": "paragraph",
-        "id": "adca22ad59e9c6ba",
+        "id": "0afb0c6bd45cb7ed",
         "text": ""
       },
-      "id": "adca22ad59e9c6ba",
+      "id": "0afb0c6bd45cb7ed",
       "type": "add",
-      "after": "8c79557ece9937e0",
-      "date": 1345604329189
+      "after": "e82cd8ce01e6bdfa",
+      "date": 1400940293387
     },
     {
       "type": "edit",
-      "id": "adca22ad59e9c6ba",
+      "id": "0afb0c6bd45cb7ed",
       "item": {
         "type": "paragraph",
-        "id": "adca22ad59e9c6ba",
-        "text": "See [https://github.com/WardCunningham/Smallest-Federated-Wiki/tree/master/client/plugins/map GitHub] for plugin source."
+        "id": "0afb0c6bd45cb7ed",
+        "text": "To move a map, drag it by its caption."
       },
-      "date": 1345604346260
+      "date": 1400940349015
     },
     {
-      "type": "edit",
-      "id": "adca22ad59e9c6ba",
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "e82cd8ce01e6bdfa",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed"
+      ],
+      "id": "e82cd8ce01e6bdfa",
+      "date": 1400940351761
+    },
+    {
+      "type": "add",
       "item": {
         "type": "paragraph",
         "id": "adca22ad59e9c6ba",
         "text": "See [https://github.com/fedwiki/wiki-plugin-map GitHub] for plugin source."
       },
-      "date": 1389178339905
+      "after": "0afb0c6bd45cb7ed",
+      "id": "adca22ad59e9c6ba",
+      "date": 1400940406807
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "01c3cbb7b0e0b41d"
+      },
+      "id": "01c3cbb7b0e0b41d",
+      "type": "add",
+      "after": "adca22ad59e9c6ba",
+      "date": 1400940529854
+    },
+    {
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "e82cd8ce01e6bdfa",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed",
+        "01c3cbb7b0e0b41d",
+        "adca22ad59e9c6ba"
+      ],
+      "id": "01c3cbb7b0e0b41d",
+      "date": 1400940535938
     },
     {
       "type": "edit",
-      "id": "8c79557ece9937e0",
+      "id": "01c3cbb7b0e0b41d",
       "item": {
         "type": "paragraph",
-        "id": "8c79557ece9937e0",
-        "text": "We use Leaflet with OpenStreetMap map tiles, as it provides a simple API."
+        "id": "01c3cbb7b0e0b41d",
+        "text": "This plugin uses Leaflet.js"
       },
-      "date": 1399922095987
+      "date": 1400940581937
     },
     {
       "type": "edit",
-      "id": "fc7d3d39695cd19c",
+      "id": "01c3cbb7b0e0b41d",
       "item": {
         "type": "paragraph",
-        "id": "fc7d3d39695cd19c",
-        "text": "The map plugin displays a map. Scrolling and zooming are actions that are saved, when the map looses focus, in the journal."
+        "id": "01c3cbb7b0e0b41d",
+        "text": "This plugin uses [http://leafletjs.com/ Leaflet], with OpenStreetMap map tiles."
       },
-      "date": 1399922133610
-    },
-    {
-      "type": "edit",
-      "id": "2add4e18c4fa1175",
-      "item": {
-        "type": "map",
-        "id": "2add4e18c4fa1175",
-        "latlng": {
-          "lat": 52.20435867519638,
-          "lng": 0.11744320392608643
-        },
-        "zoom": 17
-      },
-      "date": 1399922645358
+      "date": 1400940653077
     }
   ]
 }
