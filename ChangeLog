@@ -12,8 +12,15 @@ Wiki Plugin - map
   date: 2014-01-07
   changes:
     - Migrated to fedwiki GitHub organization
-    
+
 0.1.2
   date: 2014-05-13
   changes:
     - Using Leaflet.js, with OpenStreetMap tiles
+
+0.1.3
+  date: 2014-05-25
+  changes:
+    - Map added to factory list
+    - Add edit mode, double click to edit map and/or caption. Mouse out to save.
+    - Updated 'About Map Plugin' page
