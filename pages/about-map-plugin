@@ -7,7 +7,7 @@
       "text": "The map plug-in displays a map, with a caption. The map can be explored, scrolling and zooming, without creating an updated version. Double clicking on the map enables editing, actions being saved in the journal, when the pointer leaves the map."
     },
     {
-      "type": "paragraph",
+      "type": "html",
       "id": "e82cd8ce01e6bdfa",
       "text": "When selecting <i>map</i> from the factory menu, you will be presented with a textbox. This value will be used as a caption, if it is blank the map will be removed."
     },
@@ -220,6 +220,17 @@
         "text": "This plugin uses [http://leafletjs.com/ Leaflet], with OpenStreetMap map tiles."
       },
       "date": 1400940653077
+    },
+    {
+      "type": "edit",
+      "id": "e82cd8ce01e6bdfa",
+      "item": {
+        "type": "html",
+        "id": "e82cd8ce01e6bdfa",
+        "text": "When selecting <i>map</i> from the factory menu, you will be presented with a textbox. This value will be used as a caption, if it is blank the map will be removed."
+      },
+      "date": 1418317003930
     }
-  ]
+  ],
+  "plugin": "map"
 }
