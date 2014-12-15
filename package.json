@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4",
-    "grunt-contrib-coffee": "~0.10",
+    "grunt-contrib-coffee": "~0.12",
     "grunt-contrib-watch": "~0.6"
   },
   "license": "MIT",
