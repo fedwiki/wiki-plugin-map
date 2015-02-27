@@ -1,3 +1,10 @@
+###
+ * Federated Wiki : Map Plugin
+ *
+ * Licensed under the MIT license.
+ * https://github.com/fedwiki/wiki-plugin-map/blob/master/LICENSE.txt
+###
+
 window.plugins.map =
 
   bind: (div, item) ->
