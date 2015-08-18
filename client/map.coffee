@@ -37,6 +37,10 @@ window.plugins.map =
 
           figure.find("textarea").replaceWith( "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>" )
 
+          map.dragging.disable()
+          map.touchZoom.disable()
+          map.scrollWheelZoom.disable()
+          map.boxZoom.disable()
           figure.removeClass 'mapEditing'
 
           null
@@ -48,6 +52,11 @@ window.plugins.map =
           # ignore dblclick if we are already editing.
           return if figure.hasClass 'mapEditing'
           figure.addClass 'mapEditing'
+          # enable map zoom/moving
+          map.dragging.enable()
+          map.touchZoom.enable()
+          map.scrollWheelZoom.enable()
+          map.boxZoom.enable()
 
           # replace the caption with a textarea
           textarea = $("<textarea>#{original = item.text ? ''}</textarea>")
@@ -78,6 +87,13 @@ window.plugins.map =
 
       # disable double click zoom - so we can use double click to start edit
       map.doubleClickZoom.disable()
+
+      # disable some features so the map is fix unless editting
+      map.dragging.disable()
+      map.touchZoom.disable()
+      map.scrollWheelZoom.disable()
+      map.boxZoom.disable()
+
 
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
