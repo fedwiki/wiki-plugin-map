@@ -25,21 +25,6 @@ window.plugins.map =
           # ignore if not for the outer container
           return unless $(e.relatedTarget).hasAnyClass("page", "story")
 
-          ###
-          Bilbao
-          ---
-
-          lat 43.2607
-          long -2.9395
-          title Somewhere in Bilbao
-
-          lat 43.2607
-          long -2.9395
-          title Somewhere in Bilbao
-          ###
-
-          console.log item
-
           # see anything has changed - don't want to save if it has not
           if !map.getCenter().equals(item.latlng) || item.zoom isnt map.getZoom() || item.text isnt $("textarea").val()
             # something has been changed, so lets save
@@ -64,8 +49,7 @@ window.plugins.map =
           figure.addClass 'mapEditing'
 
           # replace the caption with a textarea
-          textarea = $("<textarea>#{original = item.text ? ''}</textarea>")
-          figure.find("figcaption").replaceWith( textarea )
+          wiki.textEditor div, item
 
           null
 
@@ -83,6 +67,7 @@ window.plugins.map =
        .bind 'focusout', (e) ->
          console.log 'event target: ', e.target
          e.stopPropagation if e.target.class == 'leaflet-tile' || 'leaflet-container'
+         null
 
       div.html figure
 
@@ -97,10 +82,12 @@ window.plugins.map =
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map)
 
+      # info to be added to the map
       points = []
       mapTitle = "Map Caption"
+
+      # parse the Geo markup
       parser = (text) ->
-        console.log text
         lines = text.split '\n'
         mapTitle = lines[0]
         for line, i in lines
@@ -111,18 +98,16 @@ window.plugins.map =
               point.title = split[0]
               point.lat = parseFloat split[1].split("/")[0].trim()
               point.lng = parseFloat split[1].split("/")[1].trim()
-              console.log point
               points.push point
 
-      console.log parser(item.text)
-
-
-      # any old maps will not define item.text, so set a default value
-      figure.append "<figcaption>#{wiki.resolveLinks(mapTitle)}</figcaption>"
-
+      parser item.text  # launch the parser
+      
       # add markers on the map
       for p in points
         L.marker([p.lat, p.lng]).addTo(map);
+
+      # any old maps will not define item.text, so set a default value
+      figure.append "<figcaption>#{wiki.resolveLinks(mapTitle)}</figcaption>"
 
   save: (div, item) ->
     wiki.pageHandler.put div.parents('.page:first'),
