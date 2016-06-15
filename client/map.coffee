@@ -25,6 +25,21 @@ window.plugins.map =
           # ignore if not for the outer container
           return unless $(e.relatedTarget).hasAnyClass("page", "story")
 
+          ###
+          Bilbao
+          ---
+
+          lat 43.2607
+          long -2.9395
+          title Somewhere in Bilbao
+
+          lat 43.2607
+          long -2.9395
+          title Somewhere in Bilbao
+          ###
+
+          console.log item
+
           # see anything has changed - don't want to save if it has not
           if !map.getCenter().equals(item.latlng) || item.zoom isnt map.getZoom() || item.text isnt $("textarea").val()
             # something has been changed, so lets save
@@ -40,7 +55,6 @@ window.plugins.map =
           figure.removeClass 'mapEditing'
 
           null
-
 
         .dblclick ->
           # Double clicking on either map or caption will switch into edit mode.
@@ -66,9 +80,9 @@ window.plugins.map =
             wiki.doInternalLink "about map plugin", page
             return false
 
-#        .bind 'focusout', (e) ->
-#          console.log 'event target: ', e.target
-#          e.stopPropagation if e.target.class == 'leaflet-tile' || 'leaflet-container'
+       .bind 'focusout', (e) ->
+         console.log 'event target: ', e.target
+         e.stopPropagation if e.target.class == 'leaflet-tile' || 'leaflet-container'
 
       div.html figure
 
@@ -83,12 +97,32 @@ window.plugins.map =
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map)
 
+      points = []
+      mapTitle = "Map Caption"
+      parser = (text) ->
+        console.log text
+        lines = text.split '\n'
+        mapTitle = lines[0]
+        for line, i in lines
+          if i != 0
+            split = line.split(">>")
+            if split.length > 1 # and split[1] not undefined
+              point={}
+              point.title = split[0]
+              point.lat = parseFloat split[1].split("/")[0].trim()
+              point.lng = parseFloat split[1].split("/")[1].trim()
+              console.log point
+              points.push point
+
+      console.log parser(item.text)
+
+
       # any old maps will not define item.text, so set a default value
-      if !item.text
-        item.text = "Map Caption"
+      figure.append "<figcaption>#{wiki.resolveLinks(mapTitle)}</figcaption>"
 
-      figure.append "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>"
-
+      # add markers on the map
+      for p in points
+        L.marker([p.lat, p.lng]).addTo(map);
 
   save: (div, item) ->
     wiki.pageHandler.put div.parents('.page:first'),
