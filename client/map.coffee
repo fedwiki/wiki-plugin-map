@@ -5,126 +5,135 @@
  * https://github.com/fedwiki/wiki-plugin-map/blob/master/LICENSE.txt
 ###
 
-window.plugins.map =
 
-  bind: (div, item) ->
-  emit: (div, item) ->
-    if (!$("link[href='http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css']").length)
-      $('<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">').appendTo("head")
-    if (!$("link[href='/plugins/map/map.css']").length)
-      $('<link rel="stylesheet" href="/plugins/map/map.css" type="text/css">').appendTo("head")
-    wiki.getScript "http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js", ->
-      mapId = 'map-' + uniqueId()
-      figure = $("<figure></figure>")
-        .mouseout (e) ->
-          # focusout does not seem fire, so using mouseout...
+emit = (div, item) ->
 
-          # ignore if we are not editing
-          return if !figure.hasClass 'mapEditing'
+  $.fn.hasAnyClass = ->
+    i = 0
+    while i < arguments.length
+      return true  if @hasClass(arguments[i])
+      i++
+    false
 
-          # ignore if not for the outer container
-          return unless $(e.relatedTarget).hasAnyClass("page", "story")
+  if (!$("link[href='http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css']").length)
+    $('<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">').appendTo("head")
+  if (!$("link[href='/plugins/map/map.css']").length)
+    $('<link rel="stylesheet" href="/plugins/map/map.css" type="text/css">').appendTo("head")
+  wiki.getScript "http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js", ->
+    mapId = 'map-' + uniqueId()
+    figure = $("<figure></figure>")
+      .mouseout (e) ->
+        # focusout does not seem fire, so using mouseout...
 
-          # see anything has changed - don't want to save if it has not
-          if !map.getCenter().equals(item.latlng) || item.zoom isnt map.getZoom() || item.text isnt $("textarea").val()
-            # something has been changed, so lets save
-            item.latlng = map.getCenter()
-            item.zoom = map.getZoom()
-            item.text = $("textarea").val()
+        # ignore if we are not editing
+        return if !figure.hasClass 'mapEditing'
 
-            # save the new position, and caption, but only if
-            plugins.map.save(div, item)
+        # ignore if not for the outer container
+        return unless $(e.relatedTarget).hasAnyClass("page", "story")
 
-          figure.find("textarea").replaceWith( "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>" )
+        # see anything has changed - don't want to save if it has not
+        if !map.getCenter().equals(item.latlng) || item.zoom isnt map.getZoom() || item.text isnt $("textarea").val()
+          # something has been changed, so lets save
+          item.latlng = map.getCenter()
+          item.zoom = map.getZoom()
+          item.text = $("textarea").val()
 
-          figure.removeClass 'mapEditing'
+          # save the new position, and caption, but only if
+          plugins.map.save(div, item)
 
-          null
+        figure.find("textarea").replaceWith( "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>" )
 
-        .dblclick ->
-          # Double clicking on either map or caption will switch into edit mode.
+        figure.removeClass 'mapEditing'
 
-          # ignore dblclick if we are already editing.
-          return if figure.hasClass 'mapEditing'
-          figure.addClass 'mapEditing'
+        null
 
-          # replace the caption with a textarea
-          wiki.textEditor div, item
+      .dblclick ->
+        # Double clicking on either map or caption will switch into edit mode.
 
-          null
+        # ignore dblclick if we are already editing.
+        return if figure.hasClass 'mapEditing'
+        figure.addClass 'mapEditing'
 
-        .bind 'keydown', (e) ->
-          if (e.altKey || e.ctlKey || e.metaKey) and e.which == 83 #alt-s
-            figure.mouseout()
-            return false
-          if (e.altKey || e.ctlKey || e.metaKey) and e.which == 73 #alt-i
-            # note: only works if clicked in the textarea
-            e.preventDefault()
-            page = $(e.target).parents('.page') unless e.shiftKey
-            wiki.doInternalLink "about map plugin", page
-            return false
+        # replace the caption with a textarea
+        wiki.textEditor div, item
 
-       .bind 'focusout', (e) ->
-         console.log 'event target: ', e.target
-         e.stopPropagation if e.target.class == 'leaflet-tile' || 'leaflet-container'
-         null
+        null
 
-      div.html figure
+      .bind 'keydown', (e) ->
+        if (e.altKey || e.ctlKey || e.metaKey) and e.which == 83 #alt-s
+          figure.mouseout()
+          return false
+        if (e.altKey || e.ctlKey || e.metaKey) and e.which == 73 #alt-i
+          # note: only works if clicked in the textarea
+          e.preventDefault()
+          page = $(e.target).parents('.page') unless e.shiftKey
+          wiki.doInternalLink "about map plugin", page
+          return false
 
-      figure.append "<div id='" + mapId + "' style='height: 300px;'></div>"
+     .bind 'focusout', (e) ->
+       console.log 'event target: ', e.target
+       e.stopPropagation if e.target.class == 'leaflet-tile' || 'leaflet-container'
+       null
 
-      map = L.map(mapId).setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
+    div.html figure
 
-      # disable double click zoom - so we can use double click to start edit
-      map.doubleClickZoom.disable()
+    figure.append "<div id='" + mapId + "' style='height: 300px;'></div>"
 
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map)
+    map = L.map(mapId).setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
 
-      # info to be added to the map
-      points = []
-      mapTitle = "Map Caption"
+    # disable double click zoom - so we can use double click to start edit
+    map.doubleClickZoom.disable()
 
-      # parse the Geo markup
-      parser = (text) ->
-        lines = text.split '\n'
-        mapTitle = lines[0]
-        for line, i in lines
-          if i != 0
-            split = line.split(">>")
-            if split.length > 1 # and split[1] not undefined
-              point={}
-              point.title = split[0]
-              point.lat = parseFloat split[1].split("/")[0].trim()
-              point.lng = parseFloat split[1].split("/")[1].trim()
-              points.push point
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map)
 
-      parser item.text  # launch the parser
-      
-      # add markers on the map
-      for p in points
-        L.marker([p.lat, p.lng]).addTo(map);
+    # info to be added to the map
+    points = []
+    mapTitle = "Map Caption"
 
-      # any old maps will not define item.text, so set a default value
-      figure.append "<figcaption>#{wiki.resolveLinks(mapTitle)}</figcaption>"
+    # parse the Geo markup
+    parser = (text) ->
+      lines = text.split '\n'
+      mapTitle = lines[0]
+      for line, i in lines
+        if i != 0
+          split = line.split(">>")
+          if split.length > 1 # and split[1] not undefined
+            point={}
+            point.title = split[0]
+            point.lat = parseFloat split[1].split("/")[0].trim()
+            point.lng = parseFloat split[1].split("/")[1].trim()
+            points.push point
 
-  save: (div, item) ->
-    wiki.pageHandler.put div.parents('.page:first'),
-      type: 'edit',
-      id: item.id,
-      item: item
+    parser item.text  # launch the parser
 
+    # add markers on the map
+    for p in points
+      L.marker([p.lat, p.lng]).addTo(map);
+
+    # any old maps will not define item.text, so set a default value
+    figure.append "<figcaption>#{wiki.resolveLinks(mapTitle)}</figcaption>"
+
+save: (div, item) ->
+  wiki.pageHandler.put div.parents('.page:first'),
+    type: 'edit',
+    id: item.id,
+    item: item
 
 uniqueId = (length=8) ->
   id = ""
   id += Math.random().toString(36).substr(2) while id.length < length
   id.substr 0, length
 
-$.fn.hasAnyClass = ->
-  i = 0
 
-  while i < arguments.length
-    return true  if @hasClass(arguments[i])
-    i++
-  false
+parse = (text) ->
+  regex = /^(-?\d{1,3}\.\d*), (-?\d{1,3}\.\d*)(.*)$/
+  match = regex.exec text
+  if match then [match[1],match[2]] else [0,0]
+
+bind = (div, item) ->
+
+
+window.plugins.map = {emit, bind} if window?
+module.exports = {parse} if module?
