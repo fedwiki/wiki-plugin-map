@@ -127,13 +127,13 @@ uniqueId = (length=8) ->
   id.substr 0, length
 
 
-parse = (text) ->
-  regex = /^(-?\d{1,3}\.\d*), (-?\d{1,3}\.\d*)(.*)$/
+marker = (text) ->
+  regex = /^(-?\d{1,3}\.\d*),? (-?\d{1,3}\.\d*)\s*(.*)$/
   match = regex.exec text
-  if match then [match[1],match[2]] else [0,0]
+  if match then {lat: +match[1], lon: +match[2], label: match[3]} else null
 
 bind = (div, item) ->
 
 
 window.plugins.map = {emit, bind} if window?
-module.exports = {parse} if module?
+module.exports = {marker} if module?
