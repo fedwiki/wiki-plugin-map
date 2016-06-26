@@ -40,7 +40,24 @@ parse = (text) ->
       captions.push resolve(line)
   {markers, caption: captions.join('<br>')}
 
+feature = (marker) ->
+  type: 'Feature'
+  geometry:
+    type: 'Point'
+    coordinates: [marker.lon, marker.lat]
+    properties:
+      label: marker.label
+
 emit = ($item, item) ->
+
+  {caption, markers} = parse item.text
+
+  $item.addClass 'marker-source'
+  $item.get(0).markerData = ->
+    parse(item.text).markers
+  $item.get(0).markerGeo = ->
+    type: 'FeatureCollection'
+    features: parse(item.text).markers.map(feature)
 
   if (!$("link[href='http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css']").length)
     $('<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">').appendTo("head")
@@ -50,8 +67,6 @@ emit = ($item, item) ->
   wiki.getScript "http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js", ->
 
     mapId = "map-#{Math.floor(Math.random()*1000000)}"
-
-    {caption, markers} = parse item.text
 
     $item.append """
       <figure style="padding: 8px;">
@@ -75,7 +90,6 @@ emit = ($item, item) ->
         .bindPopup(p.label)
         .openPopup()
         .addTo(map);
-
 
 bind = ($item, item) ->
   $item.dblclick ->
