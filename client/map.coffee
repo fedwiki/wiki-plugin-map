@@ -5,7 +5,6 @@
  * https://github.com/fedwiki/wiki-plugin-map/blob/master/LICENSE.txt
 ###
 
-
 escape = (line) ->
   line
     .replace(/&/g, '&amp;')
@@ -52,6 +51,7 @@ emit = ($item, item) ->
 
   {caption, markers} = parse item.text
 
+  # announce our capability to produce markers in native and geojson format
   $item.addClass 'marker-source'
   $item.get(0).markerData = ->
     parse(item.text).markers
@@ -84,12 +84,21 @@ emit = ($item, item) ->
       attribution: '<a href="http://osm.org/copyright">OSM</a>'
       }).addTo(map)
 
+    showMarkers = (markers) ->
+      return unless markers
+      for p in markers
+        L.marker([p.lat, p.lon])
+          .bindPopup(p.label)
+          .openPopup()
+          .addTo(map);
+
     # add markers on the map
-    for p in markers
-      L.marker([p.lat, p.lon])
-        .bindPopup(p.label)
-        .openPopup()
-        .addTo(map);
+    showMarkers markers
+
+    # find and add markers from candidate items
+    candidates = $(".item:lt(#{$('.item').index($item)})")
+    if (who = candidates.filter ".marker-source").size()
+      showMarkers div.markerData() for div in who
 
 bind = ($item, item) ->
   $item.dblclick ->
