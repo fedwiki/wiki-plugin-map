@@ -4,12 +4,17 @@
     {
       "type": "paragraph",
       "id": "75413e06d2ac887d",
-      "text": "The map plug-in displays a map, with a caption. The map can be explored, scrolling and zooming, without creating an updated version. Double clicking on the map enables editing, actions being saved in the journal, when the pointer leaves the map."
+      "text": "This plugin displays a map and caption along with markers from various sources. Explore by scrolling and zooming. Move by dragging the caption."
     },
     {
-      "type": "html",
-      "id": "e82cd8ce01e6bdfa",
-      "text": "When selecting <i>map</i> from the factory menu, you will be presented with a textbox. This value will be used as a caption, if it is blank the map will be removed."
+      "type": "paragraph",
+      "id": "0c06d0c65392757c",
+      "text": "Code and data from [http://leafletjs.com/ Leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap]."
+    },
+    {
+      "type": "paragraph",
+      "id": "adca22ad59e9c6ba",
+      "text": "See [https://github.com/fedwiki/wiki-plugin-map GitHub] for plugin source."
     },
     {
       "type": "map",
@@ -24,17 +29,32 @@
     {
       "type": "paragraph",
       "id": "0afb0c6bd45cb7ed",
-      "text": "To move a map, drag it by its caption."
+      "text": "Double-click to edit markup consisting of lines of caption text and other configuration commands."
     },
     {
       "type": "paragraph",
-      "id": "01c3cbb7b0e0b41d",
-      "text": "This plugin uses [http://leafletjs.com/ Leaflet], with OpenStreetMap map tiles."
+      "id": "673860db5b7c1d3b",
+      "text": "A line starting with coordinates describes a marker. Text after the marker become the marker's popup label."
+    },
+    {
+      "type": "code",
+      "id": "a255b2b72e8e1351",
+      "text": "52.207483, 0.115771 Master's Garden\n"
     },
     {
       "type": "paragraph",
-      "id": "adca22ad59e9c6ba",
-      "text": "See [https://github.com/fedwiki/wiki-plugin-map GitHub] for plugin source."
+      "id": "7f941f281f929e55",
+      "text": "Coordinates are always written latitude first, using decimal degrees or punctuated 'nautical' format."
+    },
+    {
+      "type": "code",
+      "id": "e974889ae2b802f1",
+      "text": "45°36'43.3\"N 122°43'52.8\"W Smith Lake, Portland"
+    },
+    {
+      "type": "paragraph",
+      "id": "9e29c3aaae504fcb",
+      "text": "Maps source markers to other items and will merge markers from items above and to its left in the lineup."
     }
   ],
   "journal": [
@@ -230,6 +250,293 @@
         "text": "When selecting <i>map</i> from the factory menu, you will be presented with a textbox. This value will be used as a caption, if it is blank the map will be removed."
       },
       "date": 1418317003930
+    },
+    {
+      "type": "edit",
+      "id": "75413e06d2ac887d",
+      "item": {
+        "type": "paragraph",
+        "id": "75413e06d2ac887d",
+        "text": "The map plugin displays a map and caption along with markers from various sources. Explore by scrolling and zooming."
+      },
+      "date": 1467046101032
+    },
+    {
+      "type": "remove",
+      "id": "e82cd8ce01e6bdfa",
+      "date": 1467046109121
+    },
+    {
+      "type": "add",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Map technology and data from "
+      },
+      "after": "75413e06d2ac887d",
+      "date": 1467046153361
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Map technology and data from [http://leafletjs.com/ leaflet] and "
+      },
+      "date": 1467046182511
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Map technology and data from [http://leafletjs.com/ leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap] contributors."
+      },
+      "date": 1467046246705
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Technology and data from [http://leafletjs.com/ leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap] contributors."
+      },
+      "date": 1467046290147
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Technology and data from [http://leafletjs.com/ leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap]."
+      },
+      "date": 1467046297416
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Technology and data from [http://leafletjs.com/ Leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap]."
+      },
+      "date": 1467046317238
+    },
+    {
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "0c06d0c65392757c",
+        "adca22ad59e9c6ba",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed",
+        "01c3cbb7b0e0b41d"
+      ],
+      "id": "adca22ad59e9c6ba",
+      "date": 1467046383910
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Code and data from [http://leafletjs.com/ Leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap]."
+      },
+      "date": 1467046432316
+    },
+    {
+      "type": "edit",
+      "id": "75413e06d2ac887d",
+      "item": {
+        "type": "paragraph",
+        "id": "75413e06d2ac887d",
+        "text": "This plugin displays a map and caption along with markers from various sources. Explore by scrolling and zooming. Move by dragging the caption."
+      },
+      "date": 1467046487886
+    },
+    {
+      "type": "remove",
+      "id": "01c3cbb7b0e0b41d",
+      "date": 1467046506569
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "Double-click the map or caption to edit."
+      },
+      "date": 1467046553336
+    },
+    {
+      "type": "add",
+      "id": "66e16074c08cc331",
+      "item": {
+        "type": "paragraph",
+        "id": "66e16074c08cc331",
+        "text": "The map markup consists of lines, either caption or marker."
+      },
+      "after": "0afb0c6bd45cb7ed",
+      "date": 1467046795144
+    },
+    {
+      "type": "edit",
+      "id": "66e16074c08cc331",
+      "item": {
+        "type": "paragraph",
+        "id": "66e16074c08cc331",
+        "text": "The map markup consists of lines, either caption or marker. "
+      },
+      "date": 1467046897221
+    },
+    {
+      "type": "add",
+      "id": "673860db5b7c1d3b",
+      "item": {
+        "type": "paragraph",
+        "id": "673860db5b7c1d3b",
+        "text": "A line starting with coordinates describes a marker. Text after the marker become the marker's popup label."
+      },
+      "after": "66e16074c08cc331",
+      "date": 1467047020777
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "Double-click the map or caption to edit markup."
+      },
+      "date": 1467047165141
+    },
+    {
+      "type": "remove",
+      "id": "66e16074c08cc331",
+      "date": 1467047173614
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "Double-click the map or caption to edit markup consisting of lines, either caption or marker. "
+      },
+      "date": 1467047189128
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "Double-click to edit markup consisting of lines of caption text and other configuration commands."
+      },
+      "date": 1467047304362
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a255b2b72e8e1351"
+      },
+      "id": "a255b2b72e8e1351",
+      "type": "add",
+      "after": "673860db5b7c1d3b",
+      "date": 1467047392506
+    },
+    {
+      "type": "edit",
+      "id": "a255b2b72e8e1351",
+      "item": {
+        "type": "code",
+        "id": "a255b2b72e8e1351",
+        "text": "52.207483, 0.115771 Master's Garden\n"
+      },
+      "date": 1467047399604
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e974889ae2b802f1"
+      },
+      "id": "e974889ae2b802f1",
+      "type": "add",
+      "after": "a255b2b72e8e1351",
+      "date": 1467047737953
+    },
+    {
+      "type": "edit",
+      "id": "e974889ae2b802f1",
+      "item": {
+        "type": "code",
+        "id": "e974889ae2b802f1",
+        "text": "45°36'43.3\"N 122°43'52.8\"W Smith Lake, Portland"
+      },
+      "date": 1467047751363
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "7f941f281f929e55"
+      },
+      "id": "7f941f281f929e55",
+      "type": "add",
+      "after": "e974889ae2b802f1",
+      "date": 1467047768532
+    },
+    {
+      "type": "edit",
+      "id": "7f941f281f929e55",
+      "item": {
+        "type": "paragraph",
+        "id": "7f941f281f929e55",
+        "text": "Coordinates are always written latitude first, using decimal degrees or punctuated 'nautical' format."
+      },
+      "date": 1467047888217
+    },
+    {
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "0c06d0c65392757c",
+        "adca22ad59e9c6ba",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed",
+        "673860db5b7c1d3b",
+        "a255b2b72e8e1351",
+        "7f941f281f929e55",
+        "e974889ae2b802f1"
+      ],
+      "id": "7f941f281f929e55",
+      "date": 1467047891026
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "9e29c3aaae504fcb"
+      },
+      "id": "9e29c3aaae504fcb",
+      "type": "add",
+      "after": "e974889ae2b802f1",
+      "date": 1467048246093
+    },
+    {
+      "type": "edit",
+      "id": "9e29c3aaae504fcb",
+      "item": {
+        "type": "paragraph",
+        "id": "9e29c3aaae504fcb",
+        "text": "Maps source markers to other items and will merge markers from items above and to its left in the lineup."
+      },
+      "date": 1467048333759
     }
   ],
   "plugin": "map"
