@@ -80,8 +80,12 @@ emit = ($item, item) ->
     # disable double click zoom - so we can use double click to start edit
     map.doubleClickZoom.disable()
 
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '<a href="http://osm.org/copyright">OSM</a>'
+    # select tiles, default to OSM
+    tile = item.tile || "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+    tileCredits  = item.tileCredits || '<a href="http://osm.org/copyright">OSM</a>'
+
+    L.tileLayer(tile, {
+      attribution: tileCredits
       }).addTo(map)
 
     showMarkers = (markers) ->

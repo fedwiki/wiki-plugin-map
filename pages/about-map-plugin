@@ -20,11 +20,9 @@
       "type": "map",
       "id": "70ab7213605ecdcc",
       "text": "Trinity College (Cambridge)",
-      "latlng": {
-        "lat": 52.206982076367645,
-        "lng": 0.11684775352478029
-      },
-      "zoom": 17
+      "zoom": 17,
+      "tile" : "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png",
+      "tileCredits" : "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a> &mdash; Map data &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
     },
     {
       "type": "paragraph",
