@@ -19,6 +19,10 @@ resolve = (text) ->
       .replace(/\[\[.*?\]\]/g,'<internal>')
       .replace(/\[.*?\]/g,'<external>')
 
+htmlDecode = (escapedText) ->
+  doc = new DOMParser().parseFromString(escapedText, "text/html")
+  doc.documentElement.textContent
+
 marker = (text) ->
   deg = (m) ->
     num = +m[0] + m[1]/60 + (m[2]||0)/60/60
@@ -91,8 +95,9 @@ emit = ($item, item) ->
     showMarkers = (markers) ->
       return unless markers
       for p in markers
+        markerLabel  = htmlDecode(wiki.resolveLinks(p.label))
         L.marker([p.lat, p.lon])
-          .bindPopup(p.label)
+          .bindPopup( markerLabel )
           .openPopup()
           .addTo(map);
 
@@ -107,8 +112,6 @@ emit = ($item, item) ->
     candidates = $(".item:lt(#{$('.item').index($item)})")
     if (who = candidates.filter ".marker-source").size()
       showMarkers div.markerData() for div in who
-
-
 
 
 bind = ($item, item) ->
