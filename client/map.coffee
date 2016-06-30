@@ -5,126 +5,105 @@
  * https://github.com/fedwiki/wiki-plugin-map/blob/master/LICENSE.txt
 ###
 
-window.plugins.map =
+escape = (line) ->
+  line
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
 
-  bind: (div, item) ->
-  emit: (div, item) ->
-    if (!$("link[href='http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css']").length)
-      $('<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">').appendTo("head")
-    if (!$("link[href='/plugins/map/map.css']").length)
-      $('<link rel="stylesheet" href="/plugins/map/map.css" type="text/css">').appendTo("head")
-    wiki.getScript "http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js", ->
-      mapId = 'map-' + uniqueId()
-      figure = $("<figure></figure>")
-        .mouseout (e) ->
-          # focusout does not seem fire, so using mouseout...
+resolve = (text) ->
+  if wiki?
+    wiki.resolveLinks(text, escape)
+  else
+    escape(text)
+      .replace(/\[\[.*?\]\]/g,'<internal>')
+      .replace(/\[.*?\]/g,'<external>')
 
-          # ignore if we are not editing
-          return if !figure.hasClass 'mapEditing'
+marker = (text) ->
+  deg = (m) ->
+    num = +m[0] + m[1]/60 + (m[2]||0)/60/60
+    if m[3].match /[SW]/i then -num else num
+  decimal = /^(-?\d{1,3}\.\d*),? *(-?\d{1,3}\.\d*)\s*(.*)$/
+  nautical = /^(\d{1,3})°(\d{1,2})'(\d*\.\d*)?"?([NS]) (\d{1,3})°(\d{1,2})'(\d*\.\d*)?"?([EW]) (.*)$/i
+  return {lat: +m[1], lon: +m[2], label: resolve(m[3])} if m = decimal.exec text
+  return {lat: deg(m[1..4]), lon: deg(m[5..8]), label: resolve(m[9])} if m = nautical.exec text
+  null
 
-          # ignore if not for the outer container
-          return unless $(e.relatedTarget).hasAnyClass("page", "story")
+parse = (text) ->
+  captions = []
+  markers = []
+  for line in text.split /\n/
+    if m = marker line
+      markers.push m
+    else
+      captions.push resolve(line)
+  {markers, caption: captions.join('<br>')}
 
-          # see anything has changed - don't want to save if it has not
-          if !map.getCenter().equals(item.latlng) || item.zoom isnt map.getZoom() || item.text isnt $("textarea").val()
-            # something has been changed, so lets save
-            item.latlng = map.getCenter()
-            item.zoom = map.getZoom()
-            item.text = $("textarea").val()
+feature = (marker) ->
+  type: 'Feature'
+  geometry:
+    type: 'Point'
+    coordinates: [marker.lon, marker.lat]
+    properties:
+      label: marker.label
 
-            # save the new position, and caption, but only if
-            plugins.map.save(div, item)
+emit = ($item, item) ->
 
-          figure.find("textarea").replaceWith( "<figcaption>#{wiki.resolveLinks(item.text)}</figcaption>" )
+  {caption, markers} = parse item.text
 
-          figure.removeClass 'mapEditing'
+  # announce our capability to produce markers in native and geojson format
+  $item.addClass 'marker-source'
+  $item.get(0).markerData = ->
+    parse(item.text).markers
+  $item.get(0).markerGeo = ->
+    type: 'FeatureCollection'
+    features: parse(item.text).markers.map(feature)
 
-          null
+  if (!$("link[href='http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css']").length)
+    $('<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">').appendTo("head")
+  if (!$("link[href='/plugins/map/map.css']").length)
+    $('<link rel="stylesheet" href="/plugins/map/map.css" type="text/css">').appendTo("head")
 
-        .dblclick ->
-          # Double clicking on either map or caption will switch into edit mode.
+  wiki.getScript "http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js", ->
 
-          # ignore dblclick if we are already editing.
-          return if figure.hasClass 'mapEditing'
-          figure.addClass 'mapEditing'
+    mapId = "map-#{Math.floor(Math.random()*1000000)}"
 
-          # replace the caption with a textarea
-          wiki.textEditor div, item
+    $item.append """
+      <figure style="padding: 8px;">
+        <div id="#{mapId}" style='height: 300px;'></div>
+        <p class="caption">#{caption}</p>
+      </figure>
+    """
 
-          null
+    map = L.map(mapId).setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
 
-        .bind 'keydown', (e) ->
-          if (e.altKey || e.ctlKey || e.metaKey) and e.which == 83 #alt-s
-            figure.mouseout()
-            return false
-          if (e.altKey || e.ctlKey || e.metaKey) and e.which == 73 #alt-i
-            # note: only works if clicked in the textarea
-            e.preventDefault()
-            page = $(e.target).parents('.page') unless e.shiftKey
-            wiki.doInternalLink "about map plugin", page
-            return false
+    # disable double click zoom - so we can use double click to start edit
+    map.doubleClickZoom.disable()
 
-       .bind 'focusout', (e) ->
-         console.log 'event target: ', e.target
-         e.stopPropagation if e.target.class == 'leaflet-tile' || 'leaflet-container'
-         null
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '<a href="http://osm.org/copyright">OSM</a>'
+      }).addTo(map)
 
-      div.html figure
+    showMarkers = (markers) ->
+      return unless markers
+      for p in markers
+        L.marker([p.lat, p.lon])
+          .bindPopup(p.label)
+          .openPopup()
+          .addTo(map);
 
-      figure.append "<div id='" + mapId + "' style='height: 300px;'></div>"
+    # add markers on the map
+    showMarkers markers
 
-      map = L.map(mapId).setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
+    # find and add markers from candidate items
+    candidates = $(".item:lt(#{$('.item').index($item)})")
+    if (who = candidates.filter ".marker-source").size()
+      showMarkers div.markerData() for div in who
 
-      # disable double click zoom - so we can use double click to start edit
-      map.doubleClickZoom.disable()
-
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map)
-
-      # info to be added to the map
-      points = []
-      mapTitle = "Map Caption"
-
-      # parse the Geo markup
-      parser = (text) ->
-        lines = text.split '\n'
-        mapTitle = lines[0]
-        for line, i in lines
-          if i != 0
-            split = line.split(">>")
-            if split.length > 1 # and split[1] not undefined
-              point={}
-              point.title = split[0]
-              point.lat = parseFloat split[1].split("/")[0].trim()
-              point.lng = parseFloat split[1].split("/")[1].trim()
-              points.push point
-
-      parser item.text  # launch the parser
-      
-      # add markers on the map
-      for p in points
-        L.marker([p.lat, p.lng]).addTo(map);
-
-      # any old maps will not define item.text, so set a default value
-      figure.append "<figcaption>#{wiki.resolveLinks(mapTitle)}</figcaption>"
-
-  save: (div, item) ->
-    wiki.pageHandler.put div.parents('.page:first'),
-      type: 'edit',
-      id: item.id,
-      item: item
+bind = ($item, item) ->
+  $item.dblclick ->
+    wiki.textEditor $item, item
 
 
-uniqueId = (length=8) ->
-  id = ""
-  id += Math.random().toString(36).substr(2) while id.length < length
-  id.substr 0, length
-
-$.fn.hasAnyClass = ->
-  i = 0
-
-  while i < arguments.length
-    return true  if @hasClass(arguments[i])
-    i++
-  false
+window.plugins.map = {emit, bind} if window?
+module.exports = {marker} if module?
