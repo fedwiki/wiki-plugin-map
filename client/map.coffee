@@ -99,10 +99,17 @@ emit = ($item, item) ->
     # add markers on the map
     showMarkers markers
 
+    # center map on markers
+    bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in markers ]
+    map.fitBounds bounds
+
     # find and add markers from candidate items
     candidates = $(".item:lt(#{$('.item').index($item)})")
     if (who = candidates.filter ".marker-source").size()
       showMarkers div.markerData() for div in who
+
+
+
 
 bind = ($item, item) ->
   $item.dblclick ->
