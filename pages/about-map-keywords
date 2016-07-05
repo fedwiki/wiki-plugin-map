@@ -1,0 +1,315 @@
+{
+  "title": "About Map Keywords",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "eb285095c3493c4e",
+      "text": "Various keywords can be mixed with markers and captions. Keywords are all caps and begin in column one."
+    },
+    {
+      "type": "markdown",
+      "id": "aaa126d593f35d19",
+      "text": "Say __LINEUP__ to read markers from the lineup."
+    },
+    {
+      "type": "markdown",
+      "id": "a3a9ffecac459f8c",
+      "text": "Say __BOUNDARY__ to bound the markers found so far."
+    },
+    {
+      "type": "paragraph",
+      "id": "5285e8e26a7c08a5",
+      "text": "If LINEUP is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
+    },
+    {
+      "type": "paragraph",
+      "id": "29bdd720fce03d1b",
+      "text": "The map can have various properties attached to its item json. Look for maps preconfigured to have useful properties."
+    },
+    {
+      "type": "markdown",
+      "id": "d6189d278b3f3381",
+      "text": "item.__latLng__ specifies the map center, default NYC."
+    },
+    {
+      "type": "markdown",
+      "id": "47a39a979bb6b839",
+      "text": "item.__zoom__ specifies the map zoom, default 13."
+    },
+    {
+      "type": "markdown",
+      "id": "927f33c7c7d31b6e",
+      "text": "item.__tile__ specifies the map tile source, default OSM."
+    },
+    {
+      "type": "paragraph",
+      "id": "38fff256637622ea",
+      "text": "The latLng is used when no markers are found. The zoom is used when less than two markers are found."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "About Map Keywords",
+        "story": []
+      },
+      "date": 1467697962692
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "eb285095c3493c4e"
+      },
+      "id": "eb285095c3493c4e",
+      "type": "add",
+      "date": 1467697978912
+    },
+    {
+      "type": "edit",
+      "id": "eb285095c3493c4e",
+      "item": {
+        "type": "paragraph",
+        "id": "eb285095c3493c4e",
+        "text": "Various keywords can be mixed with markers and captions. Keywords are all caps and begin in column one."
+      },
+      "date": 1467698059143
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "aaa126d593f35d19"
+      },
+      "id": "aaa126d593f35d19",
+      "type": "add",
+      "after": "eb285095c3493c4e",
+      "date": 1467698073819
+    },
+    {
+      "type": "edit",
+      "id": "aaa126d593f35d19",
+      "item": {
+        "type": "markdown",
+        "id": "aaa126d593f35d19",
+        "text": "Say __LINEUP__ to read markers from the lineup."
+      },
+      "date": 1467698112253
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a3a9ffecac459f8c"
+      },
+      "id": "a3a9ffecac459f8c",
+      "type": "add",
+      "after": "aaa126d593f35d19",
+      "date": 1467698117995
+    },
+    {
+      "type": "edit",
+      "id": "a3a9ffecac459f8c",
+      "item": {
+        "type": "markdown",
+        "id": "a3a9ffecac459f8c",
+        "text": "Say __BOUNDARY__ to bound the markers found so far."
+      },
+      "date": 1467698195983
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "5285e8e26a7c08a5"
+      },
+      "id": "5285e8e26a7c08a5",
+      "type": "add",
+      "after": "a3a9ffecac459f8c",
+      "date": 1467698346818
+    },
+    {
+      "type": "edit",
+      "id": "5285e8e26a7c08a5",
+      "item": {
+        "type": "paragraph",
+        "id": "5285e8e26a7c08a5",
+        "text": "If LINEUP is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
+      },
+      "date": 1467698451548
+    },
+    {
+      "type": "add",
+      "id": "29bdd720fce03d1b",
+      "item": {
+        "type": "paragraph",
+        "id": "29bdd720fce03d1b",
+        "text": "The map can have various properties attached to its item json. Look for maps preconfigured to have useful properties."
+      },
+      "after": "5285e8e26a7c08a5",
+      "date": 1467698646096
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d6189d278b3f3381"
+      },
+      "id": "d6189d278b3f3381",
+      "type": "add",
+      "after": "29bdd720fce03d1b",
+      "date": 1467698733322
+    },
+    {
+      "type": "edit",
+      "id": "d6189d278b3f3381",
+      "item": {
+        "type": "markdown",
+        "id": "d6189d278b3f3381",
+        "text": "item.__latLng__ specifies the map center if not bounded."
+      },
+      "date": 1467698789102
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "47a39a979bb6b839"
+      },
+      "id": "47a39a979bb6b839",
+      "type": "add",
+      "after": "d6189d278b3f3381",
+      "date": 1467698807025
+    },
+    {
+      "type": "edit",
+      "id": "47a39a979bb6b839",
+      "item": {
+        "type": "markdown",
+        "id": "47a39a979bb6b839",
+        "text": "item.__zoom__ specifies the map zoom if not bounded."
+      },
+      "date": 1467698852738
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "927f33c7c7d31b6e"
+      },
+      "id": "927f33c7c7d31b6e",
+      "type": "add",
+      "after": "47a39a979bb6b839",
+      "date": 1467698926009
+    },
+    {
+      "type": "edit",
+      "id": "927f33c7c7d31b6e",
+      "item": {
+        "type": "markdown",
+        "id": "927f33c7c7d31b6e",
+        "text": "item.__tile__ specifies the map tile source."
+      },
+      "date": 1467698950011
+    },
+    {
+      "type": "edit",
+      "id": "47a39a979bb6b839",
+      "item": {
+        "type": "markdown",
+        "id": "47a39a979bb6b839",
+        "text": "item.__zoom__ specifies the map zoom."
+      },
+      "date": 1467698959525
+    },
+    {
+      "type": "edit",
+      "id": "d6189d278b3f3381",
+      "item": {
+        "type": "markdown",
+        "id": "d6189d278b3f3381",
+        "text": "item.__latLng__ specifies the map center."
+      },
+      "date": 1467698967490
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a438e18ef78bfa93"
+      },
+      "id": "a438e18ef78bfa93",
+      "type": "add",
+      "after": "927f33c7c7d31b6e",
+      "date": 1467698987017
+    },
+    {
+      "type": "edit",
+      "id": "a438e18ef78bfa93",
+      "item": {
+        "type": "paragraph",
+        "id": "a438e18ef78bfa93",
+        "text": "item.__tileCredits"
+      },
+      "date": 1467699001821
+    },
+    {
+      "type": "remove",
+      "id": "a438e18ef78bfa93",
+      "date": 1467699043805
+    },
+    {
+      "type": "edit",
+      "id": "d6189d278b3f3381",
+      "item": {
+        "type": "markdown",
+        "id": "d6189d278b3f3381",
+        "text": "item.__latLng__ specifies the map center, default NYC."
+      },
+      "date": 1467699097376
+    },
+    {
+      "type": "edit",
+      "id": "47a39a979bb6b839",
+      "item": {
+        "type": "markdown",
+        "id": "47a39a979bb6b839",
+        "text": "item.__zoom__ specifies the map zoom, default 13."
+      },
+      "date": 1467699107451
+    },
+    {
+      "type": "edit",
+      "id": "927f33c7c7d31b6e",
+      "item": {
+        "type": "markdown",
+        "id": "927f33c7c7d31b6e",
+        "text": "item.__tile__ specifies the map tile source, OSM."
+      },
+      "date": 1467699139335
+    },
+    {
+      "type": "edit",
+      "id": "927f33c7c7d31b6e",
+      "item": {
+        "type": "markdown",
+        "id": "927f33c7c7d31b6e",
+        "text": "item.__tile__ specifies the map tile source, default OSM."
+      },
+      "date": 1467699153812
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "38fff256637622ea"
+      },
+      "id": "38fff256637622ea",
+      "type": "add",
+      "after": "927f33c7c7d31b6e",
+      "date": 1467699209559
+    },
+    {
+      "type": "edit",
+      "id": "38fff256637622ea",
+      "item": {
+        "type": "paragraph",
+        "id": "38fff256637622ea",
+        "text": "The latLng is used when no markers are found. The zoom is used when less than two markers are found."
+      },
+      "date": 1467699387345
+    }
+  ]
+}
