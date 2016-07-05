@@ -48,8 +48,10 @@ parse = (text, $item) ->
   for line in text.split /\n/
     if m = marker line
       markers.push m
-    else if /^BOUNDARY/.test line
-      boundary = markers.concat []
+    else if m = /^BOUNDARY *(.*)?$/.exec line
+      hints = if hint = marker m[1] then [hint] else []
+      boundary = markers.concat [] unless boundary?
+      boundary = boundary.concat hints
     else if /^LINEUP/.test line
       markers = markers.concat lineup($item)
     else
@@ -137,4 +139,4 @@ bind = ($item, item) ->
 
 
 window.plugins.map = {emit, bind} if window?
-module.exports = {marker} if module?
+module.exports = {marker, parse} if module?
