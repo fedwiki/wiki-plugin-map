@@ -79,7 +79,7 @@ emit = ($item, item) ->
       </figure>
     """
 
-    map = L.map(mapId).setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
+    map = L.map(mapId)
 
     # disable double click zoom - so we can use double click to start edit
     map.doubleClickZoom.disable()
@@ -104,9 +104,12 @@ emit = ($item, item) ->
     # add markers on the map
     showMarkers markers
 
-    # center map on markers
-    bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in markers ]
-    map.fitBounds bounds
+    # center map on markers or item properties
+    if markers.length
+      bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in markers ]
+      map.fitBounds bounds
+    else
+      map.setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
 
     # find and add markers from candidate items
     candidates = $(".item:lt(#{$('.item').index($item)})")
