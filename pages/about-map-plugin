@@ -51,6 +51,11 @@
       "type": "paragraph",
       "id": "9e29c3aaae504fcb",
       "text": "See [[About Map Keywords]] for more markup options."
+    },
+    {
+      "type": "paragraph",
+      "id": "25aadbd0c660f115",
+      "text": "See [[About Map Properties]] for defaults internal to maps."
     }
   ],
   "journal": [
@@ -560,6 +565,17 @@
         }
       },
       "date": 1467699659766
+    },
+    {
+      "type": "add",
+      "id": "25aadbd0c660f115",
+      "item": {
+        "type": "paragraph",
+        "id": "25aadbd0c660f115",
+        "text": "See [[About Map Properties]] for defaults internal to maps."
+      },
+      "after": "9e29c3aaae504fcb",
+      "date": 1467749929312
     }
   ]
 }

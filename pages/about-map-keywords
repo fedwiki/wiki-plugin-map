@@ -17,34 +17,19 @@
       "text": "Say __BOUNDARY__ to bound the markers found so far."
     },
     {
+      "type": "markdown",
+      "id": "bf21946c40683589",
+      "text": "Say __BOUNDARY hint__  to add hint to map bounds."
+    },
+    {
       "type": "paragraph",
       "id": "5285e8e26a7c08a5",
       "text": "If LINEUP is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
     },
     {
       "type": "paragraph",
-      "id": "29bdd720fce03d1b",
-      "text": "The map can have various properties attached to its item json. Look for maps preconfigured to have useful properties."
-    },
-    {
-      "type": "markdown",
-      "id": "d6189d278b3f3381",
-      "text": "item.__latLng__ specifies the map center, default NYC."
-    },
-    {
-      "type": "markdown",
-      "id": "47a39a979bb6b839",
-      "text": "item.__zoom__ specifies the map zoom, default 13."
-    },
-    {
-      "type": "markdown",
-      "id": "927f33c7c7d31b6e",
-      "text": "item.__tile__ specifies the map tile source, default OSM."
-    },
-    {
-      "type": "paragraph",
-      "id": "38fff256637622ea",
-      "text": "The latLng is used when no markers are found. The zoom is used when less than two markers are found."
+      "id": "3fee42467842feeb",
+      "text": "An optional hint resembles a marker but will expand the BOUNDARY without adding markers to the map. Use multiple BOUNDARY keywords for multiple hints."
     }
   ],
   "journal": [
@@ -310,6 +295,119 @@
         "text": "The latLng is used when no markers are found. The zoom is used when less than two markers are found."
       },
       "date": 1467699387345
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "bf21946c40683589"
+      },
+      "id": "bf21946c40683589",
+      "type": "add",
+      "after": "38fff256637622ea",
+      "date": 1467749239867
+    },
+    {
+      "type": "move",
+      "order": [
+        "eb285095c3493c4e",
+        "aaa126d593f35d19",
+        "a3a9ffecac459f8c",
+        "bf21946c40683589",
+        "5285e8e26a7c08a5",
+        "29bdd720fce03d1b",
+        "d6189d278b3f3381",
+        "47a39a979bb6b839",
+        "927f33c7c7d31b6e",
+        "38fff256637622ea"
+      ],
+      "id": "bf21946c40683589",
+      "date": 1467749243874
+    },
+    {
+      "type": "edit",
+      "id": "bf21946c40683589",
+      "item": {
+        "type": "markdown",
+        "id": "bf21946c40683589",
+        "text": "Say __BOUNDARY _hint_ __ to add hint to boundary"
+      },
+      "date": 1467749302793
+    },
+    {
+      "type": "edit",
+      "id": "bf21946c40683589",
+      "item": {
+        "type": "markdown",
+        "id": "bf21946c40683589",
+        "text": "Say __BOUNDARY *hint* __ to add hint to boundary"
+      },
+      "date": 1467749317044
+    },
+    {
+      "type": "edit",
+      "id": "bf21946c40683589",
+      "item": {
+        "type": "markdown",
+        "id": "bf21946c40683589",
+        "text": "Say __BOUNDARY __  *hint*to add hint to boundary"
+      },
+      "date": 1467749337330
+    },
+    {
+      "type": "edit",
+      "id": "bf21946c40683589",
+      "item": {
+        "type": "markdown",
+        "id": "bf21946c40683589",
+        "text": "Say __BOUNDARY hint__  to add hint to boundary"
+      },
+      "date": 1467749357252
+    },
+    {
+      "type": "add",
+      "id": "3fee42467842feeb",
+      "item": {
+        "type": "paragraph",
+        "id": "3fee42467842feeb",
+        "text": "An optional hint resembles a marker but will expand the BOUNDARY without adding markers to the map. Use multiple BOUNDARY keywords for multiple hints."
+      },
+      "after": "5285e8e26a7c08a5",
+      "date": 1467749765238
+    },
+    {
+      "type": "edit",
+      "id": "bf21946c40683589",
+      "item": {
+        "type": "markdown",
+        "id": "bf21946c40683589",
+        "text": "Say __BOUNDARY hint__  to add hint to map bounds."
+      },
+      "date": 1467749806513
+    },
+    {
+      "type": "remove",
+      "id": "29bdd720fce03d1b",
+      "date": 1467749959974
+    },
+    {
+      "type": "remove",
+      "id": "d6189d278b3f3381",
+      "date": 1467749966500
+    },
+    {
+      "type": "remove",
+      "id": "47a39a979bb6b839",
+      "date": 1467749970071
+    },
+    {
+      "type": "remove",
+      "id": "927f33c7c7d31b6e",
+      "date": 1467749973742
+    },
+    {
+      "type": "remove",
+      "id": "38fff256637622ea",
+      "date": 1467749977032
     }
   ]
 }
