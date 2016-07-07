@@ -29,6 +29,11 @@
     },
     {
       "type": "paragraph",
+      "id": "76d50ac0185b709d",
+      "text": "Shift-double-click to add a marker at a map location."
+    },
+    {
+      "type": "paragraph",
       "id": "673860db5b7c1d3b",
       "text": "A line starting with coordinates describes a marker. Text after the marker become the marker's popup label."
     },
@@ -576,6 +581,27 @@
       },
       "after": "9e29c3aaae504fcb",
       "date": 1467749929312
+    },
+    {
+      "type": "add",
+      "id": "76d50ac0185b709d",
+      "item": {
+        "type": "paragraph",
+        "id": "76d50ac0185b709d",
+        "text": "Shift-double-click to add markers without opening the editor."
+      },
+      "after": "0afb0c6bd45cb7ed",
+      "date": 1467904288251
+    },
+    {
+      "type": "edit",
+      "id": "76d50ac0185b709d",
+      "item": {
+        "type": "paragraph",
+        "id": "76d50ac0185b709d",
+        "text": "Shift-double-click to add a marker at a map location."
+      },
+      "date": 1467904348593
     }
   ]
 }
