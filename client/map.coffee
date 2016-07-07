@@ -108,7 +108,7 @@ emit = ($item, item) ->
       if e.originalEvent.shiftKey
         e.originalEvent.stopPropagation()
         new L.marker(e.latlng).addTo(map)
-        item.text += "\n#{e.latlng.lat}, #{e.latlng.lng}"
+        item.text += "\n#{e.latlng.lat.toFixed 7}, #{e.latlng.lng.toFixed 7}"
         update()
 
 
