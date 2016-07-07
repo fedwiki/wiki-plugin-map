@@ -17,6 +17,14 @@ describe 'map plugin', ->
     it 'should accept decimal lat/lon without space', ->
       marker = map.marker '45.612094,-122.726922 Smith Lake'
       expect(marker).to.eql {lat: 45.612094, lon: -122.726922, label: 'Smith Lake'}
+
+    it 'should accept decimal lat/lon without decimal point', ->
+      marker = map.marker '45, -122 Smith Lake'
+      expect(marker).to.eql {lat: 45, lon: -122, label: 'Smith Lake'}
+    it 'should accept decimal lat/lon without decimal point or comma', ->
+      marker = map.marker '45 -122 Smith Lake'
+      expect(marker).to.eql {lat: 45, lon: -122, label: 'Smith Lake'}
+
     it 'should accept nautical lat/lon', ->
       marker = map.marker '45°36\'43.5"N 122°43\'36.9"W Smith Lake'
       expect(marker).to.eql {lat: 45.61208333333334, lon: -122.72691666666667, label: 'Smith Lake'}

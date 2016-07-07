@@ -27,7 +27,7 @@ marker = (text) ->
   deg = (m) ->
     num = +m[0] + m[1]/60 + (m[2]||0)/60/60
     if m[3].match /[SW]/i then -num else num
-  decimal = /^(-?\d{1,3}\.\d*),? *(-?\d{1,3}\.\d*)\s*(.*)$/
+  decimal = /^(-?\d{1,3}\.?\d*)[, ] *(-?\d{1,3}\.?\d*)\s*(.*)$/
   nautical = /^(\d{1,3})°(\d{1,2})'(\d*\.\d*)?"?([NS]) (\d{1,3})°(\d{1,2})'(\d*\.\d*)?"?([EW]) (.*)$/i
   return {lat: +m[1], lon: +m[2], label: resolve(m[3])} if m = decimal.exec text
   return {lat: deg(m[1..4]), lon: deg(m[5..8]), label: resolve(m[9])} if m = nautical.exec text
