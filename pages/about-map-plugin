@@ -19,10 +19,8 @@
     {
       "type": "map",
       "id": "70ab7213605ecdcc",
-      "text": "Trinity College (Cambridge)",
-      "zoom": 17,
-      "tile" : "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png",
-      "tileCredits" : "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a> &mdash; Map data &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
+      "text": "Trinity College (Cambridge)\n52.207483, 0.115771 Master's Garden\n",
+      "zoom": 15
     },
     {
       "type": "paragraph",
@@ -52,7 +50,12 @@
     {
       "type": "paragraph",
       "id": "9e29c3aaae504fcb",
-      "text": "Maps source markers to other items and will merge markers from items above and to its left in the lineup."
+      "text": "See [[About Map Keywords]] for more markup options."
+    },
+    {
+      "type": "paragraph",
+      "id": "25aadbd0c660f115",
+      "text": "See [[About Map Properties]] for defaults internal to maps."
     }
   ],
   "journal": [
@@ -535,7 +538,44 @@
         "text": "Maps source markers to other items and will merge markers from items above and to its left in the lineup."
       },
       "date": 1467048333759
+    },
+    {
+      "type": "edit",
+      "id": "9e29c3aaae504fcb",
+      "item": {
+        "type": "paragraph",
+        "id": "9e29c3aaae504fcb",
+        "text": "See [[About Map Keywords]] for more markup options."
+      },
+      "date": 1467697958258
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Trinity College (Cambridge)\n52.207483, 0.115771 Master's Garden\n",
+        "zoom": 15,
+        "tile": "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png",
+        "tileCredits": "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a> &mdash; Map data &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+        "latlng": {
+          "lat": 40.73423747914046,
+          "lng": -73.98178339004517
+        }
+      },
+      "date": 1467699659766
+    },
+    {
+      "type": "add",
+      "id": "25aadbd0c660f115",
+      "item": {
+        "type": "paragraph",
+        "id": "25aadbd0c660f115",
+        "text": "See [[About Map Properties]] for defaults internal to maps."
+      },
+      "after": "9e29c3aaae504fcb",
+      "date": 1467749929312
     }
-  ],
-  "plugin": "map"
+  ]
 }

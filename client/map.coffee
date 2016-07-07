@@ -27,21 +27,37 @@ marker = (text) ->
   deg = (m) ->
     num = +m[0] + m[1]/60 + (m[2]||0)/60/60
     if m[3].match /[SW]/i then -num else num
-  decimal = /^(-?\d{1,3}\.\d*),? *(-?\d{1,3}\.\d*)\s*(.*)$/
+  decimal = /^(-?\d{1,3}\.?\d*)[, ] *(-?\d{1,3}\.?\d*)\s*(.*)$/
   nautical = /^(\d{1,3})°(\d{1,2})'(\d*\.\d*)?"?([NS]) (\d{1,3})°(\d{1,2})'(\d*\.\d*)?"?([EW]) (.*)$/i
   return {lat: +m[1], lon: +m[2], label: resolve(m[3])} if m = decimal.exec text
   return {lat: deg(m[1..4]), lon: deg(m[5..8]), label: resolve(m[9])} if m = nautical.exec text
   null
 
-parse = (text) ->
+lineup = ($item) ->
+  return [{lat: 51.5, lon: 0.0, label: 'North Greenwich'}] unless wiki?
+  markers = []
+  candidates = $(".item:lt(#{$('.item').index($item)})")
+  if (who = candidates.filter ".marker-source").size()
+    markers = markers.concat div.markerData() for div in who
+  markers
+
+parse = (text, $item) ->
   captions = []
   markers = []
+  boundary = null
   for line in text.split /\n/
     if m = marker line
       markers.push m
+    else if m = /^BOUNDARY *(.*)?$/.exec line
+      hints = if hint = marker m[1] then [hint] else []
+      boundary = markers.concat [] unless boundary?
+      boundary = boundary.concat hints
+    else if /^LINEUP/.test line
+      markers = markers.concat lineup($item)
     else
       captions.push resolve(line)
-  {markers, caption: captions.join('<br>')}
+  boundary = markers unless boundary?
+  {markers, caption: captions.join('<br>'), boundary}
 
 feature = (marker) ->
   type: 'Feature'
@@ -53,7 +69,7 @@ feature = (marker) ->
 
 emit = ($item, item) ->
 
-  {caption, markers} = parse item.text
+  {caption, markers, boundary} = parse item.text, $item
 
   # announce our capability to produce markers in native and geojson format
   $item.addClass 'marker-source'
@@ -79,7 +95,7 @@ emit = ($item, item) ->
       </figure>
     """
 
-    map = L.map(mapId).setView(item.latlng || [40.735383, -73.984655], item.zoom || 13)
+    map = L.map(mapId)
 
     # disable double click zoom - so we can use double click to start edit
     map.doubleClickZoom.disable()
@@ -104,14 +120,17 @@ emit = ($item, item) ->
     # add markers on the map
     showMarkers markers
 
-    # center map on markers
-    bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in markers ]
-    map.fitBounds bounds
+    # center map on markers or item properties
+    if boundary.length > 1
+      bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+      map.fitBounds bounds
+    else if boundary.length == 1
+      p = boundary[0]
+      map.setView([p.lat, p.lon], item.zoom || 13)
+    else
+      map.setView(item.latLng || [40.735383, -73.984655], item.zoom || 13)
 
     # find and add markers from candidate items
-    candidates = $(".item:lt(#{$('.item').index($item)})")
-    if (who = candidates.filter ".marker-source").size()
-      showMarkers div.markerData() for div in who
 
 
 bind = ($item, item) ->
@@ -120,4 +139,4 @@ bind = ($item, item) ->
 
 
 window.plugins.map = {emit, bind} if window?
-module.exports = {marker} if module?
+module.exports = {marker, parse} if module?
