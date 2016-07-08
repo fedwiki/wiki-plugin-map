@@ -1,0 +1,229 @@
+{
+  "title": "About Map Properties",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "29bdd720fce03d1b",
+      "text": "The map can have various properties attached to its item json. Look for maps preconfigured to have useful properties."
+    },
+    {
+      "type": "markdown",
+      "id": "d6189d278b3f3381",
+      "text": "item.__latLng__ specifies the map center, default NYC."
+    },
+    {
+      "type": "markdown",
+      "id": "47a39a979bb6b839",
+      "text": "item.__zoom__ specifies the map zoom, default 13."
+    },
+    {
+      "type": "markdown",
+      "id": "927f33c7c7d31b6e",
+      "text": "item.__tile__ specifies the map tile source, default OSM."
+    },
+    {
+      "type": "paragraph",
+      "id": "38fff256637622ea",
+      "text": "The latLng is used when no markers are found. The zoom is used when less than two markers are found."
+    },
+    {
+      "type": "markdown",
+      "id": "9910b14e93f46364",
+      "text": "# Example"
+    },
+    {
+      "type": "paragraph",
+      "id": "c44612914189fe4f",
+      "text": "Here we use all properties to configure a map using the Stamen Design tiles, cc-by-sa."
+    },
+    {
+      "type": "code",
+      "id": "b511cb60014a8cab",
+      "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latLng\": [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
+    },
+    {
+      "type": "map",
+      "id": "70ab7213605ecdcc",
+      "text": "Near the O2 Arena",
+      "zoom": 15,
+      "latLng": [
+        51.5,
+        0
+      ],
+      "tile": "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "About Map Properties",
+        "story": []
+      },
+      "date": 1467749949706
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "29bdd720fce03d1b",
+        "text": "The map can have various properties attached to its item json. Look for maps preconfigured to have useful properties."
+      },
+      "id": "29bdd720fce03d1b",
+      "date": 1467749959977
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "markdown",
+        "id": "d6189d278b3f3381",
+        "text": "item.__latLng__ specifies the map center, default NYC."
+      },
+      "after": "29bdd720fce03d1b",
+      "id": "d6189d278b3f3381",
+      "date": 1467749966503
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "markdown",
+        "id": "47a39a979bb6b839",
+        "text": "item.__zoom__ specifies the map zoom, default 13."
+      },
+      "after": "d6189d278b3f3381",
+      "id": "47a39a979bb6b839",
+      "date": 1467749970074
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "markdown",
+        "id": "927f33c7c7d31b6e",
+        "text": "item.__tile__ specifies the map tile source, default OSM."
+      },
+      "after": "47a39a979bb6b839",
+      "id": "927f33c7c7d31b6e",
+      "date": 1467749973744
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "38fff256637622ea",
+        "text": "The latLng is used when no markers are found. The zoom is used when less than two markers are found."
+      },
+      "after": "927f33c7c7d31b6e",
+      "id": "38fff256637622ea",
+      "date": 1467749977035
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "b511cb60014a8cab"
+      },
+      "id": "b511cb60014a8cab",
+      "type": "add",
+      "after": "38fff256637622ea",
+      "date": 1467750397507
+    },
+    {
+      "type": "edit",
+      "id": "b511cb60014a8cab",
+      "item": {
+        "type": "code",
+        "id": "b511cb60014a8cab",
+        "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latLon: [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
+      },
+      "date": 1467750406166
+    },
+    {
+      "type": "edit",
+      "id": "b511cb60014a8cab",
+      "item": {
+        "type": "code",
+        "id": "b511cb60014a8cab",
+        "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latLng: [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
+      },
+      "date": 1467750437980
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "7f73a62148f09d15"
+      },
+      "id": "7f73a62148f09d15",
+      "type": "add",
+      "after": "b511cb60014a8cab",
+      "date": 1467750481845
+    },
+    {
+      "type": "edit",
+      "id": "7f73a62148f09d15",
+      "item":     {
+      "type": "map",
+      "id": "70ab7213605ecdcc",
+      "text": "Near the O2 Arena",
+      "zoom": 15,
+      "latLng": [
+        51.5,
+        0
+      ],
+      "tile": "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
+    }
+,
+      "date": 1467750503309
+    },
+    {
+      "type": "edit",
+      "id": "b511cb60014a8cab",
+      "item": {
+        "type": "code",
+        "id": "b511cb60014a8cab",
+        "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latLng\": [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
+      },
+      "date": 1467750724111
+    },
+    {
+      "type": "add",
+      "id": "9910b14e93f46364",
+      "item": {
+        "type": "paragraph",
+        "id": "9910b14e93f46364",
+        "text": "# Example"
+      },
+      "after": "38fff256637622ea",
+      "date": 1467752568313
+    },
+    {
+      "type": "add",
+      "id": "c44612914189fe4f",
+      "item": {
+        "type": "paragraph",
+        "id": "c44612914189fe4f",
+        "text": "Here we use all properties to configure a map using the Stamen Design tiles, cc"
+      },
+      "after": "9910b14e93f46364",
+      "date": 1467752652776
+    },
+    {
+      "type": "edit",
+      "id": "c44612914189fe4f",
+      "item": {
+        "type": "paragraph",
+        "id": "c44612914189fe4f",
+        "text": "Here we use all properties to configure a map using the Stamen Design tiles, cc-by-sa."
+      },
+      "date": 1467752696113
+    },
+    {
+      "type": "edit",
+      "id": "9910b14e93f46364",
+      "item": {
+        "type": "markdown",
+        "id": "9910b14e93f46364",
+        "text": "# Example"
+      },
+      "date": 1467752699671
+    }
+  ]
+}
