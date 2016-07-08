@@ -4,3 +4,4 @@ Adam Solove <asolove@gmail.com>
 Ward Cunningham <ward@c2.com>
 Nick Niemeir <nick.niemeir@gmail.com>
 Paul Rodwell <paul.rodwell@btinternet.com>
+Clément Renaud <clement.renaud@gmail.com>
