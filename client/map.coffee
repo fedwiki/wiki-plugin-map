@@ -97,8 +97,20 @@ emit = ($item, item) ->
 
     map = L.map(mapId)
 
-    # disable double click zoom - so we can use double click to start edit
+    update = ->
+      wiki.pageHandler.put $item.parents('.page:first'),
+        type: 'edit',
+        id: item.id,
+        item: item
+
     map.doubleClickZoom.disable()
+    map.on 'dblclick', (e) ->
+      if e.originalEvent.shiftKey
+        e.originalEvent.stopPropagation()
+        new L.marker(e.latlng).addTo(map)
+        item.text += "\n#{e.latlng.lat.toFixed 7}, #{e.latlng.lng.toFixed 7}"
+        update()
+
 
     # select tiles, default to OSM
     tile = item.tile || "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
