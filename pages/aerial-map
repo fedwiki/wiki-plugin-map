@@ -1,0 +1,126 @@
+{
+  "title": "Aerial Map",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "5d9fc7baa91a6223",
+      "text": "Here we place markers from the lineup on an aerial map."
+    },
+    {
+      "type": "map",
+      "id": "d66f734b7a58c89c",
+      "text": "Aerial Map\n\nTiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community\nLINEUP",
+      "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+    },
+    {
+      "type": "paragraph",
+      "id": "1a21fa44bb1de509",
+      "text": "See [[Street Map]] or [[Topo Map]] for other views."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Aerial Map",
+        "story": []
+      },
+      "date": 1469053918295
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "5d9fc7baa91a6223"
+      },
+      "id": "5d9fc7baa91a6223",
+      "type": "add",
+      "date": 1469053924947
+    },
+    {
+      "type": "edit",
+      "id": "5d9fc7baa91a6223",
+      "item": {
+        "type": "paragraph",
+        "id": "5d9fc7baa91a6223",
+        "text": "Here we place markers found in the lineup on an aerial map."
+      },
+      "date": 1469053965030
+    },
+    {
+      "type": "edit",
+      "id": "5d9fc7baa91a6223",
+      "item": {
+        "type": "paragraph",
+        "id": "5d9fc7baa91a6223",
+        "text": "Here we place markers from the lineup on an aerial map."
+      },
+      "date": 1469053983674
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d66f734b7a58c89c"
+      },
+      "id": "d66f734b7a58c89c",
+      "type": "add",
+      "after": "5d9fc7baa91a6223",
+      "date": 1469054000701
+    },
+    {
+      "type": "edit",
+      "id": "d66f734b7a58c89c",
+      "item": {
+        "type": "map",
+        "id": "d66f734b7a58c89c",
+        "text": "Aerial Map\nLINEUP"
+      },
+      "date": 1469054014682
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "1a21fa44bb1de509"
+      },
+      "id": "1a21fa44bb1de509",
+      "type": "add",
+      "after": "d66f734b7a58c89c",
+      "date": 1469054018607
+    },
+    {
+      "type": "edit",
+      "id": "1a21fa44bb1de509",
+      "item": {
+        "type": "paragraph",
+        "id": "1a21fa44bb1de509",
+        "text": "See [[Street Map]] or [[Topo Map]] for other views."
+      },
+      "date": 1469054046847
+    },
+    {
+      "type": "edit",
+      "id": "d66f734b7a58c89c",
+      "item": {
+        "type": "map",
+        "id": "d66f734b7a58c89c",
+        "text": "Aerial Map\nTiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community\nLINEUP",
+        "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+      },
+      "date": 1469055278845
+    },
+    {
+      "type": "edit",
+      "id": "d66f734b7a58c89c",
+      "item": {
+        "type": "map",
+        "id": "d66f734b7a58c89c",
+        "text": "Aerial Map\n\nTiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community\nLINEUP",
+        "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+      },
+      "date": 1469055303284
+    },
+    {
+      "type": "fork",
+      "date": 1469058071260
+    }
+  ]
+}

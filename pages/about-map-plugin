@@ -61,6 +61,11 @@
       "type": "paragraph",
       "id": "25aadbd0c660f115",
       "text": "See [[About Map Properties]] for defaults internal to maps."
+    },
+    {
+      "type": "paragraph",
+      "id": "0685e72a4915355d",
+      "text": "See [[Street Map]] or [[Aerial Map]] or [[Topo Map]] tiles."
     }
   ],
   "journal": [
@@ -602,6 +607,37 @@
         "text": "Shift-double-click to add a marker at a map location."
       },
       "date": 1467904348593
+    },
+    {
+      "type": "add",
+      "id": "0685e72a4915355d",
+      "item": {
+        "type": "paragraph",
+        "id": "0685e72a4915355d",
+        "text": "See [[Street Map]], [[Aerial Map]] or [[Topo Map]]"
+      },
+      "after": "25aadbd0c660f115",
+      "date": 1469057959390
+    },
+    {
+      "type": "edit",
+      "id": "0685e72a4915355d",
+      "item": {
+        "type": "paragraph",
+        "id": "0685e72a4915355d",
+        "text": "See [[Street Map]] or [[Aerial Map]] or [[Topo Map]] for other views."
+      },
+      "date": 1469057973730
+    },
+    {
+      "type": "edit",
+      "id": "0685e72a4915355d",
+      "item": {
+        "type": "paragraph",
+        "id": "0685e72a4915355d",
+        "text": "See [[Street Map]] or [[Aerial Map]] or [[Topo Map]] tiles."
+      },
+      "date": 1469057996289
     }
   ]
 }

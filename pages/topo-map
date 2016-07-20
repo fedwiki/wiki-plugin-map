@@ -1,0 +1,116 @@
+{
+  "title": "Topo Map",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "9b7f4d5d1dd25053",
+      "text": "Here we place markers from the lineup on a topo map."
+    },
+    {
+      "type": "map",
+      "id": "496dc45cc5efe8ae",
+      "text": "Topo Map\n\nTiles © Esri — Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community\nLINEUP",
+      "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png"
+    },
+    {
+      "type": "paragraph",
+      "id": "6ccfd83632465922",
+      "text": "See [[Street Map]] or [[Aerial Map]]"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Topo Map",
+        "story": []
+      },
+      "date": 1469056172532
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "9b7f4d5d1dd25053"
+      },
+      "id": "9b7f4d5d1dd25053",
+      "type": "add",
+      "date": 1469056175167
+    },
+    {
+      "type": "edit",
+      "id": "9b7f4d5d1dd25053",
+      "item": {
+        "type": "paragraph",
+        "id": "9b7f4d5d1dd25053",
+        "text": "Here we place markers from the lineup on a topo map."
+      },
+      "date": 1469056194533
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "496dc45cc5efe8ae"
+      },
+      "id": "496dc45cc5efe8ae",
+      "type": "add",
+      "after": "9b7f4d5d1dd25053",
+      "date": 1469056200841
+    },
+    {
+      "type": "edit",
+      "id": "496dc45cc5efe8ae",
+      "item": {
+        "type": "map",
+        "id": "496dc45cc5efe8ae",
+        "text": "Topo Map\nLINEUP"
+      },
+      "date": 1469056224404
+    },
+    {
+      "type": "edit",
+      "id": "496dc45cc5efe8ae",
+      "item": {
+        "type": "map",
+        "id": "496dc45cc5efe8ae",
+        "text": "Topo Map\n\nTiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community\nLINEUP",
+        "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png"
+      },
+      "date": 1469056531044
+    },
+    {
+      "type": "edit",
+      "id": "496dc45cc5efe8ae",
+      "item": {
+        "type": "map",
+        "id": "496dc45cc5efe8ae",
+        "text": "Topo Map\n\nTiles © Esri — Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community\nLINEUP",
+        "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png"
+      },
+      "date": 1469056572675
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "6ccfd83632465922"
+      },
+      "id": "6ccfd83632465922",
+      "type": "add",
+      "after": "496dc45cc5efe8ae",
+      "date": 1469056609881
+    },
+    {
+      "type": "edit",
+      "id": "6ccfd83632465922",
+      "item": {
+        "type": "paragraph",
+        "id": "6ccfd83632465922",
+        "text": "See [[Street Map]] or [[Aerial Map]]"
+      },
+      "date": 1469056632654
+    },
+    {
+      "type": "fork",
+      "date": 1469058109488
+    }
+  ]
+}

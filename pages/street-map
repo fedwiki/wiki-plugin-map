@@ -1,0 +1,143 @@
+{
+  "title": "Street Map",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "d64fea7519058523",
+      "text": "Here we place markers from the lineup on a street map."
+    },
+    {
+      "type": "map",
+      "id": "4859ef0eb001b3b8",
+      "text": "Street Map\n\n© OpenStreetMap contributors.\nCartography licensed CC BY-SA. [http://www.openstreetmap.org/copyright link]\nLINEUP"
+    },
+    {
+      "type": "paragraph",
+      "id": "e384ed28baee4dcd",
+      "text": "See [[Aerial Map]] or [[Topo Map]] for other views."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Street Map",
+        "story": []
+      },
+      "date": 1469019674326
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d64fea7519058523"
+      },
+      "id": "d64fea7519058523",
+      "type": "add",
+      "date": 1469019720883
+    },
+    {
+      "type": "edit",
+      "id": "d64fea7519058523",
+      "item": {
+        "type": "paragraph",
+        "id": "d64fea7519058523",
+        "text": "Here we view place markers that we find in the lineup."
+      },
+      "date": 1469019773114
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "4859ef0eb001b3b8"
+      },
+      "id": "4859ef0eb001b3b8",
+      "type": "add",
+      "after": "d64fea7519058523",
+      "date": 1469019785243
+    },
+    {
+      "type": "edit",
+      "id": "4859ef0eb001b3b8",
+      "item": {
+        "type": "map",
+        "id": "4859ef0eb001b3b8",
+        "text": "Street Map\nLINEUP"
+      },
+      "date": 1469019812734
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e384ed28baee4dcd"
+      },
+      "id": "e384ed28baee4dcd",
+      "type": "add",
+      "after": "4859ef0eb001b3b8",
+      "date": 1469019824129
+    },
+    {
+      "type": "edit",
+      "id": "e384ed28baee4dcd",
+      "item": {
+        "type": "paragraph",
+        "id": "e384ed28baee4dcd",
+        "text": "See [[Aerial Map]] or [[Topo Map]] for other views."
+      },
+      "date": 1469019863276
+    },
+    {
+      "type": "edit",
+      "id": "d64fea7519058523",
+      "item": {
+        "type": "paragraph",
+        "id": "d64fea7519058523",
+        "text": "Here we place markers found in the lineup on a steet map."
+      },
+      "date": 1469019914242
+    },
+    {
+      "type": "edit",
+      "id": "4859ef0eb001b3b8",
+      "item": {
+        "type": "map",
+        "id": "4859ef0eb001b3b8",
+        "text": "Street Map\n\n© OpenStreetMap contributors. \nLINEUP"
+      },
+      "date": 1469057096700
+    },
+    {
+      "type": "edit",
+      "id": "4859ef0eb001b3b8",
+      "item": {
+        "type": "map",
+        "id": "4859ef0eb001b3b8",
+        "text": "Street Map\n\n© OpenStreetMap contributors. Cartography licensed CC BY-SA.\nLINEUP"
+      },
+      "date": 1469057299549
+    },
+    {
+      "type": "edit",
+      "id": "4859ef0eb001b3b8",
+      "item": {
+        "type": "map",
+        "id": "4859ef0eb001b3b8",
+        "text": "Street Map\n\n© OpenStreetMap contributors.\nCartography licensed CC BY-SA. [http://www.openstreetmap.org/copyright link]\nLINEUP"
+      },
+      "date": 1469057332250
+    },
+    {
+      "type": "fork",
+      "date": 1469058035735
+    },
+    {
+      "type": "edit",
+      "id": "d64fea7519058523",
+      "item": {
+        "type": "paragraph",
+        "id": "d64fea7519058523",
+        "text": "Here we place markers from the lineup on a street map."
+      },
+      "date": 1469058184546
+    }
+  ]
+}
