@@ -72,9 +72,17 @@ emit = ($item, item) ->
   {caption, markers, boundary} = parse item.text, $item
 
   # announce our capability to produce markers in native and geojson format
+
   $item.addClass 'marker-source'
+
+  showing = []
   $item.get(0).markerData = ->
-    parse(item.text).markers
+    opened = showing.filter (s) -> s.leaflet._popup._isOpen
+    if opened.length
+      opened.map (s) -> s.marker
+    else
+      parse(item.text).markers
+
   $item.get(0).markerGeo = ->
     type: 'FeatureCollection'
     features: parse(item.text).markers.map(feature)
@@ -124,10 +132,11 @@ emit = ($item, item) ->
       return unless markers
       for p in markers
         markerLabel  = htmlDecode(wiki.resolveLinks(p.label))
-        L.marker([p.lat, p.lon])
+        mkr = L.marker([p.lat, p.lon])
           .bindPopup( markerLabel )
           .openPopup()
           .addTo(map);
+        showing.push {leaflet:mkr, marker:p}
 
     # add markers on the map
     showMarkers markers
