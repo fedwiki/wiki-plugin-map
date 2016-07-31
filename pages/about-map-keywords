@@ -22,6 +22,11 @@
       "text": "Say __BOUNDARY hint__  to add hint to map bounds."
     },
     {
+      "type": "markdown",
+      "id": "10d7a18f2ec54c3f",
+      "text": "Say __WEBLINK url__ to link to external maps."
+    },
+    {
       "type": "paragraph",
       "id": "5285e8e26a7c08a5",
       "text": "If LINEUP is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
@@ -30,6 +35,11 @@
       "type": "paragraph",
       "id": "3fee42467842feeb",
       "text": "An optional hint resembles a marker but will expand the BOUNDARY without adding markers to the map. Use multiple BOUNDARY keywords for multiple hints."
+    },
+    {
+      "type": "markdown",
+      "id": "a990cdad1bbaaeee",
+      "text": "Markers will open WEBLINK urls on double-click. The url will substitute the marker's decimal coordinates in place of __{LAT}__ and __{LON}__."
     }
   ],
   "journal": [
@@ -408,6 +418,65 @@
       "type": "remove",
       "id": "38fff256637622ea",
       "date": 1467749977032
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "10d7a18f2ec54c3f"
+      },
+      "id": "10d7a18f2ec54c3f",
+      "type": "add",
+      "after": "3fee42467842feeb",
+      "date": 1470003482465
+    },
+    {
+      "type": "edit",
+      "id": "10d7a18f2ec54c3f",
+      "item": {
+        "type": "markdown",
+        "id": "10d7a18f2ec54c3f",
+        "text": "Say _WEBLINK url_ to link to external maps."
+      },
+      "date": 1470003583359
+    },
+    {
+      "type": "edit",
+      "id": "10d7a18f2ec54c3f",
+      "item": {
+        "type": "markdown",
+        "id": "10d7a18f2ec54c3f",
+        "text": "Say __WEBLINK url__ to link to external maps."
+      },
+      "date": 1470003593185
+    },
+    {
+      "type": "move",
+      "order": [
+        "eb285095c3493c4e",
+        "aaa126d593f35d19",
+        "a3a9ffecac459f8c",
+        "bf21946c40683589",
+        "10d7a18f2ec54c3f",
+        "5285e8e26a7c08a5",
+        "3fee42467842feeb"
+      ],
+      "id": "10d7a18f2ec54c3f",
+      "date": 1470003598376
+    },
+    {
+      "type": "fork",
+      "date": 1470004132708
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "markdown",
+        "id": "a990cdad1bbaaeee",
+        "text": "Markers will open WEBLINK urls on double-click. The url will substitute the marker's decimal coordinates in place of __{LAT}__ and __{LON}__."
+      },
+      "after": "3fee42467842feeb",
+      "id": "a990cdad1bbaaeee",
+      "date": 1470004140898
     }
   ]
 }
