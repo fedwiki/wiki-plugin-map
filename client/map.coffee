@@ -45,8 +45,10 @@ parse = (text, $item) ->
   captions = []
   markers = []
   boundary = null
+  weblink = null
   for line in text.split /\n/
     if m = marker line
+      m.weblink = weblink if weblink?
       markers.push m
     else if m = /^BOUNDARY *(.*)?$/.exec line
       hints = if hint = marker m[1] then [hint] else []
@@ -54,10 +56,14 @@ parse = (text, $item) ->
       boundary = boundary.concat hints
     else if /^LINEUP/.test line
       markers = markers.concat lineup($item)
+    else if m = /^WEBLINK *(.*)$/.exec line
+      weblink = m[1]
     else
       captions.push resolve(line)
   boundary = markers unless boundary?
-  {markers, caption: captions.join('<br>'), boundary}
+  result = {markers, caption: captions.join('<br>'), boundary}
+  result.weblink = weblink if weblink?
+  result
 
 feature = (marker) ->
   type: 'Feature'
@@ -69,7 +75,7 @@ feature = (marker) ->
 
 emit = ($item, item) ->
 
-  {caption, markers, boundary} = parse item.text, $item
+  {caption, markers, boundary, weblink} = parse item.text, $item
 
   # announce our capability to produce markers in native and geojson format
 
@@ -128,11 +134,18 @@ emit = ($item, item) ->
       attribution: tileCredits
       }).addTo(map)
 
+    openWeblink = (e) ->
+      return unless link = e.target.options.weblink
+      window.open (link
+        .replace(/\{LAT}/, e.latlng.lat)
+        .replace(/\{(LON|LNG)}/, e.latlng.lng))
+
     showMarkers = (markers) ->
       return unless markers
       for p in markers
         markerLabel  = htmlDecode(wiki.resolveLinks(p.label))
-        mkr = L.marker([p.lat, p.lon])
+        mkr = L.marker([p.lat, p.lon], {weblink: p.weblink || weblink})
+          .on( 'dblclick', openWeblink)
           .bindPopup( markerLabel )
           .openPopup()
           .addTo(map);
