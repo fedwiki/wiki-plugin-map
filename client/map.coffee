@@ -162,7 +162,7 @@ emit = ($item, item) ->
       p = boundary[0]
       map.setView([p.lat, p.lon], item.zoom || 13)
     else
-      map.setView(item.latLng || [40.735383, -73.984655], item.zoom || 13)
+      map.setView(item.latlng || item.latLng || [40.735383, -73.984655], item.zoom || 13)
 
     # find and add markers from candidate items
 

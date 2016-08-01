@@ -9,7 +9,7 @@
     {
       "type": "markdown",
       "id": "d6189d278b3f3381",
-      "text": "item.__latLng__ specifies the map center, default NYC."
+      "text": "item.__latlng__ specifies the map center, default NYC."
     },
     {
       "type": "markdown",
@@ -24,7 +24,7 @@
     {
       "type": "paragraph",
       "id": "38fff256637622ea",
-      "text": "The latLng is used when no markers are found. The zoom is used when less than two markers are found."
+      "text": "The latlng is used when no markers are found. The zoom is used when less than two markers are found."
     },
     {
       "type": "markdown",
@@ -39,14 +39,14 @@
     {
       "type": "code",
       "id": "b511cb60014a8cab",
-      "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latLng\": [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
+      "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latlng\": [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
     },
     {
       "type": "map",
       "id": "70ab7213605ecdcc",
       "text": "Near the O2 Arena",
       "zoom": 15,
-      "latLng": [
+      "latlng": [
         51.5,
         0
       ],
@@ -77,7 +77,7 @@
       "item": {
         "type": "markdown",
         "id": "d6189d278b3f3381",
-        "text": "item.__latLng__ specifies the map center, default NYC."
+        "text": "item.__latlng__ specifies the map center, default NYC."
       },
       "after": "29bdd720fce03d1b",
       "id": "d6189d278b3f3381",
@@ -110,7 +110,7 @@
       "item": {
         "type": "paragraph",
         "id": "38fff256637622ea",
-        "text": "The latLng is used when no markers are found. The zoom is used when less than two markers are found."
+        "text": "The latlng is used when no markers are found. The zoom is used when less than two markers are found."
       },
       "after": "927f33c7c7d31b6e",
       "id": "38fff256637622ea",
@@ -142,7 +142,7 @@
       "item": {
         "type": "code",
         "id": "b511cb60014a8cab",
-        "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latLng: [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
+        "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latlng: [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
       },
       "date": 1467750437980
     },
@@ -164,7 +164,7 @@
       "id": "70ab7213605ecdcc",
       "text": "Near the O2 Arena",
       "zoom": 15,
-      "latLng": [
+      "latlng": [
         51.5,
         0
       ],
@@ -179,7 +179,7 @@
       "item": {
         "type": "code",
         "id": "b511cb60014a8cab",
-        "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latLng\": [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
+        "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latlng\": [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
       },
       "date": 1467750724111
     },
