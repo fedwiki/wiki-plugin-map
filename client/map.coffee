@@ -109,13 +109,19 @@ emit = ($item, item) ->
       </figure>
     """
 
-    map = L.map(mapId)
+    map = L.map(mapId, {
+      scrollWheelZoom: false
+      })
 
     update = ->
       wiki.pageHandler.put $item.parents('.page:first'),
         type: 'edit',
         id: item.id,
         item: item
+
+    # stop dragging the map from propagating and dragging the page item.
+    mapDiv = L.DomUtil.get("#{mapId}")
+    L.DomEvent.disableClickPropagation(mapDiv)
 
     map.doubleClickZoom.disable()
     map.on 'dblclick', (e) ->
@@ -127,8 +133,8 @@ emit = ($item, item) ->
 
 
     # select tiles, default to OSM
-    tile = item.tile || "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-    tileCredits  = item.tileCredits || '<a href="http://osm.org/copyright">OSM</a>'
+    tile = item.tile || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    tileCredits  = item.tileCredits || '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
     L.tileLayer(tile, {
       attribution: tileCredits
