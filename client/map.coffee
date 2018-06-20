@@ -93,12 +93,12 @@ emit = ($item, item) ->
     type: 'FeatureCollection'
     features: parse(item.text).markers.map(feature)
 
-  if (!$("link[href='https://unpkg.com/leaflet@0.7.2/dist/leaflet.css']").length)
-    $('<link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.2/dist/leaflet.css">').appendTo("head")
+  if (!$("link[href='https://unpkg.com/leaflet@1.3.1/dist/leaflet.css']").length)
+    $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">').appendTo("head")
   if (!$("link[href='/plugins/map/map.css']").length)
     $('<link rel="stylesheet" href="/plugins/map/map.css" type="text/css">').appendTo("head")
 
-  wiki.getScript "https://unpkg.com/leaflet@0.7.2/dist/leaflet.js", ->
+  wiki.getScript "https://unpkg.com/leaflet@1.3.1/dist/leaflet.js", ->
 
     mapId = "map-#{Math.floor(Math.random()*1000000)}"
 
@@ -109,13 +109,19 @@ emit = ($item, item) ->
       </figure>
     """
 
-    map = L.map(mapId)
+    map = L.map(mapId, {
+      scrollWheelZoom: false
+      })
 
     update = ->
       wiki.pageHandler.put $item.parents('.page:first'),
         type: 'edit',
         id: item.id,
         item: item
+
+    # stop dragging the map from propagating and dragging the page item.
+    mapDiv = L.DomUtil.get("#{mapId}")
+    L.DomEvent.disableClickPropagation(mapDiv)
 
     map.doubleClickZoom.disable()
     map.on 'dblclick', (e) ->
@@ -127,8 +133,8 @@ emit = ($item, item) ->
 
 
     # select tiles, default to OSM
-    tile = item.tile || "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-    tileCredits  = item.tileCredits || '<a href="http://osm.org/copyright">OSM</a>'
+    tile = item.tile || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    tileCredits  = item.tileCredits || '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
     L.tileLayer(tile, {
       attribution: tileCredits
