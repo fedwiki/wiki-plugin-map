@@ -92,4 +92,8 @@ describe 'map plugin', ->
       parse = map.parse [n46,bo,li,bo+n47].join("\n")
       expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46,p47]}
 
+    it 'should accept overlay url and bounds', ->
+      parse = map.parse "OVERLAY http://example.com 45.5,-122.0 44.5,-123.0"
+      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}]}
+
 
