@@ -27,6 +27,11 @@
       "text": "Say __WEBLINK url__ to link to external maps."
     },
     {
+      "type": "markdown",
+      "id": "2f113729f238ed50",
+      "text": "Say __OVERLAY url sw ne__ to superimpose an image."
+    },
+    {
       "type": "paragraph",
       "id": "5285e8e26a7c08a5",
       "text": "If LINEUP is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
@@ -40,6 +45,11 @@
       "type": "markdown",
       "id": "a990cdad1bbaaeee",
       "text": "Markers will open WEBLINK urls on double-click. The url will substitute the marker's decimal coordinates in place of __{LAT}__ and __{LON}__."
+    },
+    {
+      "type": "paragraph",
+      "id": "7bc484c2561f0a84",
+      "text": "Overlay images are specialized maps aligned on the southwest and northeast corners. Separate each parameter with a single space. The decimal lat and lon of each corner is separated with a comma, but no space."
     }
   ],
   "journal": [
@@ -477,6 +487,82 @@
       "after": "3fee42467842feeb",
       "id": "a990cdad1bbaaeee",
       "date": 1470004140898
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "2f113729f238ed50"
+      },
+      "id": "2f113729f238ed50",
+      "type": "add",
+      "after": "a990cdad1bbaaeee",
+      "date": 1549849347523
+    },
+    {
+      "type": "move",
+      "order": [
+        "eb285095c3493c4e",
+        "aaa126d593f35d19",
+        "a3a9ffecac459f8c",
+        "bf21946c40683589",
+        "10d7a18f2ec54c3f",
+        "2f113729f238ed50",
+        "5285e8e26a7c08a5",
+        "3fee42467842feeb",
+        "a990cdad1bbaaeee"
+      ],
+      "id": "2f113729f238ed50",
+      "date": 1549849354765
+    },
+    {
+      "type": "edit",
+      "id": "2f113729f238ed50",
+      "item": {
+        "type": "markdown",
+        "id": "2f113729f238ed50",
+        "text": "Say _OVERLAY url sw ne_ to superimpose an image."
+      },
+      "date": 1549849449709
+    },
+    {
+      "type": "edit",
+      "id": "2f113729f238ed50",
+      "item": {
+        "type": "markdown",
+        "id": "2f113729f238ed50",
+        "text": "Say __OVERLAY url sw ne__ to superimpose an image."
+      },
+      "date": 1549849459859
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "7bc484c2561f0a84"
+      },
+      "id": "7bc484c2561f0a84",
+      "type": "add",
+      "after": "a990cdad1bbaaeee",
+      "date": 1549849500033
+    },
+    {
+      "type": "edit",
+      "id": "7bc484c2561f0a84",
+      "item": {
+        "type": "paragraph",
+        "id": "7bc484c2561f0a84",
+        "text": "Overlay images are specialized maps aligned on the southwest and northeast corners. Separate items with a single space. The decimal lat and lon of each corner is separated with a comma, but no space."
+      },
+      "date": 1549849669210
+    },
+    {
+      "type": "edit",
+      "id": "7bc484c2561f0a84",
+      "item": {
+        "type": "paragraph",
+        "id": "7bc484c2561f0a84",
+        "text": "Overlay images are specialized maps aligned on the southwest and northeast corners. Separate each parameter with a single space. The decimal lat and lon of each corner is separated with a comma, but no space."
+      },
+      "date": 1549849712076
     }
   ]
 }

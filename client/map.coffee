@@ -44,6 +44,7 @@ lineup = ($item) ->
 parse = (text, $item) ->
   captions = []
   markers = []
+  overlays = null
   boundary = null
   weblink = null
   for line in text.split /\n/
@@ -58,11 +59,14 @@ parse = (text, $item) ->
       markers = markers.concat lineup($item)
     else if m = /^WEBLINK *(.*)$/.exec line
       weblink = m[1]
+    else if m = /^OVERLAY *(.+?) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+)$/.exec line
+      overlays = (overlays||[]).concat {url:m[1], bounds:[[m[2],m[3]],[m[4],m[5]]]}
     else
       captions.push resolve(line)
   boundary = markers unless boundary?
   result = {markers, caption: captions.join('<br>'), boundary}
   result.weblink = weblink if weblink?
+  result.overlays = overlays if overlays?
   result
 
 feature = (marker) ->
@@ -75,7 +79,7 @@ feature = (marker) ->
 
 emit = ($item, item) ->
 
-  {caption, markers, boundary, weblink} = parse item.text, $item
+  {caption, markers, boundary, weblink, overlays} = parse item.text, $item
 
   # announce our capability to produce markers in native and geojson format
 
@@ -139,6 +143,10 @@ emit = ($item, item) ->
     L.tileLayer(tile, {
       attribution: tileCredits
       }).addTo(map)
+
+    # add specialized map overlays
+    for o in overlays||[]
+      L.imageOverlay(o.url, o.bounds, {opacity:0.6, interactive:true}).addTo(map)
 
     openWeblink = (e) ->
       return unless link = e.target.options.weblink
