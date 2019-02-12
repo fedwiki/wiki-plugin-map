@@ -59,7 +59,7 @@ parse = (text, $item) ->
       markers = markers.concat lineup($item)
     else if m = /^WEBLINK *(.*)$/.exec line
       weblink = m[1]
-    else if m = /^OVERLAY *(.+?) ([+-]?\d+\.\d+),([+-]?\d+\.\d+) ([+-]?\d+\.\d+),([+-]?\d+\.\d+)$/.exec line
+    else if m = /^OVERLAY *(.+?) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+)$/.exec line
       overlays = (overlays||[]).concat {url:m[1], bounds:[[m[2],m[3]],[m[4],m[5]]]}
     else
       captions.push resolve(line)
