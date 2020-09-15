@@ -1,5 +1,6 @@
 .map {
-	background: #eee;
+  background: #eee;
+  isolation: isolate;
 }
 
 .map figcaption {
