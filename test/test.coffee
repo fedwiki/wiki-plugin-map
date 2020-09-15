@@ -62,42 +62,40 @@ describe 'map plugin', ->
 
     it 'should accept caption only', ->
       parse = map.parse hi
-      expect(parse).to.eql {markers:[], caption:'Hello', boundary:[]}
+      expect(parse).to.eql {markers:[], caption:'Hello', boundary:[], tools: {}}
 
     it 'should accept marker only', ->
       parse = map.parse n46
-      expect(parse).to.eql {markers:[p46], caption:'', boundary:[p46]}
+      expect(parse).to.eql {markers:[p46], caption:'', boundary:[p46], tools: {}}
 
     it 'should accept mixed markers and caption', ->
       parse = map.parse [hi,n46,ho,n47].join("\n")
-      expect(parse).to.eql {markers:[p46,p47], caption:'Hello<br>World', boundary:[p46,p47]}
+      expect(parse).to.eql {markers:[p46,p47], caption:'Hello<br>World', boundary:[p46,p47], tools: {}}
 
     it 'should merge markers with lineup', ->
       parse = map.parse [n46,li].join("\n")
-      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46,pi]}
+      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46,pi], tools: {}}
 
     it 'should separate markers from lineup for boundary', ->
       parse = map.parse [n46,bo,li].join("\n")
-      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46]}
+      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46], tools: {}}
 
     it 'should accept boundary without marker', ->
       parse = map.parse [bo+n46].join("\n")
-      expect(parse).to.eql {markers:[], caption:'', boundary:[p46]}
+      expect(parse).to.eql {markers:[], caption:'', boundary:[p46], tools: {}}
 
     it 'should accept multiple boundary without marker', ->
       parse = map.parse [bo+n46, bo+n47].join("\n")
-      expect(parse).to.eql {markers:[], caption:'', boundary:[p46,p47]}
+      expect(parse).to.eql {markers:[], caption:'', boundary:[p46,p47], tools: {}}
 
     it 'should add markers to boundary until stopped', ->
       parse = map.parse [n46,bo,li,bo+n47].join("\n")
-      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46,p47]}
+      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46,p47], tools: {}}
 
     it 'should accept overlay url and bounds', ->
       parse = map.parse "OVERLAY http://example.com 45.5,-122.0 44.5,-123.0"
-      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}]}
+      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}], tools: {}}
 
     it 'should accept overlay url and bounds with space after comma', ->
       parse = map.parse "OVERLAY http://example.com 45.5, -122.0 44.5, -123.0"
-      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}]}
-
-
+      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}], tools: {}}

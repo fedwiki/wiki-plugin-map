@@ -47,6 +47,7 @@ parse = (text, $item) ->
   overlays = null
   boundary = null
   weblink = null
+  tools = {}
   for line in text.split /\n/
     if m = marker line
       m.weblink = weblink if weblink?
@@ -61,10 +62,14 @@ parse = (text, $item) ->
       weblink = m[1]
     else if m = /^OVERLAY *(.+?) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+)$/.exec line
       overlays = (overlays||[]).concat {url:m[1], bounds:[[m[2],m[3]],[m[4],m[5]]]}
+    else if /^LOCATE/.test line
+      tools['locate'] = true
+    else if /^SEARCH/.test line
+      tools['search'] = true
     else
       captions.push resolve(line)
   boundary = markers unless boundary?
-  result = {markers, caption: captions.join('<br>'), boundary}
+  result = {markers, caption: captions.join('<br>'), boundary, tools}
   result.weblink = weblink if weblink?
   result.overlays = overlays if overlays?
   result
@@ -79,7 +84,7 @@ feature = (marker) ->
 
 emit = ($item, item) ->
 
-  {caption, markers, boundary, weblink, overlays} = parse item.text, $item
+  {caption, markers, boundary, weblink, overlays, tools} = parse item.text, $item
 
   # announce our capability to produce markers in native and geojson format
 
@@ -122,6 +127,43 @@ emit = ($item, item) ->
         type: 'edit',
         id: item.id,
         item: item
+
+    # add locate control
+    if tools.locate
+      if (!$("link[href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css']").length)
+        $('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">').appendTo("head")
+      if (!$("link[href='https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css'"))
+        $('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css">').appendTo("head")
+      wiki.getScript "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.js", ->
+        L.control.locate({
+          position: 'topleft'
+          flyTo: true
+          drawCircle: true
+          drawMarker: false}).addTo(map)
+
+    # add search control
+    if tools.search
+      if (!$("link[href='https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css']").length)
+        $('<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />').appendTo("head")  
+      wiki.getScript "https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js", ->
+        geocoder = L.Control.geocoder({
+          defaultMarkGeocode: false
+        }).on('markgeocode', (e) ->
+          new L.marker([e.geocode.center.lat,e.geocode.center.lng],{
+            title: e.geocode.name
+          }).addTo(map)
+          boundary.push {
+            lat: e.geocode.center.lat
+            lon: e.geocode.center.lng}
+          if boundary.length > 1
+            bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+            map.flyToBounds bounds
+          else if boundary.length == 1
+            p = boundary[0]
+            map.flyTo([p.lat, p.lon], item.zoom || 13)
+          item.text +="\n#{e.geocode.center.lat.toFixed 7}, #{e.geocode.center.lng.toFixed 7} #{e.geocode.name}"
+          update()
+          ).addTo(map)
 
     # stop dragging the map from propagating and dragging the page item.
     mapDiv = L.DomUtil.get("#{mapId}")
