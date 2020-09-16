@@ -61,41 +61,59 @@ describe 'map plugin', ->
     pi = {lat: 51.5, lon: 0.0, label: 'North Greenwich'}
 
     it 'should accept caption only', ->
-      parse = map.parse hi
-      expect(parse).to.eql {markers:[], caption:'Hello', boundary:[], tools: {}}
+      parse = map.parse {'text': hi}
+      expect(parse).to.eql {markers:[], caption:'Hello', boundary:[]}
 
     it 'should accept marker only', ->
-      parse = map.parse n46
-      expect(parse).to.eql {markers:[p46], caption:'', boundary:[p46], tools: {}}
+      parse = map.parse {'text': n46}
+      expect(parse).to.eql {markers:[p46], caption:'', boundary:[p46]}
 
     it 'should accept mixed markers and caption', ->
-      parse = map.parse [hi,n46,ho,n47].join("\n")
-      expect(parse).to.eql {markers:[p46,p47], caption:'Hello<br>World', boundary:[p46,p47], tools: {}}
+      parse = map.parse {'text': [hi,n46,ho,n47].join("\n")}
+      expect(parse).to.eql {markers:[p46,p47], caption:'Hello<br>World', boundary:[p46,p47]}
 
     it 'should merge markers with lineup', ->
-      parse = map.parse [n46,li].join("\n")
-      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46,pi], tools: {}}
+      parse = map.parse {'text': [n46,li].join("\n")}
+      expect(parse).to.eql {markers:[p46,pi], lineupMarkers:[pi], caption:'', boundary:[p46,pi], tools: {freeze: true}}
 
     it 'should separate markers from lineup for boundary', ->
-      parse = map.parse [n46,bo,li].join("\n")
-      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46], tools: {}}
+      parse = map.parse {'text': [n46,bo,li].join("\n")}
+      expect(parse).to.eql {markers:[p46,pi], lineupMarkers:[pi], caption:'', boundary:[p46], tools: {freeze: true}}
 
     it 'should accept boundary without marker', ->
-      parse = map.parse [bo+n46].join("\n")
-      expect(parse).to.eql {markers:[], caption:'', boundary:[p46], tools: {}}
+      parse = map.parse {'text': [bo+n46].join("\n")}
+      expect(parse).to.eql {markers:[], caption:'', boundary:[p46]}
 
     it 'should accept multiple boundary without marker', ->
-      parse = map.parse [bo+n46, bo+n47].join("\n")
-      expect(parse).to.eql {markers:[], caption:'', boundary:[p46,p47], tools: {}}
+      parse = map.parse {'text': [bo+n46, bo+n47].join("\n")}
+      expect(parse).to.eql {markers:[], caption:'', boundary:[p46,p47]}
 
     it 'should add markers to boundary until stopped', ->
-      parse = map.parse [n46,bo,li,bo+n47].join("\n")
-      expect(parse).to.eql {markers:[p46,pi], caption:'', boundary:[p46,p47], tools: {}}
+      parse = map.parse {'text': [n46,bo,li,bo+n47].join("\n")}
+      expect(parse).to.eql {markers:[p46,pi], lineupMarkers:[pi], caption:'', boundary:[p46,p47], tools: {freeze: true}}
 
     it 'should accept overlay url and bounds', ->
-      parse = map.parse "OVERLAY http://example.com 45.5,-122.0 44.5,-123.0"
-      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}], tools: {}}
+      parse = map.parse {'text': "OVERLAY http://example.com 45.5,-122.0 44.5,-123.0"}
+      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}]}
 
     it 'should accept overlay url and bounds with space after comma', ->
-      parse = map.parse "OVERLAY http://example.com 45.5, -122.0 44.5, -123.0"
-      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}], tools: {}}
+      parse = map.parse {'text': "OVERLAY http://example.com 45.5, -122.0 44.5, -123.0"}
+      expect(parse).to.eql {markers:[], caption:'', boundary:[], overlays:[{url:'http://example.com',bounds:[[45.5,-122.0],[44.5,-123.0]]}]}
+
+    it 'frozen markers should be markers', ->
+      parse = map.parse {'text': '', 'frozen': p46}
+      expect(parse).to.eql {markers:[p46], caption:'', boundary:[p46]}
+
+    it 'lineup with frozen should be lineupMarkers', ->
+      parse = map.parse {'text': [n46,li].join("\n"), 'frozen': p47}
+      expect(parse).to.eql {markers:[p47,p46], lineupMarkers:[pi], caption:'', boundary: [p47,p46], tools: {freeze: true}}
+
+    it 'should add SEARCH tool', ->
+      parse = map.parse {'text': 'SEARCH'}
+      expect(parse).to.eql {markers:[], caption:'',boundary:[],tools: {search: true}}
+
+    it 'should add LOCATE tool', ->
+      parse = map.parse {'text': 'LOCATE'}
+      expect(parse).to.eql {markers:[], caption:'',boundary:[],tools: {locate: true}}
+
+

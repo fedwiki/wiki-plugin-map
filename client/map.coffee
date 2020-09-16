@@ -35,19 +35,25 @@ marker = (text) ->
 
 lineup = ($item) ->
   return [{lat: 51.5, lon: 0.0, label: 'North Greenwich'}] unless wiki?
-  markers = []
+  lineupMarkers = []
   candidates = $(".item:lt(#{$('.item').index($item)})")
   if (who = candidates.filter ".marker-source").size()
-    markers = markers.concat div.markerData() for div in who
-  markers
+    lineupMarkers = lineupMarkers.concat div.markerData() for div in who
+  lineupMarkers
 
-parse = (text, $item) ->
+parse = (item, $item) ->
+
+  text = item.text
+  # parsing the plugin text in context of any frozen items
   captions = []
   markers = []
+  lineupMarkers = null 
   overlays = null
   boundary = null
   weblink = null
   tools = {}
+  if item.frozen
+    markers = markers.concat item.frozen
   for line in text.split /\n/
     if m = marker line
       m.weblink = weblink if weblink?
@@ -57,7 +63,10 @@ parse = (text, $item) ->
       boundary = markers.concat [] unless boundary?
       boundary = boundary.concat hints
     else if /^LINEUP/.test line
-      markers = markers.concat lineup($item)
+      tools['freeze'] = true
+      lineupMarkers = lineup($item)
+      if !item.frozen
+        markers = markers.concat lineupMarkers
     else if m = /^WEBLINK *(.*)$/.exec line
       weblink = m[1]
     else if m = /^OVERLAY *(.+?) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+)$/.exec line
@@ -68,8 +77,15 @@ parse = (text, $item) ->
       tools['search'] = true
     else
       captions.push resolve(line)
+
+  # remove any duplicate markers
+  markers = Array.from(new Set(markers.map(JSON.stringify))).map(JSON.parse)
+  lineupMarkers = Array.from(new Set(lineupMarkers.map(JSON.stringify))).map(JSON.parse) if lineupMarkers
+
   boundary = markers unless boundary?
-  result = {markers, caption: captions.join('<br>'), boundary, tools}
+  result = {markers, caption: captions.join('<br>'), boundary}
+  result.lineupMarkers = lineupMarkers if lineupMarkers
+  result.tools = tools if Object.keys(tools).length > 0
   result.weblink = weblink if weblink?
   result.overlays = overlays if overlays?
   result
@@ -84,7 +100,7 @@ feature = (marker) ->
 
 emit = ($item, item) ->
 
-  {caption, markers, boundary, weblink, overlays, tools} = parse item.text, $item
+  {caption, markers, lineupMarkers, boundary, weblink, overlays, tools} = parse item, $item
 
   # announce our capability to produce markers in native and geojson format
 
@@ -96,11 +112,11 @@ emit = ($item, item) ->
     if opened.length
       opened.map (s) -> s.marker
     else
-      parse(item.text).markers
+      parse(item).markers
 
   $item.get(0).markerGeo = ->
     type: 'FeatureCollection'
-    features: parse(item.text).markers.map(feature)
+    features: parse(item).markers.map(feature)
 
   if (!$("link[href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css']").length)
     $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">').appendTo("head")
@@ -129,7 +145,7 @@ emit = ($item, item) ->
         item: item
 
     # add locate control
-    if tools.locate
+    if tools?.locate
       if (!$("link[href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css']").length)
         $('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">').appendTo("head")
       if (!$("link[href='https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css'"))
@@ -142,7 +158,7 @@ emit = ($item, item) ->
           drawMarker: false}).addTo(map)
 
     # add search control
-    if tools.search
+    if tools?.search
       if (!$("link[href='https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css']").length)
         $('<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />').appendTo("head")  
       wiki.getScript "https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js", ->
@@ -164,6 +180,61 @@ emit = ($item, item) ->
           item.text +="\n#{e.geocode.center.lat.toFixed 7}, #{e.geocode.center.lng.toFixed 7} #{e.geocode.name}"
           update()
           ).addTo(map)
+
+    #
+    if tools?.freeze
+      freezeControl = L.Control.extend({
+        options: {
+          position: 'bottomright'
+        }
+
+        onAdd: (map) ->
+          container = L.DomUtil.create('div', 'leaflet-bar leaflet-control')
+          container.innerHTML = """
+          <a class="leaflet-bar-part leaflet-bar-part-single" href="#" style="outline: currentcolor none medium;">
+            <span>❄︎</span>
+          </a>
+          """
+          
+          container.onclick = (e) ->
+            console.log 'freeze click',e
+
+            if e.shiftKey
+              if item.frozen
+                console.log 'freeze with shift key'
+                delete item.frozen
+                update()
+              e.preventDefault()
+              e.stopPropagation()
+            else
+              console.log 'about to freeze', item.frozen, lineupMarkers
+              toFreeze = []
+              if item.frozen
+                toFreeze = Array.from(new Set(item.frozen.concat(lineupMarkers).map(JSON.stringify))).map(JSON.parse)
+              else
+                toFreeze = lineupMarkers
+              # only update if there realy is something new to freeze or it has changed...
+              if (item.frozen and (toFreeze.length != item.frozen.length)) or (!item.frozen and toFreeze.length > 0)
+              #(!item.frozen and toFreeze.length > 0) or toFreeze.length != item.frozen.length
+                item.frozen = toFreeze
+                console.log 'items to freeze', item.frozen
+                update()
+          
+          ### mouse over will show any extra markers that will be added on a re-freeze.
+          container.addEventListener 'mouseenter', (e) ->
+            console.log 'freeze mouse enter'
+
+          container.addEventListener 'mouseleave', (e) ->
+            console.log 'freeze mouse leave'
+          ###
+          return container
+
+        onRemove: (map) ->
+          # Nothing to do here...
+
+      })
+      map.addControl(new freezeControl())
+
 
     # stop dragging the map from propagating and dragging the page item.
     mapDiv = L.DomUtil.get("#{mapId}")
