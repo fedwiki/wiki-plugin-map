@@ -42,7 +42,6 @@ lineup = ($item) ->
   lineupMarkers
 
 parse = (item, $item) ->
-
   text = item.text
   # parsing the plugin text in context of any frozen items
   captions = []
@@ -99,7 +98,6 @@ feature = (marker) ->
       label: marker.label
 
 emit = ($item, item) ->
-
   {caption, markers, lineupMarkers, boundary, weblink, overlays, tools} = parse item, $item
 
   # announce our capability to produce markers in native and geojson format
@@ -143,6 +141,7 @@ emit = ($item, item) ->
         type: 'edit',
         id: item.id,
         item: item
+      wiki.doPlugin $item.empty(), item
 
     # add locate control
     if tools?.locate
@@ -195,19 +194,18 @@ emit = ($item, item) ->
             <span>❄︎</span>
           </a>
           """
+
+          newMarkers = []
+          newMarkerGroup = null
           
           container.onclick = (e) ->
-            console.log 'freeze click',e
-
             if e.shiftKey
-              if item.frozen
-                console.log 'freeze with shift key'
-                delete item.frozen
-                update()
               e.preventDefault()
               e.stopPropagation()
+              if item.frozen
+                delete item.frozen
+                update()
             else
-              console.log 'about to freeze', item.frozen, lineupMarkers
               toFreeze = []
               if item.frozen
                 toFreeze = Array.from(new Set(item.frozen.concat(lineupMarkers).map(JSON.stringify))).map(JSON.parse)
@@ -217,16 +215,33 @@ emit = ($item, item) ->
               if (item.frozen and (toFreeze.length != item.frozen.length)) or (!item.frozen and toFreeze.length > 0)
               #(!item.frozen and toFreeze.length > 0) or toFreeze.length != item.frozen.length
                 item.frozen = toFreeze
-                console.log 'items to freeze', item.frozen
                 update()
           
-          ### mouse over will show any extra markers that will be added on a re-freeze.
+          # mouse over will show any extra markers that will be added on a re-freeze.
           container.addEventListener 'mouseenter', (e) ->
-            console.log 'freeze mouse enter'
+            m = new Set(markers.map(JSON.stringify))
+            l = new Set(lineupMarkers.map(JSON.stringify))
+            newMarkers = Array.from(new Set(Array.from(l).filter((x) -> !m.has(x)))).map(JSON.parse)
+            if newMarkers.length > 0
+              newMarkerGroup = L.layerGroup().addTo(map)
+              newMarkers.forEach (mark) ->
+                L.marker([mark.lat, mark.lon]).addTo(newMarkerGroup)
+              tmpBoundary = boundary.concat newMarkers
+              bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in tmpBoundary ]
+              map.flyToBounds bounds
 
           container.addEventListener 'mouseleave', (e) ->
-            console.log 'freeze mouse leave'
-          ###
+            if newMarkers.length > 0
+              newMarkerGroup.remove()
+              if boundary.length > 1
+                bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+                map.flyToBounds bounds
+              else if boundary.length == 1
+                p = boundary[0]
+                map.flyTo([p.lat, p.lon], item.zoom || 13)
+              else
+                map.flyTo(item.latlng || item.latLng || [40.735383, -73.984655], item.zoom || 13)
+          
           return container
 
         onRemove: (map) ->
