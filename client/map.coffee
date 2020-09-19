@@ -116,12 +116,12 @@ emit = ($item, item) ->
     type: 'FeatureCollection'
     features: parse(item).markers.map(feature)
 
-  if (!$("link[href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css']").length)
-    $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">').appendTo("head")
+  if (!$("link[href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css']").length)
+    $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">').appendTo("head")
   if (!$("link[href='/plugins/map/map.css']").length)
     $('<link rel="stylesheet" href="/plugins/map/map.css" type="text/css">').appendTo("head")
 
-  wiki.getScript "https://unpkg.com/leaflet@1.6.0/dist/leaflet.js", ->
+  wiki.getScript "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js", ->
 
     mapId = "map-#{Math.floor(Math.random()*1000000)}"
 
