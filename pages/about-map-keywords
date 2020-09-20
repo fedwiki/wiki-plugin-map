@@ -32,6 +32,16 @@
       "text": "Say __OVERLAY url sw ne__ to superimpose an image."
     },
     {
+      "type": "markdown",
+      "id": "3a5368621911edac",
+      "text": "Say __SEARCH__ to add a search tool to find a place using Open Street Map name and address data. Will add a marker to the map.\n"
+    },
+    {
+      "type": "markdown",
+      "id": "88fd1fd7a844bb5c",
+      "text": "Say __LOCATE__ add a geolocate tool. This will show probably location, but not add a marker to the map. "
+    },
+    {
       "type": "paragraph",
       "id": "5285e8e26a7c08a5",
       "text": "If LINEUP is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
@@ -563,6 +573,28 @@
         "text": "Overlay images are specialized maps aligned on the southwest and northeast corners. Separate each parameter with a single space. The decimal lat and lon of each corner is separated with a comma, but no space."
       },
       "date": 1549849712076
+    },
+    {
+      "type": "add",
+      "id": "3a5368621911edac",
+      "item": {
+        "type": "markdown",
+        "id": "3a5368621911edac",
+        "text": "Say __SEARCH__ to add a search tool to find a place using Open Street Map name and address data. Will add a marker to the map.\n"
+      },
+      "after": "2f113729f238ed50",
+      "date": 1600166047800
+    },
+    {
+      "type": "add",
+      "id": "88fd1fd7a844bb5c",
+      "item": {
+        "type": "markdown",
+        "id": "88fd1fd7a844bb5c",
+        "text": "Say __LOCATE__ add a geolocate tool. This will show probably location, but not add a marker to the map."
+      },
+      "after": "3a5368621911edac",
+      "date": 1600166255226
     }
   ]
 }
