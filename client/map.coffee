@@ -162,7 +162,6 @@ emit = ($item, item) ->
         $('<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />').appendTo("head")  
       wiki.getScript "https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js", ->
         geocoder = L.Control.geocoder({
-          position: 'topleft'
           defaultMarkGeocode: false
         }).on('markgeocode', (e) ->
           new L.marker([e.geocode.center.lat,e.geocode.center.lng],{
