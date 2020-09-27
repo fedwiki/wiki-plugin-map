@@ -162,6 +162,7 @@ emit = ($item, item) ->
         $('<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />').appendTo("head")  
       wiki.getScript "https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js", ->
         geocoder = L.Control.geocoder({
+          position: 'topleft'
           defaultMarkGeocode: false
         }).on('markgeocode', (e) ->
           new L.marker([e.geocode.center.lat,e.geocode.center.lng],{
@@ -184,14 +185,14 @@ emit = ($item, item) ->
     if tools?.freeze
       freezeControl = L.Control.extend({
         options: {
-          position: 'bottomright'
+          position: 'topright'
         }
 
         onAdd: (map) ->
           container = L.DomUtil.create('div', 'leaflet-bar leaflet-control')
           container.innerHTML = """
           <a class="leaflet-bar-part leaflet-bar-part-single" href="#" style="outline: currentcolor none medium;">
-            <span>❄︎</span>
+            <span style=#{item.frozen? 'color: black;' : 'color: blue;'}>❄︎</span>
           </a>
           """
 
