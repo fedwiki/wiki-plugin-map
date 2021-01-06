@@ -1,0 +1,669 @@
+{
+  "title": "About Map Plugin",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "75413e06d2ac887d",
+      "text": "This plugin displays a map and caption along with markers from various sources. Explore by scrolling and zooming. Move by dragging the caption."
+    },
+    {
+      "type": "paragraph",
+      "id": "0c06d0c65392757c",
+      "text": "Code and data from [http://leafletjs.com/ Leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap]."
+    },
+    {
+      "type": "paragraph",
+      "id": "adca22ad59e9c6ba",
+      "text": "See [https://github.com/fedwiki/wiki-plugin-map GitHub] for plugin source."
+    },
+    {
+      "type": "map",
+      "id": "70ab7213605ecdcc",
+      "text": "Trinity College (Cambridge)\n52.207483, 0.115771 Master's Garden\n",
+      "zoom": 15
+    },
+    {
+      "type": "paragraph",
+      "id": "0afb0c6bd45cb7ed",
+      "text": "Double-click to edit markup consisting of lines of caption text and other configuration commands."
+    },
+    {
+      "type": "paragraph",
+      "id": "76d50ac0185b709d",
+      "text": "Shift-double-click to add a marker at a map location."
+    },
+    {
+      "type": "paragraph",
+      "id": "673860db5b7c1d3b",
+      "text": "A line starting with coordinates describes a marker. Text after the marker become the marker's popup label."
+    },
+    {
+      "type": "code",
+      "id": "a255b2b72e8e1351",
+      "text": "52.207483, 0.115771 Master's Garden\n"
+    },
+    {
+      "type": "paragraph",
+      "id": "7f941f281f929e55",
+      "text": "Coordinates are always written latitude first, using decimal degrees or punctuated 'nautical' format."
+    },
+    {
+      "type": "code",
+      "id": "e974889ae2b802f1",
+      "text": "45°36'43.3\"N 122°43'52.8\"W Smith Lake, Portland"
+    },
+    {
+      "type": "paragraph",
+      "id": "9e29c3aaae504fcb",
+      "text": "See [[About Map Keywords]] for more markup options."
+    },
+    {
+      "type": "paragraph",
+      "id": "25aadbd0c660f115",
+      "text": "See [[About Map Properties]] for defaults internal to maps."
+    },
+    {
+      "type": "paragraph",
+      "id": "b13d80c7d396dfbe",
+      "text": "See [[About Map Freeze / Thaw]] for more about creating a static map from lineup markers."
+    },
+    {
+      "type": "paragraph",
+      "id": "0685e72a4915355d",
+      "text": "See [[Street Map]] or [[Aerial Map]] or [[Topo Map]] tiles."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "About Map Plugin",
+        "story": []
+      },
+      "date": 1400938220543
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "75413e06d2ac887d"
+      },
+      "id": "75413e06d2ac887d",
+      "type": "add",
+      "date": 1400938226361
+    },
+    {
+      "type": "edit",
+      "id": "75413e06d2ac887d",
+      "item": {
+        "type": "paragraph",
+        "id": "75413e06d2ac887d",
+        "text": "The map plug-in displays a map, with a caption. The map can be explored, scrolling and zooming, without creating an updated version. Double clicking on the map enables editing, actions being saved in the journal, when the pointer leaves the map."
+      },
+      "date": 1400938481574
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "70ab7213605ecdcc"
+      },
+      "id": "70ab7213605ecdcc",
+      "type": "add",
+      "after": "75413e06d2ac887d",
+      "date": 1400939953034
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Trinity College (Cambridge)"
+      },
+      "date": 1400939989041
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Trinity College (Cambridge)",
+        "latlng": {
+          "lat": 52.207047823780876,
+          "lng": 0.11680483818054199
+        },
+        "zoom": 17
+      },
+      "date": 1400940062384
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Trinity College (Cambridge)",
+        "latlng": {
+          "lat": 52.206982076367645,
+          "lng": 0.11684775352478029
+        },
+        "zoom": 17
+      },
+      "date": 1400940079952
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e82cd8ce01e6bdfa"
+      },
+      "id": "e82cd8ce01e6bdfa",
+      "type": "add",
+      "after": "70ab7213605ecdcc",
+      "date": 1400940108937
+    },
+    {
+      "type": "edit",
+      "id": "e82cd8ce01e6bdfa",
+      "item": {
+        "type": "paragraph",
+        "id": "e82cd8ce01e6bdfa",
+        "text": "When selecting <i>map</i> from the factory menu, you will be presented with a textbox. This value will be used as a caption, if it is blank the map will be removed."
+      },
+      "date": 1400940293374
+    },
+    {
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": ""
+      },
+      "id": "0afb0c6bd45cb7ed",
+      "type": "add",
+      "after": "e82cd8ce01e6bdfa",
+      "date": 1400940293387
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "To move a map, drag it by its caption."
+      },
+      "date": 1400940349015
+    },
+    {
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "e82cd8ce01e6bdfa",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed"
+      ],
+      "id": "e82cd8ce01e6bdfa",
+      "date": 1400940351761
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "adca22ad59e9c6ba",
+        "text": "See [https://github.com/fedwiki/wiki-plugin-map GitHub] for plugin source."
+      },
+      "after": "0afb0c6bd45cb7ed",
+      "id": "adca22ad59e9c6ba",
+      "date": 1400940406807
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "01c3cbb7b0e0b41d"
+      },
+      "id": "01c3cbb7b0e0b41d",
+      "type": "add",
+      "after": "adca22ad59e9c6ba",
+      "date": 1400940529854
+    },
+    {
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "e82cd8ce01e6bdfa",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed",
+        "01c3cbb7b0e0b41d",
+        "adca22ad59e9c6ba"
+      ],
+      "id": "01c3cbb7b0e0b41d",
+      "date": 1400940535938
+    },
+    {
+      "type": "edit",
+      "id": "01c3cbb7b0e0b41d",
+      "item": {
+        "type": "paragraph",
+        "id": "01c3cbb7b0e0b41d",
+        "text": "This plugin uses Leaflet.js"
+      },
+      "date": 1400940581937
+    },
+    {
+      "type": "edit",
+      "id": "01c3cbb7b0e0b41d",
+      "item": {
+        "type": "paragraph",
+        "id": "01c3cbb7b0e0b41d",
+        "text": "This plugin uses [http://leafletjs.com/ Leaflet], with OpenStreetMap map tiles."
+      },
+      "date": 1400940653077
+    },
+    {
+      "type": "edit",
+      "id": "e82cd8ce01e6bdfa",
+      "item": {
+        "type": "html",
+        "id": "e82cd8ce01e6bdfa",
+        "text": "When selecting <i>map</i> from the factory menu, you will be presented with a textbox. This value will be used as a caption, if it is blank the map will be removed."
+      },
+      "date": 1418317003930
+    },
+    {
+      "type": "edit",
+      "id": "75413e06d2ac887d",
+      "item": {
+        "type": "paragraph",
+        "id": "75413e06d2ac887d",
+        "text": "The map plugin displays a map and caption along with markers from various sources. Explore by scrolling and zooming."
+      },
+      "date": 1467046101032
+    },
+    {
+      "type": "remove",
+      "id": "e82cd8ce01e6bdfa",
+      "date": 1467046109121
+    },
+    {
+      "type": "add",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Map technology and data from "
+      },
+      "after": "75413e06d2ac887d",
+      "date": 1467046153361
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Map technology and data from [http://leafletjs.com/ leaflet] and "
+      },
+      "date": 1467046182511
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Map technology and data from [http://leafletjs.com/ leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap] contributors."
+      },
+      "date": 1467046246705
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Technology and data from [http://leafletjs.com/ leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap] contributors."
+      },
+      "date": 1467046290147
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Technology and data from [http://leafletjs.com/ leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap]."
+      },
+      "date": 1467046297416
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Technology and data from [http://leafletjs.com/ Leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap]."
+      },
+      "date": 1467046317238
+    },
+    {
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "0c06d0c65392757c",
+        "adca22ad59e9c6ba",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed",
+        "01c3cbb7b0e0b41d"
+      ],
+      "id": "adca22ad59e9c6ba",
+      "date": 1467046383910
+    },
+    {
+      "type": "edit",
+      "id": "0c06d0c65392757c",
+      "item": {
+        "type": "paragraph",
+        "id": "0c06d0c65392757c",
+        "text": "Code and data from [http://leafletjs.com/ Leaflet] and [http://www.openstreetmap.org/copyright OpenStreetMap]."
+      },
+      "date": 1467046432316
+    },
+    {
+      "type": "edit",
+      "id": "75413e06d2ac887d",
+      "item": {
+        "type": "paragraph",
+        "id": "75413e06d2ac887d",
+        "text": "This plugin displays a map and caption along with markers from various sources. Explore by scrolling and zooming. Move by dragging the caption."
+      },
+      "date": 1467046487886
+    },
+    {
+      "type": "remove",
+      "id": "01c3cbb7b0e0b41d",
+      "date": 1467046506569
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "Double-click the map or caption to edit."
+      },
+      "date": 1467046553336
+    },
+    {
+      "type": "add",
+      "id": "66e16074c08cc331",
+      "item": {
+        "type": "paragraph",
+        "id": "66e16074c08cc331",
+        "text": "The map markup consists of lines, either caption or marker."
+      },
+      "after": "0afb0c6bd45cb7ed",
+      "date": 1467046795144
+    },
+    {
+      "type": "edit",
+      "id": "66e16074c08cc331",
+      "item": {
+        "type": "paragraph",
+        "id": "66e16074c08cc331",
+        "text": "The map markup consists of lines, either caption or marker. "
+      },
+      "date": 1467046897221
+    },
+    {
+      "type": "add",
+      "id": "673860db5b7c1d3b",
+      "item": {
+        "type": "paragraph",
+        "id": "673860db5b7c1d3b",
+        "text": "A line starting with coordinates describes a marker. Text after the marker become the marker's popup label."
+      },
+      "after": "66e16074c08cc331",
+      "date": 1467047020777
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "Double-click the map or caption to edit markup."
+      },
+      "date": 1467047165141
+    },
+    {
+      "type": "remove",
+      "id": "66e16074c08cc331",
+      "date": 1467047173614
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "Double-click the map or caption to edit markup consisting of lines, either caption or marker. "
+      },
+      "date": 1467047189128
+    },
+    {
+      "type": "edit",
+      "id": "0afb0c6bd45cb7ed",
+      "item": {
+        "type": "paragraph",
+        "id": "0afb0c6bd45cb7ed",
+        "text": "Double-click to edit markup consisting of lines of caption text and other configuration commands."
+      },
+      "date": 1467047304362
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a255b2b72e8e1351"
+      },
+      "id": "a255b2b72e8e1351",
+      "type": "add",
+      "after": "673860db5b7c1d3b",
+      "date": 1467047392506
+    },
+    {
+      "type": "edit",
+      "id": "a255b2b72e8e1351",
+      "item": {
+        "type": "code",
+        "id": "a255b2b72e8e1351",
+        "text": "52.207483, 0.115771 Master's Garden\n"
+      },
+      "date": 1467047399604
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e974889ae2b802f1"
+      },
+      "id": "e974889ae2b802f1",
+      "type": "add",
+      "after": "a255b2b72e8e1351",
+      "date": 1467047737953
+    },
+    {
+      "type": "edit",
+      "id": "e974889ae2b802f1",
+      "item": {
+        "type": "code",
+        "id": "e974889ae2b802f1",
+        "text": "45°36'43.3\"N 122°43'52.8\"W Smith Lake, Portland"
+      },
+      "date": 1467047751363
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "7f941f281f929e55"
+      },
+      "id": "7f941f281f929e55",
+      "type": "add",
+      "after": "e974889ae2b802f1",
+      "date": 1467047768532
+    },
+    {
+      "type": "edit",
+      "id": "7f941f281f929e55",
+      "item": {
+        "type": "paragraph",
+        "id": "7f941f281f929e55",
+        "text": "Coordinates are always written latitude first, using decimal degrees or punctuated 'nautical' format."
+      },
+      "date": 1467047888217
+    },
+    {
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "0c06d0c65392757c",
+        "adca22ad59e9c6ba",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed",
+        "673860db5b7c1d3b",
+        "a255b2b72e8e1351",
+        "7f941f281f929e55",
+        "e974889ae2b802f1"
+      ],
+      "id": "7f941f281f929e55",
+      "date": 1467047891026
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "9e29c3aaae504fcb"
+      },
+      "id": "9e29c3aaae504fcb",
+      "type": "add",
+      "after": "e974889ae2b802f1",
+      "date": 1467048246093
+    },
+    {
+      "type": "edit",
+      "id": "9e29c3aaae504fcb",
+      "item": {
+        "type": "paragraph",
+        "id": "9e29c3aaae504fcb",
+        "text": "Maps source markers to other items and will merge markers from items above and to its left in the lineup."
+      },
+      "date": 1467048333759
+    },
+    {
+      "type": "edit",
+      "id": "9e29c3aaae504fcb",
+      "item": {
+        "type": "paragraph",
+        "id": "9e29c3aaae504fcb",
+        "text": "See [[About Map Keywords]] for more markup options."
+      },
+      "date": 1467697958258
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Trinity College (Cambridge)\n52.207483, 0.115771 Master's Garden\n",
+        "zoom": 15,
+        "tile": "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png",
+        "tileCredits": "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a> &mdash; Map data &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+        "latlng": {
+          "lat": 40.73423747914046,
+          "lng": -73.98178339004517
+        }
+      },
+      "date": 1467699659766
+    },
+    {
+      "type": "add",
+      "id": "25aadbd0c660f115",
+      "item": {
+        "type": "paragraph",
+        "id": "25aadbd0c660f115",
+        "text": "See [[About Map Properties]] for defaults internal to maps."
+      },
+      "after": "9e29c3aaae504fcb",
+      "date": 1467749929312
+    },
+    {
+      "type": "add",
+      "id": "76d50ac0185b709d",
+      "item": {
+        "type": "paragraph",
+        "id": "76d50ac0185b709d",
+        "text": "Shift-double-click to add markers without opening the editor."
+      },
+      "after": "0afb0c6bd45cb7ed",
+      "date": 1467904288251
+    },
+    {
+      "type": "edit",
+      "id": "76d50ac0185b709d",
+      "item": {
+        "type": "paragraph",
+        "id": "76d50ac0185b709d",
+        "text": "Shift-double-click to add a marker at a map location."
+      },
+      "date": 1467904348593
+    },
+    {
+      "type": "add",
+      "id": "0685e72a4915355d",
+      "item": {
+        "type": "paragraph",
+        "id": "0685e72a4915355d",
+        "text": "See [[Street Map]], [[Aerial Map]] or [[Topo Map]]"
+      },
+      "after": "25aadbd0c660f115",
+      "date": 1469057959390
+    },
+    {
+      "type": "edit",
+      "id": "0685e72a4915355d",
+      "item": {
+        "type": "paragraph",
+        "id": "0685e72a4915355d",
+        "text": "See [[Street Map]] or [[Aerial Map]] or [[Topo Map]] for other views."
+      },
+      "date": 1469057973730
+    },
+    {
+      "type": "edit",
+      "id": "0685e72a4915355d",
+      "item": {
+        "type": "paragraph",
+        "id": "0685e72a4915355d",
+        "text": "See [[Street Map]] or [[Aerial Map]] or [[Topo Map]] tiles."
+      },
+      "date": 1469057996289
+    },
+    {
+      "type": "add",
+      "id": "b13d80c7d396dfbe",
+      "item": {
+        "type": "paragraph",
+        "id": "b13d80c7d396dfbe",
+        "text": "See [[About Map Freeze/Thaw]] for more about creating a static map from lineup markers."
+      },
+      "after": "25aadbd0c660f115",
+      "date": 1600507112022
+    },
+    {
+      "type": "edit",
+      "id": "b13d80c7d396dfbe",
+      "item": {
+        "type": "paragraph",
+        "id": "b13d80c7d396dfbe",
+        "text": "See [[About Map Freeze / Thaw]] for more about creating a static map from lineup markers."
+      },
+      "date": 1600507152965
+    }
+  ]
+}

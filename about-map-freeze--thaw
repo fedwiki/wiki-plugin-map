@@ -1,0 +1,112 @@
+{
+  "title": "About Map Freeze / Thaw",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "303c723cd377bef0",
+      "text": "The markers from a lineup can be frozen, by clicking on the snowflake button. This will save, freeze, the current lineup markers with the map."
+    },
+    {
+      "type": "paragraph",
+      "id": "62034f91abb45672",
+      "text": "A map with frozen marker will show those frozen markers together with any markers included in the map item's markup. Any markers from the other maps in the current lineup will not be shown."
+    },
+    {
+      "type": "paragraph",
+      "id": "24daca99985c65e0",
+      "text": "It is possible to add markers from the current lineup to the current lineup by clicking on the snowflake button. When mouse is brought over the snowflake button the map with change to show the markers that will be added."
+    },
+    {
+      "type": "paragraph",
+      "id": "2760008864c11425",
+      "text": "The current set of frozen markers can be removed from the map item by holding the shift key while clicking on the snowflake button."
+    },
+    {
+      "type": "paragraph",
+      "id": "c18e2184a252f675",
+      "text": "The snowflake button is only shown when the map item contains the LINEUP keyword. By removing LINEUP from a map item will continue to show any frozen markers, but will remove the ability to add new markers from the lineup, and remove the frozen markers."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "About Map Freeze / Thaw",
+        "story": []
+      },
+      "date": 1600507157289
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "303c723cd377bef0"
+      },
+      "id": "303c723cd377bef0",
+      "type": "add",
+      "date": 1600597476963
+    },
+    {
+      "type": "edit",
+      "id": "303c723cd377bef0",
+      "item": {
+        "type": "paragraph",
+        "id": "303c723cd377bef0",
+        "text": "The markers from a lineup can be frozen, by clicking on the snowflake button. This will save, freeze, the current lineup markers with the map."
+      },
+      "date": 1600597682524
+    },
+    {
+      "type": "add",
+      "id": "62034f91abb45672",
+      "item": {
+        "type": "paragraph",
+        "id": "62034f91abb45672",
+        "text": "A map with frozen marker will show those frozen markers together with any markers included in the map item's markup. Any markers from the other maps in the current lineup will not be shown."
+      },
+      "after": "303c723cd377bef0",
+      "date": 1600597782931
+    },
+    {
+      "type": "add",
+      "id": "24daca99985c65e0",
+      "item": {
+        "type": "paragraph",
+        "id": "24daca99985c65e0",
+        "text": "It is possible to add markers from the current lineup to the current lineup by clicking on the snowflake button. When mouse is brought over the snowflake button the map with change to show the markers that will be added."
+      },
+      "after": "62034f91abb45672",
+      "date": 1600597925514
+    },
+    {
+      "type": "add",
+      "id": "2760008864c11425",
+      "item": {
+        "type": "paragraph",
+        "id": "2760008864c11425",
+        "text": "The current set of frozen markers can be removed from the map item by holding the shift key while clicking on the snowflake button."
+      },
+      "after": "24daca99985c65e0",
+      "date": 1600597974848
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "c18e2184a252f675"
+      },
+      "id": "c18e2184a252f675",
+      "type": "add",
+      "after": "2760008864c11425",
+      "date": 1600598034506
+    },
+    {
+      "type": "edit",
+      "id": "c18e2184a252f675",
+      "item": {
+        "type": "paragraph",
+        "id": "c18e2184a252f675",
+        "text": "The snowflake button is only shown when the map item contains the LINEUP keyword. By removing LINEUP from a map item will continue to show any frozen markers, but will remove the ability to add new markers from the lineup, and remove the frozen markers."
+      },
+      "date": 1600598188792
+    }
+  ]
+}
