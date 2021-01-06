@@ -64,6 +64,11 @@
     },
     {
       "type": "paragraph",
+      "id": "b13d80c7d396dfbe",
+      "text": "See [[About Map Freeze / Thaw]] for more about creating a static map from lineup markers."
+    },
+    {
+      "type": "paragraph",
       "id": "0685e72a4915355d",
       "text": "See [[Street Map]] or [[Aerial Map]] or [[Topo Map]] tiles."
     }
@@ -638,6 +643,27 @@
         "text": "See [[Street Map]] or [[Aerial Map]] or [[Topo Map]] tiles."
       },
       "date": 1469057996289
+    },
+    {
+      "type": "add",
+      "id": "b13d80c7d396dfbe",
+      "item": {
+        "type": "paragraph",
+        "id": "b13d80c7d396dfbe",
+        "text": "See [[About Map Freeze/Thaw]] for more about creating a static map from lineup markers."
+      },
+      "after": "25aadbd0c660f115",
+      "date": 1600507112022
+    },
+    {
+      "type": "edit",
+      "id": "b13d80c7d396dfbe",
+      "item": {
+        "type": "paragraph",
+        "id": "b13d80c7d396dfbe",
+        "text": "See [[About Map Freeze / Thaw]] for more about creating a static map from lineup markers."
+      },
+      "date": 1600507152965
     }
   ]
 }
