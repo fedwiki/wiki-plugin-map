@@ -306,7 +306,18 @@ emit = ($item, item) ->
     else
       map.setView(item.latlng || item.latLng || [40.735383, -73.984655], item.zoom || 13)
 
-    # find and add markers from candidate items
+    # announce our capability to produce a region
+
+    $item.addClass 'region-source'
+
+    $item.get(0).regionData = ->
+      region = map.getBounds()
+      return {
+        north: region.getNorth()
+        south: region.getSouth()
+        east: region.getEast()
+        west: region.getWest()
+      }
 
 
 bind = ($item, item) ->
