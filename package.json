@@ -36,7 +36,7 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-git-authors": "~3",
     "grunt-mocha-test": "^0.13.3",
-    "mocha": "^8.0.1"
+    "mocha": "^10.0.0"
   },
   "license": "MIT",
   "repository": {
@@ -48,6 +48,5 @@
   },
   "engines": {
     "node": ">=0.10"
-  },
-  "dependencies": {}
+  }
 }
