@@ -5,6 +5,10 @@
  * https://github.com/fedwiki/wiki-plugin-map/blob/master/LICENSE.txt
 ###
 
+usePageMarkers = false
+map = null
+boundary = null
+
 escape = (line) ->
   line
     .replace(/&/g, '&amp;')
@@ -41,16 +45,26 @@ lineup = ($item) ->
     lineupMarkers = lineupMarkers.concat div.markerData() for div in who
   lineupMarkers
 
+page = ($item) ->
+  return [{lat: 51.5, lon: 0.0, label: 'North Greenwich'}] unless wiki?
+  pageMarkers = []
+  candidates = $item.siblings()
+  if (who = candidates.filter ".marker-source").size()
+    pageMarkers = pageMarkers.concat div.markerData() for div in who
+  pageMarkers
+
 parse = (item, $item) ->
   text = item.text
   # parsing the plugin text in context of any frozen items
   captions = []
   markers = []
   lineupMarkers = null 
+  pageMarkers = null
   overlays = null
   boundary = null
   weblink = null
   tools = {}
+  usePageMarkers = false
   if item.frozen
     markers = markers.concat item.frozen
   for line in text.split /\n/
@@ -66,6 +80,10 @@ parse = (item, $item) ->
       lineupMarkers = lineup($item)
       if !item.frozen
         markers = markers.concat lineupMarkers
+    else if /^PAGE/.test line
+      usePageMarkers = true
+      pageMarkers = page($item)
+      markers = markers.concat pageMarkers
     else if m = /^WEBLINK *(.*)$/.exec line
       weblink = m[1]
     else if m = /^OVERLAY *(.+?) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+)$/.exec line
@@ -80,10 +98,12 @@ parse = (item, $item) ->
   # remove any duplicate markers
   markers = Array.from(new Set(markers.map(JSON.stringify))).map(JSON.parse)
   lineupMarkers = Array.from(new Set(lineupMarkers.map(JSON.stringify))).map(JSON.parse) if lineupMarkers
+  pageMarkers = Array.from(new Set(pageMarkers.map(JSON.stringify))).map(JSON.parse) if pageMarkers
 
   boundary = markers unless boundary?
   result = {markers, caption: captions.join('<br>'), boundary}
   result.lineupMarkers = lineupMarkers if lineupMarkers
+  result.pageMarkers = pageMarkers if pageMarkers
   result.tools = tools if Object.keys(tools).length > 0
   result.weblink = weblink if weblink?
   result.overlays = overlays if overlays?
@@ -98,7 +118,7 @@ feature = (marker) ->
       label: marker.label
 
 emit = ($item, item) ->
-  {caption, markers, lineupMarkers, boundary, weblink, overlays, tools} = parse item, $item
+  {caption, markers, lineupMarkers, pageMarkers, boundary, weblink, overlays, tools} = parse item, $item
 
   # announce our capability to produce markers in native and geojson format
 
@@ -321,6 +341,32 @@ emit = ($item, item) ->
 
 
 bind = ($item, item) ->
+  if usePageMarkers
+    console.log('use pager markers')
+
+    wiki.getScript "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js", ->
+      pageMarkers = page($item)
+      pageMarkers = Array.from(new Set(pageMarkers.map(JSON.stringify))).map(JSON.parse) if pageMarkers
+      console.dir(pageMarkers)
+      if pageMarkers
+        for p in pageMarkers
+          markerLabel  = htmlDecode(wiki.resolveLinks(p.label))
+          mkr = L.marker([p.lat, p.lon])
+            .bindPopup( markerLabel )
+            .openPopup()
+            .addTo(map);
+      # center map on markers or item properties
+      boundary = boundary.concat(pageMarkers)
+      boundary = Array.from(new Set(boundary.map(JSON.stringify))).map(JSON.parse)
+      console.dir(boundary)
+      if boundary.length > 1
+        bounds = new L.LatLngBounds([ [p.lat, p.lon] for p in boundary ])
+        map.fitBounds bounds
+      else if boundary.length == 1
+        p = boundary[0]
+        map.setView([p.lat, p.lon], item.zoom || 13)
+      else
+        map.setView(item.latlng || item.latLng || [40.735383, -73.984655], item.zoom || 13)
   $item.dblclick ->
     wiki.textEditor $item, item
 
