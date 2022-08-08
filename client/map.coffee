@@ -45,7 +45,7 @@ lineup = ($item) ->
     lineupMarkers = lineupMarkers.concat div.markerData() for div in who
   lineupMarkers
 
-page = ($item) ->
+getPageMarkers = ($item) ->
   return [{lat: 51.5, lon: 0.0, label: 'North Greenwich'}] unless wiki?
   pageMarkers = []
   candidates = $item.siblings()
@@ -75,15 +75,17 @@ parse = (item, $item) ->
       hints = if hint = marker m[1] then [hint] else []
       boundary = markers.concat [] unless boundary?
       boundary = boundary.concat hints
+    else if /^PAGE/.test line
+      usePageMarkers = true
+      tools['freeze'] = true
+      pageMarkers = getPageMarkers($item)
+      if !item.frozen
+        markers = markers.concat pageMarkers
     else if /^LINEUP/.test line
       tools['freeze'] = true
       lineupMarkers = lineup($item)
       if !item.frozen
         markers = markers.concat lineupMarkers
-    else if /^PAGE/.test line
-      usePageMarkers = true
-      pageMarkers = page($item)
-      markers = markers.concat pageMarkers
     else if m = /^WEBLINK *(.*)$/.exec line
       weblink = m[1]
     else if m = /^OVERLAY *(.+?) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+)$/.exec line
@@ -130,11 +132,11 @@ emit = ($item, item) ->
     if opened.length
       opened.map (s) -> s.marker
     else
-      parse(item).markers
+      parse(item, $item).markers
 
   $item.get(0).markerGeo = ->
     type: 'FeatureCollection'
-    features: parse(item).markers.map(feature)
+    features: parse(item, $item).markers.map(feature)
 
   if (!$("link[href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css']").length)
     $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">').appendTo("head")
@@ -192,6 +194,7 @@ emit = ($item, item) ->
             lon: e.geocode.center.lng}
           if boundary.length > 1
             bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+            bounds = bounds.pad(0.3)
             map.flyToBounds bounds
           else if boundary.length == 1
             p = boundary[0]
@@ -228,9 +231,9 @@ emit = ($item, item) ->
             else
               toFreeze = []
               if item.frozen
-                toFreeze = Array.from(new Set(item.frozen.concat(lineupMarkers).map(JSON.stringify))).map(JSON.parse)
+                toFreeze = Array.from(new Set(item.frozen.concat(lineupMarkers||pageMarkers).map(JSON.stringify))).map(JSON.parse)
               else
-                toFreeze = lineupMarkers
+                toFreeze = lineupMarkers||pageMarkers
               # only update if there realy is something new to freeze or it has changed...
               if (item.frozen and (toFreeze.length != item.frozen.length)) or (!item.frozen and toFreeze.length > 0)
               #(!item.frozen and toFreeze.length > 0) or toFreeze.length != item.frozen.length
@@ -240,7 +243,7 @@ emit = ($item, item) ->
           # mouse over will show any extra markers that will be added on a re-freeze.
           container.addEventListener 'mouseenter', (e) ->
             m = new Set(markers.map(JSON.stringify))
-            l = new Set(lineupMarkers.map(JSON.stringify))
+            l = new Set((lineupMarkers||pageMarkers).map(JSON.stringify))
             newMarkers = Array.from(new Set(Array.from(l).filter((x) -> !m.has(x)))).map(JSON.parse)
             if newMarkers.length > 0
               newMarkerGroup = L.layerGroup().addTo(map)
@@ -248,6 +251,7 @@ emit = ($item, item) ->
                 L.marker([mark.lat, mark.lon]).addTo(newMarkerGroup)
               tmpBoundary = boundary.concat newMarkers
               bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in tmpBoundary ]
+              bounds = bounds.pad(0.3)
               map.flyToBounds bounds
 
           container.addEventListener 'mouseleave', (e) ->
@@ -255,6 +259,7 @@ emit = ($item, item) ->
               newMarkerGroup.remove()
               if boundary.length > 1
                 bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+                bounds = bounds.pad(0.3)
                 map.flyToBounds bounds
               else if boundary.length == 1
                 p = boundary[0]
@@ -319,6 +324,7 @@ emit = ($item, item) ->
     # center map on markers or item properties
     if boundary.length > 1
       bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+      bounds = bounds.pad(0.3)
       map.fitBounds bounds
     else if boundary.length == 1
       p = boundary[0]
@@ -342,12 +348,9 @@ emit = ($item, item) ->
 
 bind = ($item, item) ->
   if usePageMarkers
-    console.log('use pager markers')
-
     wiki.getScript "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js", ->
-      pageMarkers = page($item)
+      pageMarkers = getPageMarkers($item)
       pageMarkers = Array.from(new Set(pageMarkers.map(JSON.stringify))).map(JSON.parse) if pageMarkers
-      console.dir(pageMarkers)
       if pageMarkers
         for p in pageMarkers
           markerLabel  = htmlDecode(wiki.resolveLinks(p.label))
@@ -358,9 +361,9 @@ bind = ($item, item) ->
       # center map on markers or item properties
       boundary = boundary.concat(pageMarkers)
       boundary = Array.from(new Set(boundary.map(JSON.stringify))).map(JSON.parse)
-      console.dir(boundary)
       if boundary.length > 1
         bounds = new L.LatLngBounds([ [p.lat, p.lon] for p in boundary ])
+        bounds = bounds.pad(0.3)
         map.fitBounds bounds
       else if boundary.length == 1
         p = boundary[0]
