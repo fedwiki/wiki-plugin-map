@@ -131,13 +131,14 @@ emit = ($item, item) ->
   $item.get(0).markerData = ->
     opened = showing.filter (s) -> s.leaflet._popup._isOpen
     if opened.length
-      opened.map (s) -> s.marker
+      marlers = opened.map (s) -> s.marker
     else
-      parse(item).markers
+      markers = parse(item, $item).markers
+    return markers
 
   $item.get(0).markerGeo = ->
     type: 'FeatureCollection'
-    features: parse(item).markers.map(feature)
+    features: parse(item, $item).markers.map(feature)
 
   if (!$("link[href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css']").length)
     $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">').appendTo("head")
