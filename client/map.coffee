@@ -196,6 +196,7 @@ emit = ($item, item) ->
             lon: e.geocode.center.lng}
           if boundary.length > 1
             bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+            bounds = bounds.pad(0.3)
             map.flyToBounds bounds
           else if boundary.length == 1
             p = boundary[0]
@@ -256,6 +257,7 @@ emit = ($item, item) ->
                 L.marker([mark.lat, mark.lon]).addTo(newMarkerGroup)
               tmpBoundary = boundary.concat newMarkers
               bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in tmpBoundary ]
+              bounds = bounds.pad(0.3)
               map.flyToBounds bounds
 
           container.addEventListener 'mouseleave', (e) ->
@@ -263,6 +265,7 @@ emit = ($item, item) ->
               newMarkerGroup.remove()
               if boundary.length > 1
                 bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+                bounds = bounds.pad(0.3)
                 map.flyToBounds bounds
               else if boundary.length == 1
                 p = boundary[0]
@@ -327,6 +330,7 @@ emit = ($item, item) ->
     # center map on markers or item properties
     if boundary.length > 1
       bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+      bounds = bounds.pad(0.3)
       map.fitBounds bounds
     else if boundary.length == 1
       p = boundary[0]
