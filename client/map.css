@@ -2,6 +2,7 @@
   background: #eee;
   isolation: isolate;
   clear: both;
+  margin-bottom: 0.4em;
 }
 
 .map figcaption {
