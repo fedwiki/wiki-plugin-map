@@ -5,6 +5,9 @@
  * https://github.com/fedwiki/wiki-plugin-map/blob/master/LICENSE.txt
 ###
 
+# page markers?
+usePageMarkers = false
+
 escape = (line) ->
   line
     .replace(/&/g, '&amp;')
@@ -40,17 +43,29 @@ lineup = ($item) ->
   if (who = candidates.filter ".marker-source").size()
     lineupMarkers = lineupMarkers.concat div.markerData() for div in who
   lineupMarkers
+  
+page = ($item) ->
+  return [{lat: 51.5, lon: 0.0, label: 'North Greenwich'}] unless wiki?
+  pageMarkers = []
+  candidates = $item.siblings()
+  if (who = candidates.filter ".marker-source").size()
+    pageMarkers = pageMarkers.concat div.markerData() for div in who
+  pageMarkers
 
 parse = (item, $item) ->
   text = item.text
   # parsing the plugin text in context of any frozen items
   captions = []
   markers = []
-  lineupMarkers = null 
+  lineupMarkers = null
+  pageMarkers = null
   overlays = null
   boundary = null
   weblink = null
   tools = {}
+
+  usePageMarkers = false
+
   if item.frozen
     markers = markers.concat item.frozen
   for line in text.split /\n/
@@ -66,6 +81,12 @@ parse = (item, $item) ->
       lineupMarkers = lineup($item)
       if !item.frozen
         markers = markers.concat lineupMarkers
+    else if /^PAGE/.test line
+      tools['freeze'] = true
+      pageMarkers = page($item)
+      usePageMarkers = true
+      if !item.frozen
+        markers = markers.concat pageMarkers
     else if m = /^WEBLINK *(.*)$/.exec line
       weblink = m[1]
     else if m = /^OVERLAY *(.+?) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+) ([+-]?\d+\.\d+), ?([+-]?\d+\.\d+)$/.exec line
@@ -80,10 +101,12 @@ parse = (item, $item) ->
   # remove any duplicate markers
   markers = Array.from(new Set(markers.map(JSON.stringify))).map(JSON.parse)
   lineupMarkers = Array.from(new Set(lineupMarkers.map(JSON.stringify))).map(JSON.parse) if lineupMarkers
+  pageMarkers = Array.from(new Set(pageMarkers.map(JSON.stringify))).map(JSON.parse) if pageMarkers
 
   boundary = markers unless boundary?
   result = {markers, caption: captions.join('<br>'), boundary}
   result.lineupMarkers = lineupMarkers if lineupMarkers
+  result.pageMarkers = pageMarkers if pageMarkers
   result.tools = tools if Object.keys(tools).length > 0
   result.weblink = weblink if weblink?
   result.overlays = overlays if overlays?
@@ -98,7 +121,7 @@ feature = (marker) ->
       label: marker.label
 
 emit = ($item, item) ->
-  {caption, markers, lineupMarkers, boundary, weblink, overlays, tools} = parse item, $item
+  {caption, markers, lineupMarkers, pageMarkers, boundary, weblink, overlays, tools} = parse item, $item
 
   # announce our capability to produce markers in native and geojson format
 
@@ -108,13 +131,14 @@ emit = ($item, item) ->
   $item.get(0).markerData = ->
     opened = showing.filter (s) -> s.leaflet._popup._isOpen
     if opened.length
-      opened.map (s) -> s.marker
+      marlers = opened.map (s) -> s.marker
     else
-      parse(item).markers
+      markers = parse(item, $item).markers
+    return markers
 
   $item.get(0).markerGeo = ->
     type: 'FeatureCollection'
-    features: parse(item).markers.map(feature)
+    features: parse(item, $item).markers.map(feature)
 
   if (!$("link[href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css']").length)
     $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">').appendTo("head")
@@ -172,6 +196,7 @@ emit = ($item, item) ->
             lon: e.geocode.center.lng}
           if boundary.length > 1
             bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+            bounds = bounds.pad(0.3)
             map.flyToBounds bounds
           else if boundary.length == 1
             p = boundary[0]
@@ -206,11 +231,13 @@ emit = ($item, item) ->
                 delete item.frozen
                 update()
             else
+              if usePageMarkers
+                pageMarkers = page($item)
               toFreeze = []
               if item.frozen
-                toFreeze = Array.from(new Set(item.frozen.concat(lineupMarkers).map(JSON.stringify))).map(JSON.parse)
+                toFreeze = Array.from(new Set(item.frozen.concat(lineupMarkers||pageMarkers).map(JSON.stringify))).map(JSON.parse)
               else
-                toFreeze = lineupMarkers
+                toFreeze = lineupMarkers||pageMarkers
               # only update if there realy is something new to freeze or it has changed...
               if (item.frozen and (toFreeze.length != item.frozen.length)) or (!item.frozen and toFreeze.length > 0)
               #(!item.frozen and toFreeze.length > 0) or toFreeze.length != item.frozen.length
@@ -219,8 +246,10 @@ emit = ($item, item) ->
           
           # mouse over will show any extra markers that will be added on a re-freeze.
           container.addEventListener 'mouseenter', (e) ->
+            if usePageMarkers
+              pageMarkers = page($item)
             m = new Set(markers.map(JSON.stringify))
-            l = new Set(lineupMarkers.map(JSON.stringify))
+            l = new Set((lineupMarkers||pageMarkers).map(JSON.stringify))
             newMarkers = Array.from(new Set(Array.from(l).filter((x) -> !m.has(x)))).map(JSON.parse)
             if newMarkers.length > 0
               newMarkerGroup = L.layerGroup().addTo(map)
@@ -228,6 +257,7 @@ emit = ($item, item) ->
                 L.marker([mark.lat, mark.lon]).addTo(newMarkerGroup)
               tmpBoundary = boundary.concat newMarkers
               bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in tmpBoundary ]
+              bounds = bounds.pad(0.3)
               map.flyToBounds bounds
 
           container.addEventListener 'mouseleave', (e) ->
@@ -235,6 +265,7 @@ emit = ($item, item) ->
               newMarkerGroup.remove()
               if boundary.length > 1
                 bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+                bounds = bounds.pad(0.3)
                 map.flyToBounds bounds
               else if boundary.length == 1
                 p = boundary[0]
@@ -299,6 +330,7 @@ emit = ($item, item) ->
     # center map on markers or item properties
     if boundary.length > 1
       bounds = new L.LatLngBounds [ [p.lat, p.lon] for p in boundary ]
+      bounds = bounds.pad(0.3)
       map.fitBounds bounds
     else if boundary.length == 1
       p = boundary[0]

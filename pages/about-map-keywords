@@ -13,6 +13,11 @@
     },
     {
       "type": "markdown",
+      "id": "98bca36bc7f177a6",
+      "text": "Say __PAGE__ to read markers from the page."
+    },
+    {
+      "type": "markdown",
       "id": "a3a9ffecac459f8c",
       "text": "Say __BOUNDARY__ to bound the markers found so far."
     },
@@ -44,7 +49,7 @@
     {
       "type": "paragraph",
       "id": "5285e8e26a7c08a5",
-      "text": "If LINEUP is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
+      "text": "If LINEUP or PAGE is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
     },
     {
       "type": "paragraph",
@@ -595,6 +600,27 @@
       },
       "after": "3a5368621911edac",
       "date": 1600166255226
+    },
+    {
+      "type": "edit",
+      "id": "5285e8e26a7c08a5",
+      "item": {
+        "type": "paragraph",
+        "id": "5285e8e26a7c08a5",
+        "text": "If LINEUP or PAGE is omitted, only markers from this map will be used. If BOUNDARY is omitted all of the markers will be used to position and zoom the map."
+      },
+      "date": 1659966468905
+    },
+    {
+      "type": "add",
+      "id": "98bca36bc7f177a6",
+      "item": {
+        "type": "markdown",
+        "id": "98bca36bc7f177a6",
+        "text": "Say __PAGE__ to read markers from the page."
+      },
+      "after": "aaa126d593f35d19",
+      "date": 1659966730211
     }
   ]
 }
