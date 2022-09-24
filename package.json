@@ -1,6 +1,6 @@
 {
   "name": "wiki-plugin-map",
-  "version": "0.6.0-rc.2",
+  "version": "0.6.0",
   "description": "Federated Wiki - Map Plug-in",
   "keywords": [
     "wiki",
