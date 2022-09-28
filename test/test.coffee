@@ -106,7 +106,7 @@ describe 'map plugin', ->
 
     it 'lineup with frozen should be lineupMarkers', ->
       parse = map.parse {'text': [n46,li].join("\n"), 'frozen': p47}
-      expect(parse).to.eql {markers:[p47,p46], lineupMarkers:[pi], caption:'', boundary: [p47,p46], tools: {freeze: true}}
+      expect(parse).to.eql {markers:[p47,p46], caption:'', boundary: [p47,p46], tools: {freeze: true}}
 
     it 'should add SEARCH tool', ->
       parse = map.parse {'text': 'SEARCH'}
