@@ -353,7 +353,7 @@ emit = ($item, item) ->
 
 
 bind = ($item, item) ->
-  $item.dblclick ->
+  $item.on 'dblclick', () ->
     wiki.textEditor $item, item
 
 
