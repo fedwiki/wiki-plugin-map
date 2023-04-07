@@ -41,7 +41,7 @@ lineup = ($item) ->
   return [{lat: 51.5, lon: 0.0, label: 'North Greenwich'}] unless wiki?
   lineupMarkers = []
   candidates = $(".item:lt(#{$('.item').index($item)})")
-  if (who = candidates.filter ".marker-source").size()
+  if (who = candidates.filter ".marker-source").length
     lineupMarkers = lineupMarkers.concat div.markerData() for div in who
   lineupMarkers
   
@@ -49,7 +49,7 @@ page = ($item) ->
   return [{lat: 51.5, lon: 0.0, label: 'North Greenwich'}] unless wiki?
   pageMarkers = []
   candidates = $item.siblings()
-  if (who = candidates.filter ".marker-source").size()
+  if (who = candidates.filter ".marker-source").length
     pageMarkers = pageMarkers.concat div.markerData() for div in who
   pageMarkers
 
@@ -357,7 +357,7 @@ emit = ($item, item) ->
 
 
 bind = ($item, item) ->
-  $item.dblclick ->
+  $item.on 'dblclick', () ->
     wiki.textEditor $item, item
 
 
