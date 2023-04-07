@@ -5,8 +5,9 @@
  * https://github.com/fedwiki/wiki-plugin-map/blob/master/LICENSE.txt
 ###
 
-# page markers?
+# which markers types
 usePageMarkers = false
+useLineupMarkers = false
 
 escape = (line) ->
   line
@@ -65,6 +66,7 @@ parse = (item, $item) ->
   tools = {}
 
   usePageMarkers = false
+  useLineupMarkers = false
 
   if item.frozen
     markers = markers.concat item.frozen
@@ -78,14 +80,15 @@ parse = (item, $item) ->
       boundary = boundary.concat hints
     else if /^LINEUP/.test line
       tools['freeze'] = true
-      lineupMarkers = lineup($item)
+      useLineupMarkers = true
       if !item.frozen
+        lineupMarkers = lineup($item)
         markers = markers.concat lineupMarkers
     else if /^PAGE/.test line
       tools['freeze'] = true
-      pageMarkers = page($item)
       usePageMarkers = true
       if !item.frozen
+        pageMarkers = page($item)
         markers = markers.concat pageMarkers
     else if m = /^WEBLINK *(.*)$/.exec line
       weblink = m[1]
@@ -131,14 +134,13 @@ emit = ($item, item) ->
   $item.get(0).markerData = ->
     opened = showing.filter (s) -> s.leaflet._popup._isOpen
     if opened.length
-      marlers = opened.map (s) -> s.marker
+      return opened.map (s) -> s.marker
     else
-      markers = parse(item, $item).markers
-    return markers
+      return markers
 
   $item.get(0).markerGeo = ->
     type: 'FeatureCollection'
-    features: parse(item, $item).markers.map(feature)
+    features: markers.map(feature)
 
   if (!$("link[href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css']").length)
     $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">').appendTo("head")
@@ -248,6 +250,8 @@ emit = ($item, item) ->
           container.addEventListener 'mouseenter', (e) ->
             if usePageMarkers
               pageMarkers = page($item)
+            if useLineupMarkers
+              lineupMarkers = lineup($item)
             m = new Set(markers.map(JSON.stringify))
             l = new Set((lineupMarkers||pageMarkers).map(JSON.stringify))
             newMarkers = Array.from(new Set(Array.from(l).filter((x) -> !m.has(x)))).map(JSON.parse)
