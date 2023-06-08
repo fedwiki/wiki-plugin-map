@@ -218,7 +218,7 @@ emit = ($item, item) ->
           container = L.DomUtil.create('div', 'leaflet-bar leaflet-control')
           container.innerHTML = """
           <a class="leaflet-bar-part leaflet-bar-part-single" href="#" style="outline: currentcolor none medium;">
-            <span style=#{item.frozen? 'color: black;' : 'color: blue;'}>❄︎</span>
+            <span style="#{if item.frozen then 'color: #5792FF;' else 'color: blue;'}">❄︎</span>
           </a>
           """
 
