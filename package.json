@@ -28,8 +28,8 @@
     "test": "grunt mochaTest"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
     "expect.js": "*",
     "grunt": "^1.0.4",
     "grunt-contrib-coffee": "^2.1.0",
