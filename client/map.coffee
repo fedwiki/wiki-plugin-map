@@ -142,12 +142,12 @@ emit = ($item, item) ->
     type: 'FeatureCollection'
     features: markers.map(feature)
 
-  if (!$("link[href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css']").length)
-    $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">').appendTo("head")
+  if (!$("link[href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css']").length)
+    $('<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" >').appendTo("head")
   if (!$("link[href='/plugins/map/map.css']").length)
     $('<link rel="stylesheet" href="/plugins/map/map.css" type="text/css">').appendTo("head")
 
-  wiki.getScript "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js", ->
+  wiki.getScript "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", ->
 
     mapId = "map-#{Math.floor(Math.random()*1000000)}"
 
@@ -171,11 +171,9 @@ emit = ($item, item) ->
 
     # add locate control
     if tools?.locate
-      if (!$("link[href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css']").length)
-        $('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">').appendTo("head")
-      if (!$("link[href='https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css'"))
-        $('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css">').appendTo("head")
-      wiki.getScript "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.js", ->
+      if (!$("link[href='https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css']").length)
+        $('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css">').appendTo("head")
+      wiki.getScript "https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js", ->
         L.control.locate({
           position: 'topleft'
           flyTo: true
