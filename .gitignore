@@ -1,5 +1,7 @@
-/*/*.js
-/*/*.map
+coverage
+client/*.js
+client/*.map
 status
 node_modules
 npm-debug.log
+meta-client.json

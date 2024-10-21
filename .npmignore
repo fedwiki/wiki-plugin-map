@@ -1,2 +1,2 @@
-/**/*.coffee
-Gruntfile.js
+coverage
+meta-client.json
