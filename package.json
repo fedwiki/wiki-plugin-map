@@ -13,29 +13,22 @@
     "url": "http://ward.fed.wiki.org"
   },
   "contributors": [
-    {
-      "name": "Nick Niemeir",
-      "email": "nick.niemeir@gmail.com",
-      "url": "http://nrn.io"
-    },
-    {
-      "name": "Paul Rodwell",
-      "email": "paul.rodwell@btinternet.com",
-      "url": "http://wiki-paul90.rhcloud.com"
-    }
+    "Adam Solove <asolove@gmail.com>",
+    "Ward Cunningham <ward@c2.com>",
+    "Nick Niemeir <nick.niemeir@gmail.com>",
+    "Paul Rodwell <paul.rodwell@btinternet.com>",
+    "Clément Renaud <clement.renaud@gmail.com>"
   ],
   "scripts": {
-    "test": "grunt mochaTest"
+    "clean": "rm client/map.js client/map.js.map",
+    "build": "npm run clean; node --no-warnings scripts/build-client.js",
+    "test": "mocha",
+    "update-authors": "node scripts/update-authors.cjs"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.2",
-    "@babel/preset-env": "^7.23.2",
+    "esbuild": "^0.24.0",
     "expect.js": "*",
-    "grunt": "^1.0.4",
-    "grunt-contrib-coffee": "^2.1.0",
-    "grunt-contrib-watch": "^1.1.0",
     "grunt-git-authors": "~3",
-    "grunt-mocha-test": "^0.13.3",
     "mocha": "^10.0.0"
   },
   "license": "MIT",
@@ -46,7 +39,8 @@
   "bugs": {
     "url": "https://github.com/fedwiki/wiki-plugin-map/issues"
   },
+  "type": "module",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=18.x"
   }
 }
