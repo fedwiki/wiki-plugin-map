@@ -9,12 +9,12 @@
     {
       "type": "map",
       "id": "4859ef0eb001b3b8",
-      "text": "Street Map\n\n© OpenStreetMap contributors.\nCartography licensed CC BY-SA. [http://www.openstreetmap.org/copyright link]\nLINEUP"
+      "text": "Street Map\nLINEUP"
     },
     {
       "type": "paragraph",
       "id": "e384ed28baee4dcd",
-      "text": "See [[Aerial Map]] or [[Topo Map]] for other views."
+      "text": "See [[Aerial Map]], [[Cycle Map]] or [[Topo Map]] for other views."
     }
   ],
   "journal": [
@@ -138,6 +138,26 @@
         "text": "Here we place markers from the lineup on a street map."
       },
       "date": 1469058184546
+    },
+    {
+      "type": "edit",
+      "id": "4859ef0eb001b3b8",
+      "item": {
+        "type": "map",
+        "id": "4859ef0eb001b3b8",
+        "text": "Street Map\nLINEUP"
+      },
+      "date": 1733408770475
+    },
+    {
+      "type": "edit",
+      "id": "e384ed28baee4dcd",
+      "item": {
+        "type": "paragraph",
+        "id": "e384ed28baee4dcd",
+        "text": "See [[Aerial Map]], [[Cycle Map]] or [[Topo Map]] for other views."
+      },
+      "date": 1733410911378
     }
   ]
 }

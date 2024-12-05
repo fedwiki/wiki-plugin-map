@@ -1,0 +1,93 @@
+{
+  "title": "Cycle Map",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "c7ff9c3e53733353",
+      "text": "Here we place markers from the lineup on a cycle map."
+    },
+    {
+      "type": "map",
+      "id": "04de6f4075bc6f57",
+      "text": "Cycle Map\nLINEUP",
+      "tile": "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",
+      "tileCredits": "<a href=\"https://github.com/cyclosm/cyclosm-cartocss-style/releases\" title=\"CyclOSM - Open Bicycle render\"  target=\"_blank\">CyclOSM</a> | Map data: &copy; <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"
+    },
+    {
+      "type": "paragraph",
+      "id": "48051ec4040469e7",
+      "text": "See [[Aerial Map]], [[Street Map]] or [[Topo Map]] for other views."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Cycle Map",
+        "story": []
+      },
+      "date": 1733410350036
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "c7ff9c3e53733353"
+      },
+      "id": "c7ff9c3e53733353",
+      "type": "add",
+      "date": 1733410351664
+    },
+    {
+      "type": "edit",
+      "id": "c7ff9c3e53733353",
+      "item": {
+        "type": "paragraph",
+        "id": "c7ff9c3e53733353",
+        "text": "Here we place markers from the lineup on a cycle map."
+      },
+      "date": 1733410378866
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "04de6f4075bc6f57"
+      },
+      "id": "04de6f4075bc6f57",
+      "type": "add",
+      "after": "c7ff9c3e53733353",
+      "date": 1733410386242
+    },
+    {
+      "type": "edit",
+      "id": "04de6f4075bc6f57",
+      "item": {
+        "type": "map",
+        "id": "04de6f4075bc6f57",
+        "text": "Cycle Map\nLINEUP",
+        "tile": "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",
+        "tileCredits": "<a href=\"https://github.com/cyclosm/cyclosm-cartocss-style/releases\" title=\"CyclOSM - Open Bicycle render\" target=\"_blank\">CyclOSM</a> | Map data: &copy; <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"
+      },
+      "date": 1733410408099
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "48051ec4040469e7"
+      },
+      "id": "48051ec4040469e7",
+      "type": "add",
+      "after": "04de6f4075bc6f57",
+      "date": 1733410413856
+    },
+    {
+      "type": "edit",
+      "id": "48051ec4040469e7",
+      "item": {
+        "type": "paragraph",
+        "id": "48051ec4040469e7",
+        "text": "See [[Aerial Map]], [[Street Map]] or [[Topo Map]] for other views."
+      },
+      "date": 1733410476620
+    }
+  ]
+}

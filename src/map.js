@@ -375,7 +375,8 @@ const emit = ($item, item) => {
     // select tiles, default to OSM
     const tile = item.tile || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     const tileCredits =
-      item.tileCredits || '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      item.tileCredits ||
+      '© <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
 
     L.tileLayer(tile, {
       attribution: tileCredits,
