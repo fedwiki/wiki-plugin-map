@@ -22,6 +22,11 @@
       "text": "item.__tile__ specifies the map tile source, default OSM."
     },
     {
+      "type": "markdown",
+      "id": "611ffa0ce5a344f8",
+      "text": "item.__tileCredits__ specifies the credit notice for the map tile source, default OSM copyright."
+    },
+    {
       "type": "paragraph",
       "id": "38fff256637622ea",
       "text": "The latlng is used when no markers are found. The zoom is used when less than two markers are found."
@@ -39,18 +44,16 @@
     {
       "type": "code",
       "id": "b511cb60014a8cab",
-      "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latlng\": [51.5, 0],\n  \"tile\": \"http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\n}"
+      "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latlng\": [51.5, 0],\n  \"tile\": \"https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png\",\n  \"tileCredits\": '<a href=\"https://github.com/cyclosm/cyclosm-cartocss-style/releases\" title=\"CyclOSM - Open Bicycle render\">CyclOSM</a> | Map data: &copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\n}"
     },
     {
       "type": "map",
       "id": "70ab7213605ecdcc",
       "text": "Near the O2 Arena",
       "zoom": 15,
-      "latlng": [
-        51.5,
-        0
-      ],
-      "tile": "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
+      "latlng": [51.5, 0],
+      "tile": "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",
+      "tileCredits": "<a href='https://github.com/cyclosm/cyclosm-cartocss-style/releases' title='CyclOSM - Open Bicycle render'>CyclOSM</a> | Map data: &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
     }
   ],
   "journal": [
@@ -159,18 +162,14 @@
     {
       "type": "edit",
       "id": "7f73a62148f09d15",
-      "item":     {
-      "type": "map",
-      "id": "70ab7213605ecdcc",
-      "text": "Near the O2 Arena",
-      "zoom": 15,
-      "latlng": [
-        51.5,
-        0
-      ],
-      "tile": "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
-    }
-,
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Near the O2 Arena",
+        "zoom": 15,
+        "latlng": [51.5, 0],
+        "tile": "http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
+      },
       "date": 1467750503309
     },
     {
@@ -224,6 +223,40 @@
         "text": "# Example"
       },
       "date": 1467752699671
+    },
+    {
+      "type": "add",
+      "id": "611ffa0ce5a344f8",
+      "item": {
+        "type": "markdown",
+        "id": "611ffa0ce5a344f8",
+        "text": "item.__tileCredits__ specifies the credit notice for the map tile source, default OSM copyright."
+      },
+      "after": "927f33c7c7d31b6e",
+      "date": 1733397956749
+    },
+    {
+      "type": "edit",
+      "id": "b511cb60014a8cab",
+      "item": {
+        "type": "code",
+        "id": "b511cb60014a8cab",
+        "text": "{\n  \"type\": \"map\",\n  \"id\": \"70ab7213605ecdcc\",\n  \"text\": \"Near the O2 Arena\",\n  \"zoom\": 15,\n  \"latlng\": [51.5, 0],\n  \"tile\": \"https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png\",\n  \"tileCredits\": '<a href=\"https://github.com/cyclosm/cyclosm-cartocss-style/releases\" title=\"CyclOSM - Open Bicycle render\">CyclOSM</a> | Map data: &copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\n}"
+      },
+      "date": 1733398070284
+    },
+    {
+      "type": "edit",
+      "id": "70ab7213605ecdcc",
+      "item": {
+        "type": "map",
+        "id": "70ab7213605ecdcc",
+        "text": "Near the O2 Arena",
+        "zoom": 15,
+        "latlng": [51.5, 0],
+        "tile": "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",
+        "tileCredits": "<a href='https://github.com/cyclosm/cyclosm-cartocss-style/releases' title='CyclOSM - Open Bicycle render'>CyclOSM</a> | Map data: &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+      }
     }
   ]
 }

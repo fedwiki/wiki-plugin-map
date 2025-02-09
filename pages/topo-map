@@ -9,13 +9,14 @@
     {
       "type": "map",
       "id": "496dc45cc5efe8ae",
-      "text": "Topo Map\n\nTiles © Esri — Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community\nLINEUP",
-      "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png"
+      "text": "Topo Map\nLINEUP",
+      "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png",
+      "tileCredits": "<a href='#' title='Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'>Tiles &copy;</a>"
     },
     {
       "type": "paragraph",
       "id": "6ccfd83632465922",
-      "text": "See [[Street Map]] or [[Aerial Map]]"
+      "text": "See [[Street Map]], [[Aerial Map]] or [[Cycle Map]] for other views."
     }
   ],
   "journal": [
@@ -111,6 +112,38 @@
     {
       "type": "fork",
       "date": 1469058109488
+    },
+    {
+      "type": "edit",
+      "id": "496dc45cc5efe8ae",
+      "item": {
+        "type": "map",
+        "id": "496dc45cc5efe8ae",
+        "text": "Topo Map\nLINEUP",
+        "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png",
+        "tileCredits": "<a href='#' title='Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'>Tiles &copy;</a>"
+      },
+      "date": 1733408927892
+    },
+    {
+      "type": "edit",
+      "id": "6ccfd83632465922",
+      "item": {
+        "type": "paragraph",
+        "id": "6ccfd83632465922",
+        "text": "See [[Street Map]], [[Aerial Map]] or [[Cycle Map]]"
+      },
+      "date": 1733410834397
+    },
+    {
+      "type": "edit",
+      "id": "6ccfd83632465922",
+      "item": {
+        "type": "paragraph",
+        "id": "6ccfd83632465922",
+        "text": "See [[Street Map]], [[Aerial Map]] or [[Cycle Map]] for other views."
+      },
+      "date": 1733410872168
     }
   ]
 }

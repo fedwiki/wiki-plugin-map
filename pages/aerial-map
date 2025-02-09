@@ -9,13 +9,14 @@
     {
       "type": "map",
       "id": "d66f734b7a58c89c",
-      "text": "Aerial Map\n\nTiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community\nLINEUP",
-      "tile": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+      "text": "Aerial Map\nLINEUP",
+      "tile": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      "tileCredits": "<a href='#' title='Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'>Tiles &copy;</a>"
     },
     {
       "type": "paragraph",
       "id": "1a21fa44bb1de509",
-      "text": "See [[Street Map]] or [[Topo Map]] for other views."
+      "text": "See [[Street Map]], [[Cycle Map]] or [[Topo Map]] for other views."
     }
   ],
   "journal": [
@@ -121,6 +122,28 @@
     {
       "type": "fork",
       "date": 1469058071260
+    },
+    {
+      "type": "edit",
+      "id": "d66f734b7a58c89c",
+      "item": {
+        "type": "map",
+        "id": "d66f734b7a58c89c",
+        "text": "Aerial Map\nLINEUP",
+        "tile": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        "tileCredits": "<a href='#' title='Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'>Tiles &copy;</a>"
+      },
+      "date": 1733408441907
+    },
+    {
+      "type": "edit",
+      "id": "1a21fa44bb1de509",
+      "item": {
+        "type": "paragraph",
+        "id": "1a21fa44bb1de509",
+        "text": "See [[Street Map]], [[Cycle Map]] or [[Topo Map]] for other views."
+      },
+      "date": 1733410889493
     }
   ]
 }
