@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "clean": "rm client/map.js client/map.js.map",
-    "build": "npm run clean;npm run test; node --no-warnings scripts/build-client.js",
+    "build": "(npm run clean || true) && npm run test && node scripts/build-client.js",
     "test": "node --test",
     "update-authors": "node scripts/update-authors.cjs"
   },
@@ -40,6 +40,6 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=18.x"
+    "node": ">=22.x"
   }
 }
