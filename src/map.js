@@ -167,8 +167,9 @@ const emit = ($item, item) => {
   let { caption, markers, lineupMarkers, pageMarkers, boundary, weblink, overlays, tools } = parse(item, $item)
 
   // announce our capability to produce markers in native and geojson format
-
   $item.addClass('marker-source')
+
+  const initialState = {}
 
   const showing = []
   $item.get(0).markerData = () => {
@@ -200,9 +201,7 @@ const emit = ($item, item) => {
       </figure>
     `)
 
-    const map = L.map(mapId, {
-      scrollWheelZoom: false,
-    })
+    const map = L.map(mapId)
 
     const update = () => {
       wiki.pageHandler.put($item.parents('.page:first'), {
@@ -212,6 +211,51 @@ const emit = ($item, item) => {
       })
       wiki.doPlugin($item.empty(), item)
     }
+
+    // Add freeze logic to map - full set of options specified, including defaults, added for clarity
+    wiki.getScript(
+      'https://cdn.jsdelivr.net/npm/@mrubli/leaflet-freezy@0.0.3/dist/Leaflet.Freezy.bundle.min.js',
+      () => {
+        L.control
+          .freezeMapControl({
+            // Whether to immediately freeze the map when the control is added.
+            freezeOnAdd: true,
+            // Opacity of the map container when it's frozen. (default 0.5)
+            frozenMapOpacity: 0.8,
+            // Thaw the map when hovering the cursor over it for a certain duration.
+            // Default: Browser-dependent (true for Chromium-based, false for others)
+            hoverToThaw: true,
+            // Amount of time after which hovering thaws the map. [ms]
+            hoverToThawDuration: 1000,
+            // Freeze the map again when leaving the map container with the cursor for a certain
+            // duration.
+            leaveToFreeze: true,
+            // Amount of time after which to freeze the map when the cursor has left the map container.
+            // [ms]
+            leaveToFreezeDuration: 2000,
+            // Whether to display the 'Freeze' button when the map is thawed.
+            freezeButtonWhenThawed: true,
+            // Inner HTML of the 'Freeze' button.
+            freezeButtonInnerHtml: '🔒',
+            // Title (hover text) of the 'Freeze' button.
+            freezeButtonTitle: 'Deactivate map',
+            // Overlay content to show while the map is frozen. This can be either of:
+            //   undefined: Use the plugin's standard text overlay   (default)
+            //   function: Function to evaluate in order to obtain a DOM element tree.
+            //   null: Disable the overlay
+            frozenOverlay: null,
+          })
+          .on('freeze', () => {
+            console.log('🥶')
+            if (restoreControlAdded) map.removeControl(restoreControl)
+          })
+          .on('thaw', () => {
+            console.log('🥵')
+            if (restoreControlAdded) map.addControl(restoreControl)
+          })
+          .addTo(map)
+      },
+    )
 
     // add locate control
     if (tools?.locate) {
@@ -419,6 +463,69 @@ const emit = ($item, item) => {
     } else {
       map.setView(item.latlng || item.latLng || [40.735383, -73.984655], item.zoom || 13)
     }
+
+    // save initial state
+    initialState.center = map.getCenter()
+    initialState.zoom = map.getZoom()
+
+    // reset map after zoom/pan
+    const RestoreControl = L.Control.extend({
+      options: {
+        position: 'topright',
+      },
+
+      onAdd: map => {
+        const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control')
+        container.innerHTML = `
+          <a class="leaflet-bar-part leaflet-bar-part-single" href="#" style="outline: currentcolor none medium;">
+            <span>⎌</span>
+          </a>
+        `
+
+        container.onclick = e => {
+          if (!samePlace(initialState.center, map.getCenter()) || initialState.zoom !== map.getZoom()) {
+            map.flyTo(initialState.center, initialState.zoom, { animate: true })
+            restoreControlAdded = false
+            map.removeControl(restoreControl)
+          }
+        }
+        return container
+      },
+
+      onRemove: map => {
+        // Nothing to do here...
+      },
+    })
+
+    let restoreControlAdded = false
+    const restoreControl = new RestoreControl()
+
+    const samePlace = (a, b) => {
+      console.log('samePlace', { a, b })
+      return a.lat.toFixed(4) === b.lat.toFixed(4) && a.lng.toFixed(4) === b.lng.toFixed(4)
+    }
+
+    const onMapChange = event => {
+      console.log('onMapChange', { initialState, restoreControlAdded }, map.getCenter())
+      if (
+        !restoreControlAdded &&
+        (!samePlace(initialState.center, map.getCenter()) || initialState.zoom !== map.getZoom())
+      ) {
+        restoreControlAdded = true
+        map.addControl(restoreControl)
+      }
+      if (
+        restoreControlAdded &&
+        samePlace(initialState.center, map.getCenter()) &&
+        initialState.zoom === map.getZoom()
+      ) {
+        restoreControlAdded = false
+        map.removeControl(restoreControl)
+      }
+    }
+
+    map.on('zoomend', onMapChange)
+    map.on('moveend', onMapChange)
 
     // announce our capability to produce a region
 
