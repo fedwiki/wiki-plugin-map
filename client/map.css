@@ -22,3 +22,15 @@
 #mapediting{
 	background: #eae8d7;
 }
+
+.leaflet-control-freezy-reset {
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background-color: #fff;
+  background-image: url('/plugins/map/reset.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}

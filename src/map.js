@@ -226,7 +226,7 @@ const emit = ($item, item) => {
             // Default: Browser-dependent (true for Chromium-based, false for others)
             hoverToThaw: true,
             // Amount of time after which hovering thaws the map. [ms]
-            hoverToThawDuration: 1000,
+            hoverToThawDuration: 4000,
             // Freeze the map again when leaving the map container with the cursor for a certain
             // duration.
             leaveToFreeze: true,
@@ -246,11 +246,9 @@ const emit = ($item, item) => {
             frozenOverlay: null,
           })
           .on('freeze', () => {
-            console.log('🥶')
             if (restoreControlAdded) map.removeControl(restoreControl)
           })
           .on('thaw', () => {
-            console.log('🥵')
             if (restoreControlAdded) map.addControl(restoreControl)
           })
           .addTo(map)
@@ -478,7 +476,7 @@ const emit = ($item, item) => {
         const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control')
         container.innerHTML = `
           <a class="leaflet-bar-part leaflet-bar-part-single" href="#" style="outline: currentcolor none medium;">
-            <span>⎌</span>
+            <button class="leaflet-control-freezy-reset" type="button" title="reset pan/zoom" aria-label="reset pan/zoom">&nbsp;</button>
           </a>
         `
 
