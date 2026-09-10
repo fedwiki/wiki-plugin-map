@@ -34,3 +34,10 @@
   background-position: center;
   cursor: pointer;
 }
+
+.leaflet-control-freeze-button {
+  background-image: url('/plugins/map/pan_zoom.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}

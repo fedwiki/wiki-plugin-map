@@ -193,6 +193,8 @@ const emit = ($item, item) => {
 
   wiki.getScript('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', () => {
     const mapId = `map-${Math.floor(Math.random() * 1000000)}`
+    // true when the map has been moved outside of an edit.
+    let restoreControlAdded = false
 
     $item.append(`
       <figure style="padding: 8px;">
@@ -221,7 +223,7 @@ const emit = ($item, item) => {
             // Whether to immediately freeze the map when the control is added.
             freezeOnAdd: true,
             // Opacity of the map container when it's frozen. (default 0.5)
-            frozenMapOpacity: 0.8,
+            frozenMapOpacity: 1.0,
             // Thaw the map when hovering the cursor over it for a certain duration.
             // Default: Browser-dependent (true for Chromium-based, false for others)
             hoverToThaw: true,
@@ -236,7 +238,7 @@ const emit = ($item, item) => {
             // Whether to display the 'Freeze' button when the map is thawed.
             freezeButtonWhenThawed: true,
             // Inner HTML of the 'Freeze' button.
-            freezeButtonInnerHtml: '🔒',
+            freezeButtonInnerHtml: '&nbsp;',
             // Title (hover text) of the 'Freeze' button.
             freezeButtonTitle: 'Deactivate map',
             // Overlay content to show while the map is frozen. This can be either of:
@@ -495,7 +497,6 @@ const emit = ($item, item) => {
       },
     })
 
-    let restoreControlAdded = false
     const restoreControl = new RestoreControl()
 
     const samePlace = (a, b) => {

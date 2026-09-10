@@ -4,7 +4,21 @@
     {
       "type": "paragraph",
       "id": "75413e06d2ac887d",
-      "text": "This plugin displays a map and caption along with markers from various sources. Explore by scrolling and zooming. Move by dragging the caption."
+      "text": "This plugin displays a map and caption along with markers from various sources. To explore the by panning/zooming the map needs to be unclocked. Move by dragging the caption."
+    },
+    {
+      "type": "image",
+      "id": "d9c04374bb3c15ea",
+      "text": "pan/zoom active and reset buttons",
+      "size": "thumbnail",
+      "width": 183,
+      "height": 103,
+      "url": "/plugins/map/7477e83f60cda66753a38a3bee096399.jpg"
+    },
+    {
+      "type": "paragraph",
+      "id": "57e91c29d1287edb",
+      "text": "The map can be unlocked, for explored, by clicking, or hovering over it for 5 seconds. This enables interaction using the features provided by leaflet. To disable interaction either move the pointer outside the map, or click on the pan/zoom icon. Should you get lost exploring, clicking on the reset button will return the map to its original location."
     },
     {
       "type": "paragraph",
@@ -664,6 +678,73 @@
         "text": "See [[About Map Freeze / Thaw]] for more about creating a static map from lineup markers."
       },
       "date": 1600507152965
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d9c04374bb3c15ea"
+      },
+      "id": "d9c04374bb3c15ea",
+      "type": "add",
+      "after": "0685e72a4915355d",
+      "date": 1781607187606
+    },
+    {
+      "id": "d9c04374bb3c15ea",
+      "type": "move",
+      "order": [
+        "75413e06d2ac887d",
+        "d9c04374bb3c15ea",
+        "0c06d0c65392757c",
+        "adca22ad59e9c6ba",
+        "70ab7213605ecdcc",
+        "0afb0c6bd45cb7ed",
+        "76d50ac0185b709d",
+        "673860db5b7c1d3b",
+        "a255b2b72e8e1351",
+        "7f941f281f929e55",
+        "e974889ae2b802f1",
+        "9e29c3aaae504fcb",
+        "25aadbd0c660f115",
+        "b13d80c7d396dfbe",
+        "0685e72a4915355d"
+      ],
+      "date": 1781607195471
+    },
+    {
+      "type": "edit",
+      "id": "d9c04374bb3c15ea",
+      "item":     {
+        "type": "image",
+        "id": "d9c04374bb3c15ea",
+        "text": "pan/zoom active and reset buttons",
+        "size": "thumbnail",
+        "width": 183,
+        "height": 103,
+        "url": "/plugins/map/7477e83f60cda66753a38a3bee096399.jpg"
+    },
+      "date": 1781607219143
+    },
+    {
+      "type": "edit",
+      "id": "75413e06d2ac887d",
+      "item": {
+        "type": "paragraph",
+        "id": "75413e06d2ac887d",
+        "text": "This plugin displays a map and caption along with markers from various sources. To explore the by panning/zooming the map needs to be unclocked. Move by dragging the caption."
+      },
+      "date": 1781607290544
+    },
+    {
+      "type": "add",
+      "id": "57e91c29d1287edb",
+      "item": {
+        "type": "paragraph",
+        "id": "57e91c29d1287edb",
+        "text": "The map can be unlocked, for explored, by clicking, or hovering over it for 5 seconds. This enables interaction using the features provided by leaflet. To disable interaction either move the pointer outside the map, or click on the pan/zoom icon. Should you get lost exploring, clicking on the reset button will return the map to its original location."
+      },
+      "after": "d9c04374bb3c15ea",
+      "date": 1781607413936
     }
   ]
 }
